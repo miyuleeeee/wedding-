@@ -1,57 +1,40 @@
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: sans-serif;
   margin: 0;
-  padding: 0;
-  background: #fffaf7;
-  color: #333;
-  line-height: 1.6;
-  text-align: center;
+  padding: 20px;
+  background: #fff;
+  color: #111;
 }
 
-.hero {
-  padding: 20px;
-}
-.main-photo {
-  width: 100%;
-  max-width: 350px;
-  border-radius: 12px;
-  margin-bottom: 15px;
-}
-.hero h1 {
-  font-size: 1.5em;
-  margin: 10px 0;
-  color: #a0522d;
-}
-.date, .place {
-  margin: 5px 0;
-  font-size: 1em;
+.menu {
+  margin-bottom: 40px;
 }
 
-.invite {
-  background: #fef3ec;
-  padding: 20px;
-  font-size: 1.1em;
-  border-top: 2px solid #f5d1c3;
-  border-bottom: 2px solid #f5d1c3;
+.menu p {
+  margin: 8px 0;
+  font-size: 16px;
 }
 
-.gallery {
-  padding: 20px;
-}
-.gallery h2 {
-  margin-bottom: 10px;
-}
 .photos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-.photos img {
-  width: 45%;
-  border-radius: 8px;
+  position: relative;
+  height: 600px; /* 사진이 흩어져 배치될 영역 */
 }
 
-.map {
-  padding: 20px;
+.photo {
+  position: absolute;
+  width: 40%;
+  max-width: 200px;
+  border-radius: 4px;
+}
+
+/* 불규칙하게 위치 배치 */
+.p1 { top: 20px; left: 10px; transform: rotate(-2deg); }
+.p2 { top: 150px; right: 20px; transform: rotate(3deg); }
+.p3 { bottom: 30px; left: 50px; transform: rotate(-4deg); }
+
+.footer {
+  margin-top: 50px;
+  font-size: 14px;
+  text-align: left;
+  color: #555;
 }
