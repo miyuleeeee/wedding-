@@ -33,6 +33,35 @@ body {
 .p3 { bottom: 140px; left: 50px; transform: rotate(0deg); }
 .p4 { bottom: 1400px; left: 50px; transform: rotate(-15deg); }
 
+
+
+
+
+.zigzag {
+  display: flex;
+  flex-direction: column;
+  gap: 40px; /* 사진 사이 간격 */
+}
+
+.photo {
+  display: flex;
+  justify-content: flex-start; /* 기본 왼쪽 */
+}
+
+.photo:nth-child(even) {
+  justify-content: flex-end; /* 짝수 번째는 오른쪽 */
+}
+
+.photo img {
+  width: 70%;  /* 사진 크기 조절 */
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
+
+
 .footer {
   margin-top: 50px;
   font-size: 14px;
