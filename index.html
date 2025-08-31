@@ -7,17 +7,24 @@
   <title>우리 결혼합니다</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* 상단 배경 */
-    .top-background {
-      background-image: img src="images/int.jpg"/* 배경 이미지 */
-      background-size: cover;   /* 화면에 꽉 차게 */
-      background-position: center;
-      height: 300px;            /* 원하는 높이 (이미지 크기에 맞게 조절) */
-      position: relative;
+    /* 상단 고정 배너 */
+    .top-banner {
+      position: fixed;   /* 스크롤해도 고정 */
+      top: 0;
+      left: 0;
+      width: 100%;       /* 화면 전체 너비 */
+      z-index: 1000;     /* 다른 요소보다 위에 표시 */
+      background-color: #fff; /* 필요 시 배경색 */
     }
-
-    /* 본문 */
+    .top-banner img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    /* 본문이 이미지에 가려지지 않도록 여백 추가 */
     .content {
+      margin-top: 200px; /* 이미지 높이에 맞춰 조절 */
       padding: 20px;
     }
   </style>
@@ -29,13 +36,15 @@
     <p>우리 결혼합니다 !</p>
     <p>2026. 04. 18</p>
   </div>
- <div class="top-background"></div>
-
-  <!-- 본문 -->
-  <div class="content">
-    <h1>메인 페이지 내용</h1>
-    <p>스크롤하면 상단 배경 이미지 위로 본문이 덮여서 내려옵니다.</p>
+<div class="top-banner">
+    <img src="images/int.jpg" alt="상단 이미지">
   </div>
+
+
+
+
+
+  
     <div class="photos">
     <img src="images/yum1.jpg" class="photo p1" alt="">
     <img src="images/3472.jpeg" class="photo p2" alt="">
