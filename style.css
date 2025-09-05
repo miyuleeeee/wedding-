@@ -37,7 +37,13 @@ body {
 
 .map {
   padding: 20px;
-
+  width : 100%;
+  height : 300px
+}
+@media (max-width: 600px) {
+  #map {
+    height:200px;
+  }
 
 
 .footer {
