@@ -40,7 +40,7 @@ body {
   width : 70%;
   height : 300px
 }
-@media (max-width: 600px) {
+@media (max-width: 300px) {
   .map {
     height:200px;
   }
