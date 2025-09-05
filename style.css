@@ -41,7 +41,7 @@ body {
   height : 300px
 }
 @media (max-width: 600px) {
-  #map {
+  .map {
     height:200px;
   }
 
