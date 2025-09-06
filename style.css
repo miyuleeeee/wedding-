@@ -56,47 +56,11 @@ body {
 .map-buttons .btn {
   display: inline-block;
   padding: 12px 24px;
-  border-radius: 30px;
+  border-radius: 5px;
   font-weight: bold;
   text-decoration: none;
   font-size: 15px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
-  transition: 0.2s;
-}
-
-/* 카카오맵 버튼 */
-.map-buttons .kakao {
-  background-color: #ffe812;  /* 카카오 노랑 */
-  color: #000;
-}
-
-/* 네이버지도 버튼 */
-.map-buttons .naver {
-  background-color: #2DB400;  /* 네이버 초록 */
-  color: #fff;
-}
-
-/* 버튼 눌렀을 때 */
-.map-buttons .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-}
-
-.map-buttons {
-  margin-top: 20px;
-  display: flex;            /* 기본: PC/모바일 모두 보임 */
-  justify-content: center;
-  gap: 15px;
-}
-
-.map-buttons .btn {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 15px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  box-shadow: none;
   transition: 0.2s;
 }
 
