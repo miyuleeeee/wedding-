@@ -70,10 +70,10 @@ body {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 0;     /* 네모 버튼 */
+  border-radius: 2px;     /* 네모 버튼 */
 }
-.map-buttons .kakao { background:#ffe812; color:#000; }
-.map-buttons .naver { background:#2DB400; color:#fff; }
+.map-buttons .kakao { background:#ffff66; color:#000; }
+.map-buttons .naver { background:#14f584; color:#fff; }
 .map-buttons .btn:hover { opacity:.9; }
 
 
