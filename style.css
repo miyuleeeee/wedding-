@@ -36,7 +36,7 @@ body {
 
 
 .map iframe {
-  width: 100%;     /* 화면 폭에 맞춤 */
+  width: 80%;     /* 화면 폭에 맞춤 */
   height: 200px;   /* 세로를 줄여서 박스 형태 */
   border: none;
 }
