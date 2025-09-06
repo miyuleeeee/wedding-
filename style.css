@@ -35,11 +35,13 @@ body {
 
 
 
-.map {
-  padding: 20px;
-  width : 70%;
-  height : 300px
+.map iframe {
+  width: 100%;     /* 화면 폭에 맞춤 */
+  height: 200px;   /* 세로를 줄여서 박스 형태 */
+  border: none;
 }
+
+
 @media (max-width: 768px) {
   .map {
     width:100%
