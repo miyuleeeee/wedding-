@@ -46,33 +46,41 @@ body {
   .map {
     width:100%
     height:200px;
-  }
-.map-buttons {
-  margin-top: 15px;
+  }.map-buttons {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 .map-buttons .btn {
   display: inline-block;
-  padding: 10px 20px;
-  border-radius: 25px;
-  text-decoration: none;
+  padding: 12px 24px;
+  border-radius: 30px;
   font-weight: bold;
-  color: #fff;
-  font-size: 14px;
+  text-decoration: none;
+  font-size: 15px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+  transition: 0.2s;
 }
 
+/* 카카오맵 버튼 */
 .map-buttons .kakao {
-  background-color: #ffe812; /* 카카오맵 노란색 */
+  background-color: #ffe812;  /* 카카오 노랑 */
   color: #000;
 }
 
+/* 네이버지도 버튼 */
 .map-buttons .naver {
-  background-color: #2DB400; /* 네이버 초록색 */
+  background-color: #2DB400;  /* 네이버 초록 */
+  color: #fff;
 }
 
+/* 버튼 눌렀을 때 */
+.map-buttons .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
 
 .footer {
   margin-top: 50px;
