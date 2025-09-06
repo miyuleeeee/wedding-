@@ -72,57 +72,45 @@
   </div>
 
 
-
-  <!-- 오시는 길 -->
-  <section class="map">
+<section class="map">
   <h2>오시는 길</h2>
-  <iframe 
-    src="https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225"
-    allowfullscreen
-    loading="lazy">
-  </iframe>
 
-  <p class = "addr">
-    경북 경주시 보문로 338<br>
-    라한셀렉트 경주 호텔</p>
-  <!-- 지도 카드 -->
+  <!-- 지도 모양 -->
   <div class="map-card">
     <iframe
       src="https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225"
-      loading="lazy" allowfullscreen></iframe>
+      allowfullscreen
+      loading="lazy"></iframe>
   </div>
 
+  <!-- 주소 -->
+  <p class="addr">
+    경북 경주시 보문로 338<br>
+    라한셀렉트 경주 호텔
+  </p>
+
+  <!-- 버튼 -->
   <div class="map-buttons">
-    <!-- 기본값: PC용 '웹 지도' 링크 -->
     <a id="btnKakao" class="btn kakao"
        href="https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225"
        target="_blank">카카오맵</a>
-
     <a id="btnNaver" class="btn naver"
        href="https://map.naver.com/v5/search/라한셀렉트%20경주?c=129.2770225,35.8503198,15,0,0,0,dh"
        target="_blank">네이버지도</a>
   </div>
 </section>
 
-<!-- 모바일이면 앱 링크로 바꿔치기 -->
 <script>
 (function () {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (!isMobile) return;
-
-  // 카카오맵 앱(좌표 보기)
   document.getElementById('btnKakao')
-    .setAttribute('href', 'kakaomap://look?p=35.8503198,129.2770225');
-
-  // 네이버지도 앱(장소 보기)
-  var placeName = encodeURIComponent('라한셀렉트경주');
+    .setAttribute('href','kakaomap://look?p=35.8503198,129.2770225');
   document.getElementById('btnNaver')
-    .setAttribute('href', 'nmap://place?lat=35.8503198&lng=129.2770225&name=' + placeName);
+    .setAttribute('href','nmap://place?lat=35.8503198&lng=129.2770225&name='+encodeURIComponent('라한셀렉트경주'));
 })();
 </script>
 
-
-  
   <div class="footer">
     <p> @@ @@ @! </p>
     <p>@ 우리 결혼해요</p>
