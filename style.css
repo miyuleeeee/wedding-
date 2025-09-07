@@ -149,7 +149,7 @@ body {
   border-radius: 4.5px;     /* 네모 버튼 */
 }
 .map-buttons .kakao { background:#fffc5dec; color:#000; }
-.map-buttons .naver { background:##15de0e; color:#fff; }
+.map-buttons .naver { background:#2ce126; color:#fff; }
 .map-buttons .btn:hover { opacity:.9; }
 
 
