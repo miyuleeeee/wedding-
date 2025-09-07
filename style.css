@@ -128,11 +128,6 @@ body {
 
 
 
-.map-illust img{
-  width: 100%;
-  height: auto;
-  display: block;  /* 지도 비율 유지 */
-}
 
 .map-illust{
   width: 100%;
@@ -140,6 +135,11 @@ body {
   margin:0 auto 16px;
 }
 
+.map-illust img{
+  width: 100%;
+  height: auto;
+  display: block;  /* 지도 비율 유지 */
+}
 /* 주소 */
 .map .addr {
   text-align: center;
