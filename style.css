@@ -82,7 +82,7 @@ body {
 .dot{
   width: 6px; height: 6px;
   border-radius: 999px;
-  background: #cfcfcf;
+  background: #5af857;
   border: 0;
   padding: 0;
   opacity: .9;
@@ -146,10 +146,10 @@ body {
   font-size: 14px;
   font-weight: bold;
   text-decoration: none;
-  border-radius: 5.5px;     /* 네모 버튼 */
+  border-radius: 4.5px;     /* 네모 버튼 */
 }
-.map-buttons .kakao { background:#f0d551; color:#000; }
-.map-buttons .naver { background:#02d96d; color:#fff; }
+.map-buttons .kakao { background:#fffc5dec; color:#000; }
+.map-buttons .naver { background:##15de0e; color:#fff; }
 .map-buttons .btn:hover { opacity:.9; }
 
 
