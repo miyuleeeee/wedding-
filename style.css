@@ -33,6 +33,132 @@ body {
 .p3 { bottom: 140px; left: 50px; transform: rotate(0deg); }
 .p4 { bottom: 1400px; left: 50px; transform: rotate(-15deg); }
 
+<!-- ========== 2) CSS ========== -->
+<style>
+/* 영역 */
+.carousel-wrap{
+  max-width: 640px;           /* PC에서 너무 퍼지지 않게 */
+  margin: 24px auto;
+  position: relative;
+  padding-bottom: 28px;        /* 점 영역 여백 */
+  --radius: 14px;
+}
+
+/* 가로 스크롤 트랙 */
+.carousel{
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;         /* 스냅! */
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;                  /* firefox */
+}
+.carousel::-webkit-scrollbar{ display:none; }  /* webkit */
+
+/* 각 슬라이드 */
+.slide{
+  flex: 0 0 100%;               /* 화면 너비 100% */
+  scroll-snap-align: center;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.slide img{
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 4/5;            /* 인스타 느낌 비율(원하면 수정) */
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+/* 점 */
+.dots{
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+}
+.dot{
+  width: 6px; height: 6px;
+  border-radius: 999px;
+  background: #cfcfcf;
+  border: 0;
+  padding: 0;
+  opacity: .9;
+}
+.dot.is-active{ width: 18px; background:#111; }
+
+/* 화살표 (옵션) */
+.nav{
+  position:absolute; inset: 0;
+  display:flex; align-items:center; justify-content:space-between;
+  pointer-events:none;           /* 버튼만 클릭 가능하게 아래에서 재활성화 */
+}
+.nav button{
+  pointer-events:auto;
+  border:0; background:rgba(0,0,0,.28);
+  color:#fff; width:36px; height:36px; border-radius:999px;
+  font-size:18px; line-height:36px;
+}
+@media (hover:none){ .nav{ display:none; } } /* 모바일은 보통 화살표 숨김 */
+</style>
+
+<!-- ========== 3) JS ========== -->
+<script>
+(function(){
+  const track = document.getElementById('carousel');
+  const dotsBox = document.getElementById('dots');
+  const dots = Array.from(dotsBox.querySelectorAll('.dot'));
+  const prev = document.querySelector('.prev');
+  const next = document.querySelector('.next');
+
+  // 현재 인덱스 계산
+  function indexFromScroll(){
+    return Math.round(track.scrollLeft / track.clientWidth);
+  }
+  function go(i){
+    const max = track.children.length - 1;
+    const clamped = Math.max(0, Math.min(i, max));
+    track.children[clamped].scrollIntoView({behavior:'smooth', inline:'center'});
+    updateDots(clamped);
+  }
+  function updateDots(i){
+    dots.forEach((d,idx)=>d.classList.toggle('is-active', idx===i));
+  }
+
+  // 초기 점 상태
+  updateDots(0);
+
+  // 스크롤/스와이프할 때 점 갱신
+  let ticking = false;
+  track.addEventListener('scroll', ()=>{
+    if(!ticking){
+      window.requestAnimationFrame(()=>{
+        updateDots(indexFromScroll());
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, {passive:true});
+
+  // 점 클릭으로 이동
+  dots.forEach((btn, idx)=>btn.addEventListener('click', ()=>go(idx)));
+
+  // 화살표
+  prev?.addEventListener('click', ()=>go(indexFromScroll()-1));
+  next?.addEventListener('click', ()=>go(indexFromScroll()+1));
+
+  // 반응형: 창 크기 바뀌면 가장 가까운 슬라이드로 스냅
+  window.addEventListener('resize', ()=>go(indexFromScroll()));
+})();
+</script>
+
+
+
+
+
 
 /* 지도 박스 */
 .map-card {
