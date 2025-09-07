@@ -128,8 +128,9 @@ body {
 
 
 
-.map-illust{
+.map-illust img{
   width: 100%;
+  height: auto;
   max-width: 600px;     /* PC에서 너무 넓어지지 않게 */
   display: block;  /* 지도 비율 유지 */
   margin: 0 auto 16px;
