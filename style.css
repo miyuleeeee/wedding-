@@ -33,8 +33,7 @@ body {
 .p3 { bottom: 140px; left: 50px; transform: rotate(0deg); }
 .p4 { bottom: 1400px; left: 50px; transform: rotate(-15deg); }
 
-<!-- ========== 2) CSS ========== -->
-<style>
+
 /* 영역 */
 .carousel-wrap{
   max-width: 640px;           /* PC에서 너무 퍼지지 않게 */
@@ -105,55 +104,6 @@ body {
 @media (hover:none){ .nav{ display:none; } } /* 모바일은 보통 화살표 숨김 */
 </style>
 
-<!-- ========== 3) JS ========== -->
-<script>
-(function(){
-  const track = document.getElementById('carousel');
-  const dotsBox = document.getElementById('dots');
-  const dots = Array.from(dotsBox.querySelectorAll('.dot'));
-  const prev = document.querySelector('.prev');
-  const next = document.querySelector('.next');
-
-  // 현재 인덱스 계산
-  function indexFromScroll(){
-    return Math.round(track.scrollLeft / track.clientWidth);
-  }
-  function go(i){
-    const max = track.children.length - 1;
-    const clamped = Math.max(0, Math.min(i, max));
-    track.children[clamped].scrollIntoView({behavior:'smooth', inline:'center'});
-    updateDots(clamped);
-  }
-  function updateDots(i){
-    dots.forEach((d,idx)=>d.classList.toggle('is-active', idx===i));
-  }
-
-  // 초기 점 상태
-  updateDots(0);
-
-  // 스크롤/스와이프할 때 점 갱신
-  let ticking = false;
-  track.addEventListener('scroll', ()=>{
-    if(!ticking){
-      window.requestAnimationFrame(()=>{
-        updateDots(indexFromScroll());
-        ticking = false;
-      });
-      ticking = true;
-    }
-  }, {passive:true});
-
-  // 점 클릭으로 이동
-  dots.forEach((btn, idx)=>btn.addEventListener('click', ()=>go(idx)));
-
-  // 화살표
-  prev?.addEventListener('click', ()=>go(indexFromScroll()-1));
-  next?.addEventListener('click', ()=>go(indexFromScroll()+1));
-
-  // 반응형: 창 크기 바뀌면 가장 가까운 슬라이드로 스냅
-  window.addEventListener('resize', ()=>go(indexFromScroll()));
-})();
-</script>
 
 
 
