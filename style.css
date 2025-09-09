@@ -58,7 +58,7 @@ body {
   /* 크기 + 배경색 전환 부드럽게 */
 }
 .popup button:hover {
-   transform: scale(1.2);   
+   transform: scale(1.5);   
 }
 /* 애니메이션 */
 @keyframes fadeIn {
