@@ -39,23 +39,27 @@ body {
 
 /* 닫기 버튼 */
 .popup button {
-  position: absolute;   /* 팝업 우측 상단 고정 */
+  position: absolute;   
   top: 10px;
   right: 10px;
-  width: 30px;          /* 버튼 크기 */
+  width: 30px;
   height: 30px;
-  background: red;      /* 빨간 배경 */
-  color: white;         /* X는 흰색 */
+  background: red;
+  color: white;
   border: none;
-  border-radius: 50%;   /* 동그랗게 */
-  font-size: 18px;      /* X 크기 */
+  border-radius: 50%;
+  font-size: 18px;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;     
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;  
+  /* 크기 + 배경색 전환 부드럽게 */
 }
-
+.popup button:hover {
+   transform: scale(1.2);   
+}
 /* 애니메이션 */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.9); }
