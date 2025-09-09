@@ -18,7 +18,8 @@ body {
 
 /* 팝업 박스 */
 .popup {
-  background: #fff;
+  background: transparent;
+  box-shadow: none;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0,0,0,0.2);
   width: 80%;           
@@ -38,14 +39,21 @@ body {
 
 /* 닫기 버튼 */
 .popup button {
-  position: absolute;
-  top: 10px; right: 10px;
-  background: #333;
-  color: #fff;
+  position: absolute;   /* 팝업 우측 상단 고정 */
+  top: 10px;
+  right: 10px;
+  width: 30px;          /* 버튼 크기 */
+  height: 30px;
+  background: red;      /* 빨간 배경 */
+  color: white;         /* X는 흰색 */
   border: none;
-  padding: 6px 10px;
-  border-radius: 50%;
-  cursor: pointer;
+  border-radius: 50%;   /* 동그랗게 */
+  font-size: 18px;      /* X 크기 */
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;     
 }
 
 /* 애니메이션 */
