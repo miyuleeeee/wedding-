@@ -9,6 +9,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>우리 결혼합니다</title>
   <link rel="stylesheet" href="style.css">
+
+
+
+  <!-- style.css 연결 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>홈페이지 메인</h1>
+  <p>여기에 본문 내용이 들어갑니다.</p>
+
+  <!-- 팝업 -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <button onclick="closePopup()">X</button>
+      <img src="notice.png" alt="공지 이미지">
+      <p>배송 휴무 안내입니다.</p>
+    </div>
+  </div>
+
+  <script>
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
+</body>
+</html>
+
+
+
+ 
+ 
+
+
+
+
+
+
+ 
   <style>
     /* 상단 고정 배너 */
     .top-banner {
@@ -56,336 +95,6 @@
   </style>
   </head>
 <body>
-
-<!-- ========== Popup RSVP & Guestbook ========== -->
-<style>
-  :root{
-    --popup-z: 9999;
-    --radius: 18px;
-  }
-  /* 오버레이 */
-  .popup-overlay{
-    position: fixed; inset: 0; background: rgba(0,0,0,.45);
-    display: none; align-items: center; justify-content: center;
-    z-index: var(--popup-z);
-    padding: 20px;
-  }
-  .popup-overlay.show{ display: flex; }
-
-  /* 팝업 카드 */
-  .popup-card{
-    width: 100%; max-width: 720px; background: #fff; border-radius: var(--radius);
-    box-shadow: 0 10px 40px rgba(0,0,0,.25); overflow: hidden;
-    animation: pop .18s ease-out;
-  }
-  @keyframes pop{ from{ transform: scale(.97); opacity:.7 } to{ transform: scale(1); opacity:1 } }
-
-  /* 상단 헤더 */
-  .popup-header{
-    display: grid; grid-template-columns: 1fr 3fr; gap: 16px; align-items: center;
-    padding: 18px 18px 8px 18px;
-  }
-  .popup-thumb{
-    aspect-ratio: 1/1; width: 100%; border-radius: 12px; object-fit: cover; background:#f3f3f3;
-  }
-  .popup-title{ font: 700 22px/1.2 "Noto Sans KR", system-ui, sans-serif; margin: 0; }
-  .popup-sub{ font: 400 14px/1.5 "Noto Sans KR", system-ui, sans-serif; color:#444; margin: 6px 0 0; }
-
-  /* 탭 */
-  .popup-tabs{ display:flex; border-top:1px solid #eee; border-bottom:1px solid #eee; }
-  .popup-tab{
-    flex:1; text-align:center; padding:12px 8px; cursor:pointer; user-select:none;
-    font: 600 15px/1 "Noto Sans KR", system-ui, sans-serif; background:#fafafa;
-    border-right:1px solid #eee;
-  }
-  .popup-tab:last-child{ border-right:none; }
-  .popup-tab.active{ background:#fff; }
-
-  /* 내용영역 */
-  .popup-body{ padding: 16px 18px 4px; }
-  .hidden{ display:none !important; }
-
-  /* 폼 공통 */
-  .form-row{ margin: 10px 0 14px; }
-  .form-row label{ display:block; font:600 14px/1.2 "Noto Sans KR", sans-serif; margin-bottom:6px; }
-  .form-row input[type="text"],
-  .form-row input[type="tel"],
-  .form-row select,
-  .form-row textarea{
-    width:100%; border:1px solid #ddd; border-radius:12px; padding:12px 14px; font:15px/1.4 system-ui, sans-serif;
-    background:#fff;
-  }
-  .form-row textarea{ min-height: 96px; resize: vertical; }
-  .radio-row{ display:flex; gap:14px; }
-  .radio-row label{ font-weight:500; display:flex; align-items:center; gap:6px; }
-  .helper{ font-size:12px; color:#777; margin-top:6px; }
-
-  /* 리스트 */
-  .list{ margin: 10px 0 6px; }
-  .entry{
-    border:1px solid #eee; border-radius:12px; padding:10px 12px; margin-bottom:8px; background:#fff;
-  }
-  .entry .meta{ font-size:12px; color:#666; margin-bottom:4px; display:flex; gap:8px; flex-wrap:wrap; }
-  .entry .msg{ white-space:pre-wrap; font-size:14px; }
-
-  /* 하단 버튼 영역 */
-  .popup-footer{
-    display:grid; grid-template-columns: 1fr 1fr; border-top:1px solid #eee;
-  }
-  .popup-btn{
-    border:0; background:#fff; padding:14px; font:600 14px/1 "Noto Sans KR", sans-serif; cursor:pointer;
-  }
-  .popup-btn + .popup-btn{ border-left:1px solid #eee; }
-  .btn-primary{
-    width:100%; border:0; background:#111; color:#fff; padding:13px 14px; border-radius:12px;
-    font:600 15px/1 "Noto Sans KR", sans-serif; cursor:pointer;
-  }
-  .btn-primary:active{ transform: translateY(1px); }
-
-  /* 모바일 최적화 */
-  @media (max-width: 480px){
-    .popup-header{ grid-template-columns: 88px 1fr; gap: 12px; }
-    .popup-title{ font-size: 18px; }
-  }
-</style>
-
-<div id="wedding-popup" class="popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popup-title">
-  <div class="popup-card">
-    <div class="popup-header">
-      <!-- 필요 없으면 img 태그를 제거하세요 -->
-      <img class="popup-thumb" src="header.jpg" alt="Invitation">
-      <div>
-        <h3 id="popup-title" class="popup-title">유미 & 진훈 Wedding</h3>
-        <p class="popup-sub">참석 여부를 알려주시고, 따뜻한 한마디를 남겨주세요 💐</p>
-      </div>
-    </div>
-
-    <!-- 탭 -->
-    <div class="popup-tabs">
-      <button class="popup-tab active" data-tab="tab-rsvp" type="button">RSVP (참석 여부)</button>
-      <button class="popup-tab" data-tab="tab-guestbook" type="button">방명록</button>
-    </div>
-
-    <!-- 본문 -->
-    <div class="popup-body">
-      <!-- RSVP -->
-      <section id="tab-rsvp">
-        <form id="rsvp-form" autocomplete="on" novalidate>
-          <div class="form-row">
-            <label for="rsvp-name">이름</label>
-            <input id="rsvp-name" name="name" type="text" required placeholder="성함을 입력해주세요" />
-          </div>
-          <div class="form-row">
-            <label for="rsvp-phone">연락처 (선택)</label>
-            <input id="rsvp-phone" name="phone" type="tel" inputmode="tel" placeholder="예: 010-1234-5678" />
-            <div class="helper">알림/안내용으로만 사용됩니다.</div>
-          </div>
-          <div class="form-row">
-            <label>참석 여부</label>
-            <div class="radio-row">
-              <label><input type="radio" name="status" value="참석" required />참석</label>
-              <label><input type="radio" name="status" value="불참" />불참</label>
-              <label><input type="radio" name="status" value="미정" />미정</label>
-            </div>
-          </div>
-          <div class="form-row">
-            <label for="rsvp-guests">동반 인원</label>
-            <select id="rsvp-guests" name="guests">
-              <option value="0">혼자</option>
-              <option value="1">동반 1명</option>
-              <option value="2">동반 2명</option>
-              <option value="3">동반 3명</option>
-              <option value="4+">4명 이상</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="rsvp-msg">메시지 (선택)</label>
-            <textarea id="rsvp-msg" name="message" placeholder="전하고 싶은 말을 적어주세요"></textarea>
-          </div>
-          <button class="btn-primary" type="submit">참석 정보 보내기</button>
-        </form>
-
-        <!-- 간단한 통계 (localStorage 기준) -->
-        <div id="rsvp-stats" class="helper" style="margin-top:10px;"></div>
-      </section>
-
-      <!-- 방명록 -->
-      <section id="tab-guestbook" class="hidden">
-        <form id="guestbook-form" autocomplete="on" novalidate>
-          <div class="form-row">
-            <label for="gb-name">이름</label>
-            <input id="gb-name" name="name" type="text" required placeholder="성함" />
-          </div>
-          <div class="form-row">
-            <label for="gb-msg">메시지</label>
-            <textarea id="gb-msg" name="message" required placeholder="축하 메시지를 남겨주세요"></textarea>
-          </div>
-          <button class="btn-primary" type="submit">방명록 남기기</button>
-        </form>
-
-        <div class="list" id="guestbook-list" aria-live="polite"></div>
-      </section>
-    </div>
-
-    <!-- 하단 버튼 -->
-    <div class="popup-footer">
-      <button id="btn-hide-today" class="popup-btn" type="button">오늘 하루 열지 않기</button>
-      <button id="btn-close" class="popup-btn" type="button">닫기</button>
-    </div>
-  </div>
-</div>
-
-<script>
-(() => {
-  const overlay = document.getElementById('wedding-popup');
-  const btnClose = document.getElementById('btn-close');
-  const btnHideToday = document.getElementById('btn-hide-today');
-  const tabs = Array.from(document.querySelectorAll('.popup-tab'));
-  const tabBodies = { 
-    'tab-rsvp': document.getElementById('tab-rsvp'),
-    'tab-guestbook': document.getElementById('tab-guestbook')
-  };
-
-  const RSVP_KEY = 'rsvpSubmissions';
-  const GB_KEY   = 'guestbookEntries';
-  const HIDE_KEY = 'popupHiddenUntil'; // YYYY-MM-DD
-
-  // ===== 유틸 =====
-  const todayStr = () => new Date().toISOString().slice(0,10);
-  const load = (k, fallback=[]) => { try{ return JSON.parse(localStorage.getItem(k)) ?? fallback }catch{ return fallback } };
-  const save = (k, v) => localStorage.setItem(k, JSON.stringify(v));
-  const toast = (msg) => alert(msg); // 필요시 커스텀 토스트로 교체
-
-  // ===== 팝업 표시 로직 (오늘 하루 열지 않기) =====
-  const showIfNeeded = () => {
-    const hiddenUntil = localStorage.getItem(HIDE_KEY);
-    if (!hiddenUntil || hiddenUntil < todayStr()) {
-      overlay.classList.add('show');
-    }
-  };
-
-  // ===== 탭 전환 =====
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      Object.values(tabBodies).forEach(el => el.classList.add('hidden'));
-      tabBodies[tab.dataset.tab].classList.remove('hidden');
-    });
-  });
-
-  // ===== 닫기/오늘 안 보기 =====
-  btnClose.addEventListener('click', () => overlay.classList.remove('show'));
-  btnHideToday.addEventListener('click', () => {
-    localStorage.setItem(HIDE_KEY, todayStr());
-    overlay.classList.remove('show');
-  });
-
-  // ===== RSVP 처리 =====
-  const rsvpForm = document.getElementById('rsvp-form');
-  const rsvpStats = document.getElementById('rsvp-stats');
-
-  function renderStats(){
-    const items = load(RSVP_KEY, []);
-    const attend = items.filter(i => i.status === '참석').length;
-    const notAttend = items.filter(i => i.status === '불참').length;
-    const pending = items.filter(i => i.status === '미정').length;
-    rsvpStats.textContent = `현재 집계 (내 브라우저 기준): 참석 ${attend} · 불참 ${notAttend} · 미정 ${pending}`;
-  }
-
-  rsvpForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const fd = new FormData(rsvpForm);
-    const name = (fd.get('name')||'').trim();
-    const status = fd.get('status');
-    if (!name || !status){ toast('이름과 참석 여부를 확인해주세요.'); return; }
-
-    const rec = {
-      name,
-      phone: (fd.get('phone')||'').trim(),
-      status,
-      guests: fd.get('guests'),
-      message: (fd.get('message')||'').trim(),
-      ts: new Date().toISOString()
-    };
-
-    const list = load(RSVP_KEY, []);
-    list.push(rec); save(RSVP_KEY, list);
-    rsvpForm.reset();
-    renderStats();
-    toast('참석 정보가 저장되었습니다! (현재 기기 기준)');
-    // 서버 수집을 하려면 아래 sendToWebhook(rec)를 사용하세요. (가이드는 본문 하단)
-  });
-
-  // ===== 방명록 처리 =====
-  const gbForm = document.getElementById('guestbook-form');
-  const gbList = document.getElementById('guestbook-list');
-
-  function renderGuestbook(){
-    const items = load(GB_KEY, []);
-    gbList.innerHTML = items.slice().reverse().map(it => `
-      <div class="entry">
-        <div class="meta"><strong>${escapeHtml(it.name)}</strong><span>${formatKST(it.ts)}</span></div>
-        <div class="msg">${escapeHtml(it.message)}</div>
-      </div>
-    `).join('') || '<div class="helper">아직 방명록이 없습니다. 첫 메시지를 남겨주세요!</div>';
-  }
-
-  gbForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const fd = new FormData(gbForm);
-    const name = (fd.get('name')||'').trim();
-    const message = (fd.get('message')||'').trim();
-    if (!name || !message){ toast('이름과 메시지를 입력해주세요.'); return; }
-
-    const rec = { name, message, ts: new Date().toISOString() };
-    const list = load(GB_KEY, []);
-    list.push(rec); save(GB_KEY, list);
-    gbForm.reset();
-    renderGuestbook();
-    toast('방명록이 저장되었습니다! (현재 기기 기준)');
-    // 서버 수집하려면 sendToWebhook(rec) 참고
-  });
-
-  // ===== 도우미 =====
-  function escapeHtml(s){
-    return s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
-  }
-  function formatKST(iso){
-    try{
-      const d = new Date(iso);
-      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Seoul';
-      return new Intl.DateTimeFormat('ko-KR', { timeZone: tz, dateStyle:'medium', timeStyle:'short' }).format(d);
-    }catch{ return iso }
-  }
-
-  // ===== 초기 렌더 =====
-  renderStats();
-  renderGuestbook();
-  showIfNeeded();
-
-  // (선택) 서버로 보내기: Apps Script/서버 엔드포인트가 있을 때 사용
-  async function sendToWebhook(payload){
-    const ENDPOINT = ''; // e.g. 'https://script.google.com/macros/s/AKfycb.../exec'
-    if(!ENDPOINT) return;
-    try{
-      await fetch(ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-    }catch(e){ console.warn('Webhook 전송 실패', e); }
-  }
-})();
-</script>
-<!-- ========== /Popup RSVP & Guestbook ========== -->
-
-
-
-
-
-
-
-
-
-
-
 
 
 
