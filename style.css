@@ -20,8 +20,8 @@ body {
 .popup {
   background: transparent;
   box-shadow: none;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  box-shadow: none;
   width: 80%;           
   max-width: 500px;     
   padding: 20px;
@@ -48,7 +48,7 @@ body {
   color: white;
   border: none;
   border-radius: 50%;
-  font-size: 18px;
+  font-size: 10px;
   font-weight: bold;
   display: flex;
   align-items: center;
