@@ -2,136 +2,272 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>우리 결혼합니다</title>
-
-  <!-- 폰트 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
-  <!-- 외부 css (있다면 1번만 링크) -->
   <link rel="stylesheet" href="style.css">
 
-  <style>
-    /* ===== 공통 반응형 안전장치 ===== */
-    html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
-    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",Roboto,Helvetica,Arial,sans-serif}
 
-    img,video{max-width:100%;height:auto;display:block}
 
-    /* 본문 안전 폭 */
-    .wrap{max-width:680px;margin:0 auto;padding:0 16px}
-    .section{padding:24px 0}
-
-    /* 상단 고정 배너 */
-    .top-banner{position:fixed;top:0;left:0;width:100%;z-index:1000;background:#fff}
-    .top-banner img{max-width:100%;height:auto;display:block;margin:0 auto}
-    .content-offset{height:200px} /* 배너 높이만큼 밀어주기 (이미지 높이에 맞춰 조절) */
-
-    /* 연락하기(바텀시트) 핵심만 유지 */
-    :root{--cta-bg:#555;--cta-bg-hover:#444;--cta-text:#fff;--divider:#eee;--label:#777;--sheet-radius:16px}
-    .contact-cta{width:min(520px,88%);display:block;margin:24px auto 80px;padding:14px 18px;border-radius:12px;background:var(--cta-bg);color:var(--cta-text);font-weight:700;border:0}
-    .contact-cta:hover,.contact-cta:active{background:var(--cta-bg-hover)}
-    body.no-scroll{position:fixed;width:100%;height:100vh;overflow:hidden;touch-action:none}
-
-    .sheet{position:fixed;inset:0;display:none;z-index:99999}
-    .sheet[aria-hidden="false"]{display:block}
-    .sheet-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);opacity:0;transition:.25s;z-index:1}
-    .sheet-panel{position:absolute;left:0;right:0;bottom:0;background:#fff;z-index:2;border-top-left-radius:var(--sheet-radius);border-top-right-radius:var(--sheet-radius);box-shadow:0 -10px 30px rgba(0,0,0,.15);transform:translateY(100%);-webkit-transform:translateY(100%);transition:transform .28s ease;-webkit-transition:-webkit-transform .28s ease;max-height:70vh;display:flex;flex-direction:column;will-change:transform;padding-bottom:max(12px,env(safe-area-inset-bottom))}
-    .sheet[aria-hidden="false"] .sheet-backdrop{opacity:1}
-    .sheet[aria-hidden="false"] .sheet-panel{transform:translateY(0);-webkit-transform:translateY(0)}
-    .sheet-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 6px}
-    .sheet-header h3{margin:0;font-size:20px;font-weight:700}
-    .sheet-close{border:0;background:transparent;font-size:22px;padding:8px;line-height:1}
-    .sheet-body{overflow:auto;-webkit-overflow-scrolling:touch;padding:12px 16px 28px}
-    .group{background:#fafafa;border-radius:16px;padding:12px 0;margin:16px 0;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    .group-title{font-weight:700;padding:10px 14px;color:#333;border-bottom:1px solid var(--divider)}
-    .row{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;gap:10px;border-bottom:1px solid var(--divider)}
-    .row:last-child{border-bottom:0}
-    .who .role{font-size:13px;color:var(--label)}
-    .who .name{font-size:17px;font-weight:700;color:#222}
-    .acts{display:flex;gap:8px}
-    .acts a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:#f5f5f5;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-    .acts a:active{transform:translateY(1px)}
-
-    /* 지도 섹션 이미지 넘침 방지 */
-    .map-illust img{width:100%;height:auto}
-
-    /* 아주 작은 화면 보정 */
-    @media (max-width:360px){
-      .row{padding:14px 16px}
-      .who .name{font-size:16px}
-    }
-  </style>
+  <!-- style.css 연결 -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <!-- 팝업 -->
-  <div class="popup-overlay" id="popup" style="display:none">
+  <div class="popup-overlay" id="popup">
     <div class="popup">
-      <button type="button" onclick="document.getElementById('popup').style.display='none'">X</button>
+      <button onclick="closePopup()">X</button>
       <img src="images/popup.png" alt="공지 이미지">
       <p></p>
     </div>
   </div>
 
-  <!-- 상단 고정 배너 -->
-  <div class="top-banner">
-    <img src="images/intt.png" alt="상단 이미지">
-  </div>
-  <div class="content-offset"></div>
-
-  <main class="wrap">
-    <div class="menu section">
-      <p>유미 · 진훈</p>
-      <p>우리 결혼합니다! 2026.04.18</p>
-    </div>
-
-    <!-- 사진들 -->
-    <section class="section photos">
-      <img src="images/3472.jpeg" alt="">
-      <img src="images/2.jpeg" alt="">
-    </section>
-
-    <!-- (갤러리/캐러셀은 필요 시 여기) -->
-
-
-    <!-- 오시는 길 -->
-    <section class="section map">
-      <h2>오시는 길</h2>
-      <div class="map-illust"><img src="images/map.jpg" alt="맵 그래픽"></div>
-      <p class="addr">경북 경주시 보문로 338<br>라한셀렉트 경주 호텔</p>
-      <div class="map-buttons">
-        <a id="btnKakao" class="btn kakao" href="https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225" target="_blank">카카오맵</a>
-        <a id="btnNaver" class="btn naver" href="https://map.naver.com/v5/search/라한셀렉트%20경주?c=129.2770225,35.8503198,15,0,0,0,dh" target="_blank">네이버지도</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- JS는 끝에 -->
   <script>
-    // 연락하기 모달
-    (function(){
-      const openBtn=document.getElementById('openContact');
-      const sheet=document.getElementById('contactSheet');
-      const closes=sheet.querySelectorAll('[data-close]');
-      const open=()=>{sheet.setAttribute('aria-hidden','false');document.body.classList.add('no-scroll');(sheet.querySelector('.sheet-close')||{}).focus?.();}
-      const close=()=>{sheet.setAttribute('aria-hidden','true');document.body.classList.remove('no-scroll');openBtn&&openBtn.focus();}
-      openBtn&&openBtn.addEventListener('click',open);
-      closes.forEach(el=>el.addEventListener('click',close));
-      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sheet.getAttribute('aria-hidden')==='false')close();});
-    })();
-
-    // 지도 앱 딥링크 (모바일에서만)
-    (function(){
-      var isMobile=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-      if(!isMobile) return;
-      document.getElementById('btnKakao').setAttribute('href','kakaomap://look?p=35.8503198,129.2770225');
-      document.getElementById('btnNaver').setAttribute('href','nmap://place?lat=35.8503198&lng=129.2770225&name='+encodeURIComponent('라한셀렉트경주'));
-    })();
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
   </script>
 </body>
 </html>
 
+
+
+
+
+ 
+  <style>
+    /* 상단 고정 배너 */
+    .top-banner {
+      position: fixed;   /* 스크롤해도 고정 */
+      top: 0;
+      left: 0;
+      width: 100%;       /* 화면 전체 너비 */
+      z-index: 1000;     /* 다른 요소보다 위에 표시 */
+      background-color:  /* 필요 시 배경색 */
+    }
+    .top-banner img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    /* 본문이 이미지에 가려지지 않도록 여백 추가 */
+    .content {
+      margin-top: 200px; /* 이미지 높이에 맞춰 조절 */
+      padding: 20px;
+    }
+      @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 1024px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      p {
+        font-size: 1.1em;
+      }
+    }
+
+   @media (min-width: 1025px) {
+  .container {
+    max-width: 1000px;  /* PC일 때는 1000px 안쪽에서만 보여줌 */
+    padding: 30px;
+      }
+    }
+  </style>
+  </head>
+<body>
+
+
+
+ 
+  <div class="menu">
+    <p>유미</p>
+    <p>진훈</p>
+    <p>우리 결혼합니다 !</p>
+    <p>2026. 04. 18</p>
+  </div>
+<div class="top-banner">
+    <img src="images/intt.png" alt="상단 이미지">
+  </div>
+
+
+  
+    <div class="photos">
+    
+    <img src="images/3472.jpeg" class="photo p2" alt="">
+    <img src="images/2.jpeg" class="photo p3" alt="">
+  </div>
+
+<!-- ========== 1) HTML ========== -->
+<section class="carousel-wrap">
+  <div class="carousel" id="carousel">
+    <figure class="slide">
+      <img src="images/3472.jpeg" alt="우리 사진 1" loading="lazy">
+    </figure>
+    <figure class="slide">
+      <img src="images/2.jpeg" alt="우리 사진 2" loading="lazy">
+    </figure>
+    <figure class="slide">
+      <img src="images/03.jpg" alt="우리 사진 3" loading="lazy">
+    </figure>
+    <figure class="slide">
+      <img src="images/04.jpg" alt="우리 사진 4" loading="lazy">
+    </figure>
+  </div>
+
+  <div class="dots" id="dots" aria-label="슬라이드 위치 표시">
+    <button class="dot" aria-label="1번 슬라이드"></button>
+    <button class="dot" aria-label="2번 슬라이드"></button>
+    <button class="dot" aria-label="3번 슬라이드"></button>
+    <button class="dot" aria-label="4번 슬라이드"></button>
+  </div>
+
+  <div class="nav">
+    <button class="prev" aria-label="이전">&larr;</button>
+    <button class="next" aria-label="다음">&rarr;</button>
+  </div>
+</section>
+
+<!-- 연락하기 버튼 -->
+<button id="openContact" class="contact-cta">연락하기</button>
+
+<!-- 바텀시트 모달 -->
+<div id="contactSheet" class="sheet" aria-hidden="true">
+  <div class="sheet-backdrop" data-close></div>
+
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-header">
+      <h3 id="sheetTitle">연락하기</h3>
+      <button class="sheet-close" aria-label="닫기" data-close>✕</button>
+    </div>
+
+    <div class="sheet-body">
+      <!-- 신랑 측 -->
+      <div class="group">
+        <div class="group-title">신랑</div>
+        <div class="row">
+          <div class="who">
+            <div class="role">신랑</div>
+            <div class="name">박진훈</div>
+          </div>
+          <div class="acts">
+            <a href="tel:01030032464" aria-label="박진훈 전화">📞</a>
+            <a href="sms:01030032464" aria-label="박진훈 문자">✉️</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="who">
+            <div class="role">신랑 아버지</div>
+            <div class="name">아버지 </div>
+          </div>
+          <div class="acts">
+            <a href="tel:010 xxx" aria-label="아버지 전화">📞</a>
+            <a href="sms:010 xxx" aria-label="아버지 문자">✉️</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="who">
+            <div class="role">신랑 어머니</div>
+            <div class="name">어머니</div>
+          </div>
+          <div class="acts">
+            <a href="tel:010 xxx" aria-label="어머니 전화">📞</a>
+            <a href="sms:010 xxx" aria-label="어머니 문자">✉️</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 신부 측 -->
+      <div class="group">
+        <div class="group-title">신부</div>
+        <div class="row">
+          <div class="who">
+            <div class="role">신부</div>
+            <div class="name">이유미</div>
+          </div>
+          <div class="acts">
+            <a href="tel:01073277009" aria-label="이유미 전화">📞</a>
+            <a href="sms:01073277009" aria-label="이유미 문자">✉️</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="who">
+            <div class="role">신부 아버지</div>
+            <div class="name">이재준</div>
+          </div>
+          <div class="acts">
+            <a href="tel:010 xxx" aria-label="이재준 전화">📞</a>
+            <a href="sms:010 xxx" aria-label="이재준 문자">✉️</a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="who">
+            <div class="role">신부 어머니</div>
+            <div class="name">김윤정</div>
+          </div>
+          <div class="acts">
+            <a href="tel:010 xxx" aria-label="김윤정 전화">📞</a>
+            <a href="sms:010 xxx" aria-label="김윤정 문자">✉️</a>
+          </div>
+        </div>
+      </div>
+    </div> <!-- /sheet-body -->
+  </div> <!-- /sheet-panel -->
+</div> <!-- /sheet -->
+
+
+ 
+<section class="map">
+  <h2>오시는 길</h2>
+
+  <!-- 지도 모양 -->
+<div class="map-illust">
+<img src="images/map.jpg" alt="맵 그래픽">
+</div>
+
+
+  <!-- 주소 -->
+  <p class="addr">
+    경북 경주시 보문로 338<br>
+    라한셀렉트 경주 호텔
+  </p>
+
+  <!-- 버튼 -->
+  <div class="map-buttons">
+    <a id="btnKakao" class="btn kakao"
+       href="https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225"
+       target="_blank">카카오맵</a>
+    <a id="btnNaver" class="btn naver"
+       href="https://map.naver.com/v5/search/라한셀렉트%20경주?c=129.2770225,35.8503198,15,0,0,0,dh"
+       target="_blank">네이버지도</a>
+  </div>
+</section>
+
+<script>
+(function () {
+  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (!isMobile) return;
+  document.getElementById('btnKakao')
+    .setAttribute('href','kakaomap://look?p=35.8503198,129.2770225');
+  document.getElementById('btnNaver')
+    .setAttribute('href','nmap://place?lat=35.8503198&lng=129.2770225&name='+encodeURIComponent('라한셀렉트경주'));
+})();
+</script>
+
+
+</body>
+</html>
