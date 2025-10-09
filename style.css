@@ -250,12 +250,37 @@ body {
 .who .role{ font-size:12px; color:var(--label); }
 .who .name{ font-size:16px; font-weight:600; }
 
-.acts a{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:36px; height:36px; border-radius:10px;
-  background:#f5f5f5; text-decoration:none; font-size:18px;
+.acts a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;          /* 버튼 크기 */
+  height: 42px;
+  border-radius: 12px;
+  background: #f5f5f5;
+  text-decoration: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: 0.2s;
 }
-.acts a:active{ transform: translateY(1px); }
+
+.acts a:active {
+  transform: translateY(1px);
+}
+
+/* PNG 아이콘 전용 스타일 */
+.acts a img {
+  width: 22px;      /* PNG 실제 아이콘 크기 */
+  height: 22px;
+  display: block;
+  object-fit: contain;  /* 비율 유지 */
+  transition: 0.2s;
+}
+
+/* 마우스 올렸을 때 살짝 커짐 효과 */
+.acts a:hover img {
+  transform: scale(1.1);
+}
+
 
 /* 페이지가 뒤에서 스크롤되지 않도록 */
 body.no-scroll{ height:100vh; overflow:hidden; }
