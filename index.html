@@ -268,6 +268,31 @@
 })();
 </script>
 
+<script>
+(function(){
+  const openBtn = document.getElementById('openContact');
+  const sheet = document.getElementById('contactSheet');
+  const closes = sheet.querySelectorAll('[data-close]');
+
+  const open = () => {
+    sheet.setAttribute('aria-hidden','false');
+    document.body.classList.add('no-scroll');
+  };
+
+  const close = () => {
+    sheet.setAttribute('aria-hidden','true');
+    document.body.classList.remove('no-scroll');
+  };
+
+  openBtn && openBtn.addEventListener('click', open);
+  closes.forEach(el => el.addEventListener('click', close));
+
+  // ESC로 닫기
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape' && sheet.getAttribute('aria-hidden')==='false'){ close(); }
+  });
+})();
+</script>
 
 </body>
 </html>
