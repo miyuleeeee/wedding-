@@ -196,7 +196,7 @@ body {
 .contact-cta:hover{ background: var(--cta-bg-hover); }
 
 /* sheet base */
-.sheet{ position:fixed; inset:0; display:none; }
+.sheet{ position:fixed; inset:0; display:none;z-index: 99999;  }
 .sheet[aria-hidden="false"]{ display:block; }
 
 .sheet-backdrop{
@@ -204,18 +204,29 @@ body {
   background: rgba(0,0,0,.35);
   backdrop-filter: blur(2px);
   opacity:0; transition:.25s;
+  z-index: 1;
 }
-.sheet-panel{
-  position:absolute; left:0; right:0; bottom:0;
-  background: var(--sheet-bg);
-  border-top-left-radius: var(--sheet-radius);
-  border-top-right-radius: var(--sheet-radius);
-  box-shadow: var(--sheet-shadow);
+.sheet-panel {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: #fff;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.15);
   transform: translateY(100%);
-  transition: transform .28s ease;
-  max-height: 70vh;  /* 시트 높이 */
-  display:flex; flex-direction:column;
+  transition: transform 0.28s ease;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  will-change: transform; /* ✅ 모바일에서 렌더링 강제 */
+  -webkit-transform: translateY(100%); /* ✅ 사파리 호환 */
+  -webkit-transition: -webkit-transform 0.28s ease;
 }
+.sheet[aria-hidden="false"] .sheet-panel {
+  transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+}
+
 .sheet[aria-hidden="false"] .sheet-backdrop{ opacity:1; }
 .sheet[aria-hidden="false"] .sheet-panel{ transform: translateY(0%); }
 
