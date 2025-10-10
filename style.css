@@ -314,25 +314,27 @@ body.no-scroll{ height:100vh; overflow:hidden; }
 /* 7) 시트 열렸을 때 바디 스크롤 잠금이 실제로 동작하도록 (선택) */
 body.no-scroll { position: fixed; width: 100%; }
 
-
-
-
-
-
-
-
-
-.map-illust{
-  width: 100%;
-  max-width: 100%;
-  margin:0 auto 16px;
+.location {
+  text-align: center;
+  padding: 40px 0;
 }
 
-.map-illust img{
-  width: 100%;
-  height: auto;
-  display: block;  /* 지도 비율 유지 */
+.map-wrap {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
+
+.map-wrap iframe {
+  width: 100%;
+  height: 350px;
+  border: 0;
+}
+
 /* 주소 */
 .map .addr {
   text-align: center;
