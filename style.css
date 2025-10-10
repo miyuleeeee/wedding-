@@ -227,6 +227,60 @@ body {
   margin: 10px 0 18px;
 }
 
+/* 반응형 네모박스 */
+.contact-box--responsive{
+  /* 가로폭: 화면의 90%~520px 사이에서 자동 */
+  width: min(90%, 520px);
+  margin: clamp(24px, 4vw, 48px) auto; /* 위아래 여백도 반응형 */
+  /* 안쪽 여백: 폰에선 16~20px, PC에선 28~36px 정도로 자동 증가 */
+  padding: clamp(16px, 4vw, 28px) clamp(14px, 4vw, 24px);
+  background: #fafafa;
+  border: 1.5px solid #e5e5e5;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+  text-align: center;
+}
+
+/* 타이포도 반응형으로 */
+.contact-box--responsive h2{
+  margin: 0 0 8px;
+  font-size: clamp(18px, 4.2vw, 22px);
+  font-weight: 700;
+  color: #333;
+}
+.contact-box--responsive p{
+  margin: 6px 0 16px;
+  font-size: clamp(13px, 3.6vw, 15px);
+  color: #555;
+  line-height: 1.6;
+}
+
+/* 버튼은 박스 안에서 꽉 채우기 */
+.contact-box--responsive .contact-cta{
+  width: 100%;
+  padding: clamp(12px, 3.6vw, 16px);
+  border-radius: 10px;
+}
+
+/* 아주 작은 폰(≤360px)에서 여백 살짝 줄이기 */
+@media (max-width: 360px){
+  .contact-box--responsive{
+    width: 92%;
+    padding: 14px 14px;
+  }
+}
+
+/* 태블릿 이상에서 살짝 더 여유롭게 */
+@media (min-width: 768px){
+  .contact-box--responsive{
+    border-radius: 18px;
+    padding: 28px 26px;
+  }
+}
+
+
+
+
 /* 기존 버튼 그대로 but 박스 안에 꽉 차게 */
 .contact-cta {
   width: 100%;
