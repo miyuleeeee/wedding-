@@ -169,48 +169,49 @@ body {
 @media (hover:none){ .nav{ display:none; } } /* 모바일은 보통 화살표 숨김 */
 </style>
 
-:root{
-  --sheet-radius:16px;
-  --sheet-bg:#fff;
-  --sheet-shadow:0 -10px 30px rgba(0,0,0,.15);
-  --divider:#eee;
-  --label:#777;
-  --cta-bg:#555;      /* 연락하기 버튼 배경 */
-  --cta-bg-hover:#444;
-  --cta-text:#fff;
+/* 네모박스 */
+.contact-box {
+  background: #fafafa;
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  width: min(520px, 90%);
+  margin: 0 auto 80px;
+  padding: 24px 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  text-align: center;
 }
 
-.contact-cta{
-  width: min(520px, 88%);
-  display:block;
-  margin: 0 auto;
-  padding:14px 18px;
-  border-radius:12px;
+/* 버튼 - 박스 안 폭에 딱 맞게 */
+.contact-cta {
+  display: block;
+  width: 100%;              /* 박스 안쪽 폭 기준으로 꽉 채움 */
+  box-sizing: border-box;   /* padding/border 포함 계산 */
+  padding: 14px;
+  border-radius: 10px;
   background: var(--cta-bg);
   color: var(--cta-text);
-  font-weight:700;
-  border:0;
+  font-weight: 700;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
-.contact-cta:active,
-.contact-cta:hover{ background: var(--cta-bg-hover); }
+/* hover 시 */
+.contact-cta:hover {
+  background: var(--cta-bg-hover);
+}
 
-/* 연락하기 섹션 전체 */
+/* 눌렸을 때 */
+.contact-cta:active {
+  transform: scale(0.98);
+  background: var(--cta-bg-hover);
+}
+
+/* 연락하기 섹션 */
 .contact-section {
   text-align: center;
-  margin: 40px 0 20px;
   padding: 40px 0;
-}
-
-/* 네모 박스 */
-.contact-box {
-  background: #fafafa;              /* 부드러운 회색 배경 */
-  border: 2px solid #ddd;           /* 테두리 */
-  border-radius: 16px;              /* 둥근 모서리 */
-  width: min(520px, 50%);           /* 폰/PC 모두 적당히 */
-  margin: 0 auto 80px;
-  padding: 10px 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);  /* 은은한 그림자 */
 }
 
 /* 제목 */
@@ -221,88 +222,13 @@ body {
   font-weight: 700;
 }
 
-/* 설명 문구 */
+/* 설명 문구 (있을 경우) */
 .contact-box p {
   font-size: 15px;
   color: #555;
   margin: 10px 0 18px;
-}
-
-/* 반응형 네모박스 */
-.contact-box--responsive{
-  /* 가로폭: 화면의 90%~520px 사이에서 자동 */
-  width: min(90%, 520px);
-  margin: clamp(24px, 4vw, 48px) auto; /* 위아래 여백도 반응형 */
-  /* 안쪽 여백: 폰에선 16~20px, PC에선 28~36px 정도로 자동 증가 */
-  padding: clamp(16px, 4vw, 28px) clamp(14px, 4vw, 24px);
-  background: #fafafa;
-  border: 1.5px solid #e5e5e5;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,.08);
-  text-align: center;
-}
-
-/* 타이포도 반응형으로 */
-.contact-box--responsive h2{
-  margin: 0 0 8px;
-  font-size: clamp(18px, 4.2vw, 22px);
-  font-weight: 700;
-  color: #333;
-}
-.contact-box--responsive p{
-  margin: 6px 0 16px;
-  font-size: clamp(13px, 3.6vw, 15px);
-  color: #555;
   line-height: 1.6;
 }
-
-/* 버튼은 박스 안에서 꽉 채우기 */
-.contact-box--responsive .contact-cta{
-  width: 100%;
-  padding: clamp(12px, 3.6vw, 16px);
-  border-radius: 10px;
-}
-
-/* 아주 작은 폰(≤360px)에서 여백 살짝 줄이기 */
-@media (max-width: 360px){
-  .contact-box--responsive{
-    width: 92%;
-    padding: 14px 14px;
-  }
-}
-
-/* 태블릿 이상에서 살짝 더 여유롭게 */
-@media (min-width: 768px){
-  .contact-box--responsive{
-    border-radius: 18px;
-    padding: 28px 26px;
-  }
-}
-
-
-
-
-/* 기존 버튼 그대로 but 박스 안에 꽉 차게 */
-.contact-cta {
-  width: 100%;
-  padding: 14px;
-  border-radius: 10px;
-  background: var(--cta-bg);
-  color: var(--cta-text);
-  font-weight: 700;
-  border: 0;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.contact-cta:hover {
-  background: var(--cta-bg-hover);
-}
-
-
-
-
 
 /* sheet base */
 .sheet{ position:fixed; inset:0; display:none; }
