@@ -487,6 +487,7 @@ body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
   text-align: left;
   color: #555;
 }
+/* 기존 버튼 스타일 유지 */
 .music-btn{
   position: fixed; right: 14px; bottom: 14px; z-index: 9999;
   width: 48px; height: 48px; border: 0; border-radius: 999px;
@@ -498,7 +499,19 @@ body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
 }
 .music-btn:hover{ transform: translateY(-1px); }
 .music-btn[aria-pressed="true"]{ background: rgba(0,0,0,.85); }
-@media (hover:none){ .music-btn:hover{ transform:none; } } /* 터치환경 */
+@media (hover:none){ .music-btn:hover{ transform:none; } }
+
+/* 아이콘 전환 부분 (이 아래에 추가) */
+.music-btn img {
+  width: 24px; height: 24px;
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+.music-btn .icon-on { opacity: 0; transform: scale(0.7); }
+.music-btn .icon-off { opacity: 1; transform: scale(1); }
+.music-btn[aria-pressed="true"] .icon-on { opacity: 1; transform: scale(1); }
+.music-btn[aria-pressed="true"] .icon-off { opacity: 0; transform: scale(0.7); }
 
 
 
