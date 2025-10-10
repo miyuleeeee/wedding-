@@ -44,10 +44,15 @@ body {
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.12);
 }
-.popup-close svg {
+.popup-close img {
   width: 22px;
   height: 22px;
-  color: #222;
+  display: block;
+}
+
+.popup-close:hover {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 8px 22px rgba(0,0,0,.22);
 }
 .popup-close:active {
   transform: translateX(-50%) translateY(1px);
