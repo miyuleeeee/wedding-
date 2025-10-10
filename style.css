@@ -183,7 +183,7 @@ body {
 .contact-cta{
   width: min(520px, 88%);
   display:block;
-  margin: 24px auto 80px;
+  margin: 0 auto;
   padding:14px 18px;
   border-radius:12px;
   background: var(--cta-bg);
@@ -198,6 +198,7 @@ body {
 /* 연락하기 섹션 전체 */
 .contact-section {
   text-align: center;
+  margin: 40px 0 20px;
   padding: 40px 0;
 }
 
