@@ -53,7 +53,7 @@ body {
 .popup-close:hover,
 .popup-close:active {
   transform: translateX(-50%) scale(1.1);
-  box-shadow: 0 8px 22px rgba(0,0,0,.22);
+  
 }
 
 /* 편지지 이미지 */
