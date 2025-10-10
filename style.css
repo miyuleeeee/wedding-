@@ -288,6 +288,31 @@ body {
 
 /* 페이지가 뒤에서 스크롤되지 않도록 */
 body.no-scroll{ height:100vh; overflow:hidden; }
+/* 1) sheet 자체를 최상단으로 올려서 다른 요소가 가리지 못하게 */
+.sheet { z-index: 9999; }
+
+/* 2) 패널이 백드롭 위에 오도록 확실히 지정 (blur가 stacking context 만들면서 꼬일 수 있음) */
+.sheet-backdrop { z-index: 0; }
+.sheet-panel    { z-index: 1; }
+
+/* 3) 숨길 때는 완전히 이벤트를 막기 (보이지 않아도 터치 먹는 상황 방지) */
+.sheet[aria-hidden="true"] { display:none; pointer-events:none; }
+.sheet[aria-hidden="false"] { display:block; pointer-events:auto; }
+
+/* 4) 아이콘 이미지가 터치를 먹지 않게 (부모 <a>가 터치 받도록) */
+.acts a img,
+.acts a svg { pointer-events: none; -webkit-user-select: none; user-select: none; }
+
+/* 5) 모바일 터치 타깃 최소 44px 권장 (36px이면 ‘잘 안 눌림’ 느낌) */
+@media (hover: none) and (pointer: coarse) {
+  .acts a { width: 44px; height: 44px; }
+}
+
+/* 6) iOS 터치 하이라이트 제거로 체감 개선 */
+.acts a { -webkit-tap-highlight-color: transparent; }
+
+/* 7) 시트 열렸을 때 바디 스크롤 잠금이 실제로 동작하도록 (선택) */
+body.no-scroll { position: fixed; width: 100%; }
 
 
 
