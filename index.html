@@ -355,7 +355,13 @@
     당신의 브라우저는 오디오 태그를 지원하지 않습니다.
   </audio>
 
-<button id="musicToggle" class="music-btn" aria-label="음악 켜기" aria-pressed="false">♪</button>
+<button id="musicToggle" class="music-btn" aria-label="음악 켜기" aria-pressed="false">
+  <!-- 꺼진 상태 아이콘 -->
+  <img src="images/off.svg" alt="음악 꺼짐" class="icon-off">
+  <!-- 켜진 상태 아이콘 -->
+  <img src="images/on.svg" alt="음악 켜짐" class="icon-on">
+</button>
+
 
 <script>
 (() => {
