@@ -96,11 +96,12 @@ body {
   border-radius: 0px;
   object-fit: cover;
   box-shadow: 0 6px 18px rgba(0,0,0,.12);
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: none;
+  transition: trnasform 0.3s ease, box-shadow 0.3 ease;
 }
-.photo:hover{
-  transform: scale(1.03);
-  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+.photo:hover {
+  transform: rotate(-3deg) scale(1.05); /* hover 시 기울이고 확대 */
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
 }
 
 /* 불규칙 배치 (pica 스타일) — 값만 감각적으로 조정됨 */
