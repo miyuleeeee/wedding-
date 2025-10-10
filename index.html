@@ -350,6 +350,77 @@
   </div>
 </section>
 
+
+
+<script>
+(() => {
+  const carousel = document.getElementById('carousel');
+  const slides   = Array.from(carousel.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const dots     = Array.from(dotsWrap.querySelectorAll('.dot'));
+  const prevBtn  = document.querySelector('.nav .prev');
+  const nextBtn  = document.querySelector('.nav .next');
+
+  // 현재 인덱스 계산 (scroll-snap 기준)
+  const getIndex = () => Math.round(carousel.scrollLeft / carousel.clientWidth);
+
+  // dot 상태 업데이트
+  function setActive(i){
+    dots.forEach((d, idx) => d.classList.toggle('is-active', idx === i));
+    // aria-current로 접근성도 표시
+    dots.forEach((d, idx) => d.setAttribute('aria-current', idx === i ? 'true' : 'false'));
+  }
+
+  // 캐러셀 스크롤할 때 dot 동기화
+  let ticking = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      setActive(getIndex());
+      ticking = false;
+    });
+  }
+  carousel.addEventListener('scroll', onScroll, { passive: true });
+
+  // dot 클릭 → 해당 슬라이드로 스크롤
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
+    }, { passive: true });
+  });
+
+  // 이전/다음 버튼
+  function goto(i){
+    const clamped = Math.max(0, Math.min(slides.length - 1, i));
+    carousel.scrollTo({ left: clamped * carousel.clientWidth, behavior: 'smooth' });
+  }
+  prevBtn?.addEventListener('click', () => goto(getIndex() - 1));
+  nextBtn?.addEventListener('click', () => goto(getIndex() + 1));
+
+  // 리사이즈 시 현재 인덱스 유지한 채 위치 재계산
+  let current = 0;
+  const onResize = () => {
+    current = getIndex();
+    carousel.scrollTo({ left: current * carousel.clientWidth, behavior: 'instant' in window ? 'instant' : 'auto' });
+    setActive(current);
+  };
+  window.addEventListener('resize', onResize);
+
+  // 초기 활성화
+  setActive(0);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+ 
 <script>
 (function () {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
