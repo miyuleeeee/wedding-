@@ -319,21 +319,39 @@ body.no-scroll { position: fixed; width: 100%; }
   padding: 40px 0;
 }
 
+/* 지도 감싸는 박스 */
 .map-wrap {
   position: relative;
-  width: 90%;
-  max-width: 600px;
-  margin: 0 auto;
-  border-radius: 12px;
+  width: 92%;              /* 화면 폭의 92% */
+  max-width: 600px;        /* 너무 커지지 않게 상한 */
+  margin: 0 auto;          /* 가운데 정렬 */
+  border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.map-wrap iframe {
-  width: 100%;
-  height: 350px;
-  border: 0;
+/* iframe을 비율 유지한 채로 늘리기 */
+.map-wrap::before {
+  content: "";
+  display: block;
+  padding-top: 60%; /* 높이 비율 (60% = 16:9 근사) */
 }
+
+.map-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 14px;
+}
+
+/* 📱 모바일에서 여백 조금 줄이기 */
+@media (max-width: 480px) {
+  .map-wrap { width: 94%; border-radius: 10px; }
+  .map-wrap::before { padding-top: 70%; } /* 좀 더 세로 넓게 */
+}
+
 
 /* 주소 */
 .map .addr {
