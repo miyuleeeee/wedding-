@@ -140,10 +140,10 @@ body {
 
 
 /* 불규칙하게 위치 배치 */
-.p1 { top: 120px; left: 10px; transform: rotate(-2deg); }
-.p2 { top: 150px; right: 20px; transform: rotate(3deg); }
-.p3 { bottom: 140px; left: 50px; transform: rotate(0deg); }
-.p4 { bottom: 1400px; left: 50px; transform: rotate(-15deg); }
+.p1 { top: 120px; left: 10px; }
+.p2 { top: 150px; right: 20px; }
+.p3 { bottom: 140px; left: 50px; }
+.p4 { bottom: 1400px; left: 50px; }
 
 
 /* 영역 */
