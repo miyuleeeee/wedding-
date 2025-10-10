@@ -350,7 +350,12 @@
   </div>
 </section>
 
+<audio id="bgm" preload="auto" loop playsinline>
+    <source src="bgm/song.mp3" type="audio/mpeg" />
+    당신의 브라우저는 오디오 태그를 지원하지 않습니다.
+  </audio>
 
+<button id="musicToggle" class="music-btn" aria-label="음악 켜기" aria-pressed="false">♪</button>
 
 <script>
 (() => {
@@ -413,14 +418,6 @@
 </script>
 
 
-
-
-
-
-
-
-
- 
 <script>
 (function () {
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -488,6 +485,56 @@ function copyAccount(text) {
 }
 </script>
 
+<script>
+(() => {
+  const audio = document.getElementById('bgm');
+  const btn   = document.getElementById('musicToggle');
+
+  // UI 갱신
+  function render(on){
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? '⏸' : '♪';
+    try { localStorage.setItem('bgm_on', on ? '1' : '0'); } catch(e){}
+  }
+
+  async function playBGM(){
+    try { await audio.play(); render(true); }
+    catch(e){ render(false); } // 자동재생 실패 시 버튼으로만 켜기
+  }
+  function pauseBGM(){ audio.pause(); render(false); }
+
+  // 버튼 토글
+  btn.addEventListener('click', () => {
+    if (audio.paused) playBGM(); else pauseBGM();
+  });
+
+  // 첫 사용자 제스처 이후 자동재생 시도 (iOS 정책 대응)
+  let primed = false;
+  const prime = () => {
+    if (primed) return; primed = true;
+    const wantOn = (localStorage.getItem('bgm_on') ?? '1') === '1'; // 기본 켜짐
+    if (wantOn) playBGM(); else render(false);
+    window.removeEventListener('pointerdown', prime);
+    window.removeEventListener('touchstart', prime);
+    window.removeEventListener('keydown', prime);
+    window.removeEventListener('scroll', prime);
+  };
+  window.addEventListener('pointerdown', prime, {passive:true});
+  window.addEventListener('touchstart', prime, {passive:true});
+  window.addEventListener('keydown', prime);
+  window.addEventListener('scroll', prime, {passive:true});
+
+  // 탭 전환 시 일시정지/복원(선택)
+  let wasPlaying = false;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden){ wasPlaying = !audio.paused; if (wasPlaying) pauseBGM(); }
+    else { if (wasPlaying && (localStorage.getItem('bgm_on') === '1')) playBGM(); }
+  });
+
+  // 초기 UI
+  render(false);
+})();
+</script>
 
 
  
