@@ -50,15 +50,10 @@ body {
   display: block;
 }
 
-/* hover 시: 버튼 살짝 커지고 그림자 강조 */
-.popup-close:hover {
+.popup-close:hover,
+.popup-close:active {
   transform: translateX(-50%) scale(1.1);
   box-shadow: 0 8px 22px rgba(0,0,0,.22);
-}
-
-/* 클릭(눌림) 시: 살짝 줄어듦 */
-.popup-close:active {
-  transform: translateX(-50%) scale(0.5);
 }
 
 /* 편지지 이미지 */
