@@ -262,6 +262,61 @@
 </div> <!-- /sheet -->
 
 
+<section class="account-section">
+  <h2>마음 전달하기</h2>
+  <div class="account-box">
+    <button id="openAccount" class="contact-cta" type="button">마음 전달하기</button>
+  </div>
+</section>
+
+<!-- 💌 계좌 시트 -->
+<div class="sheet" id="accountSheet" aria-hidden="true">
+  <div class="sheet-backdrop"></div>
+  <div class="sheet-panel">
+    <div class="sheet-header">
+      <h3>마음을 전하는 곳</h3>
+      <button class="sheet-close" aria-label="닫기">&times;</button>
+    </div>
+
+    <div class="sheet-body">
+      <div class="group">
+        <div class="group-title">💍 신랑측</div>
+        <div class="row">
+          <div class="who">
+            <div class="name">박진훈</div>
+            <div class="role">카카오뱅크 3333-34-9794264</div>
+          </div>
+          <button class="copy-btn" onclick="copyAccount('3333349794264')">복사</button>
+        </div>
+        <div class="row">
+          <div class="who">
+            <div class="name">박창원</div>
+            <div class="role">경남은행 537-21-0109505</div>
+          </div>
+          <button class="copy-btn" onclick="copyAccount('537210109505')">복사</button>
+        </div>
+      </div>
+
+      <div class="group">
+        <div class="group-title">💐 신부측</div>
+        <div class="row">
+          <div class="who">
+            <div class="name">김유미</div>
+            <div class="role">국민은행 110-123-456789</div>
+          </div>
+          <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
+        </div>
+        <div class="row">
+          <div class="who">
+            <div class="name">김유미</div>
+            <div class="role">신한은행 110-987-654321</div>
+          </div>
+          <button class="copy-btn" onclick="copyAccount('110987654321')">복사</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
  
 <section class="map">
@@ -333,5 +388,38 @@
 })();
 </script>
 
+<script>
+// 시트 열기/닫기
+const accountBtn = document.getElementById('openAccount');
+const accountSheet = document.getElementById('accountSheet');
+
+accountBtn?.addEventListener('click', () => {
+  accountSheet.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll');
+});
+
+accountSheet?.addEventListener('click', (e) => {
+  if (e.target.classList.contains('sheet-backdrop')) {
+    accountSheet.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+  }
+});
+
+accountSheet.querySelectorAll('.sheet-close')
+  .forEach(btn => btn.addEventListener('click', () => {
+    accountSheet.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('no-scroll');
+  }));
+
+// 복사 기능
+function copyAccount(text) {
+  navigator.clipboard.writeText(text);
+  alert('계좌번호가 복사되었습니다 💌');
+}
+</script>
+
+
+
+ 
 </body>
 </html>
