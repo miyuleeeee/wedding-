@@ -93,7 +93,7 @@ body {
   position: absolute;
   width: 45%;            /* 화면 폭 대비 */
   max-width: 260px;      /* 너무 커지지 않게 상한 */
-  border-radius: 6px;
+  border-radius: 0px;
   object-fit: cover;
   box-shadow: 0 6px 18px rgba(0,0,0,.12);
   transition: transform .25s ease, box-shadow .25s ease;
@@ -121,7 +121,7 @@ body {
   .photo{
     width: 62%;
     max-width: 180px;
-    border-radius: 5px;
+    border-radius: 0px;
   }
   .p1{ top: 0;    left: 10%; transform: rotate(-2deg); }
   .p2{ top: 150px; right: 8%; transform: rotate(2deg); }
