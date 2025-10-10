@@ -37,7 +37,7 @@ body {
   width: 44px;
   height: 44px;
   border: none;
-  background: #fff;          /* 버튼만 흰색 동그라미 */
+  background: #f2ff00;          /* 버튼 색상 변경 */
   border-radius: 50%;
   display: grid;
   place-items: center;
