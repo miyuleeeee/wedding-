@@ -34,27 +34,45 @@ body {
   left: 50%;
   top: -26px;
   transform: translateX(-50%);
-  width: 44px;
-  height: 44px;
+  width: 64px;
+  height: 64px;
   border: none;
-  background: #f2ff00;          /* 버튼 색상 변경 */
+  background: #fff;
   border-radius: 50%;
-  display: grid;
-  place-items: center;
+  display: flex;              /* flex로 변경 */
+  flex-direction: column;     /* 세로 정렬 */
+  align-items: center;
+  justify-content: center;
+  gap: 4px;                   /* SVG와 글자 사이 간격 */
   cursor: pointer;
-  box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08);
+  z-index: 10;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* 아이콘 */
 .popup-close img {
   width: 22px;
   height: 22px;
   display: block;
 }
 
-.popup-close:hover,
-.popup-close:active {
-  transform: translateX(-50%) scale(1.1);
-  
+/* 텍스트 */
+.popup-close span {
+  font-size: 12px;
+  font-weight: 600;
+  color: #333;
 }
+
+/* hover & active */
+.popup-close:hover {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 8px 22px rgba(0,0,0,.22);
+}
+.popup-close:active {
+  transform: translateX(-50%) translateY(1px) scale(0.95);
+}
+
 
 /* 편지지 이미지 */
 .popup img {
