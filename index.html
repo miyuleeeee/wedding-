@@ -369,6 +369,20 @@
   <img src="images/on.svg" alt="음악 켜짐" class="icon-on">
 </button>
 
+<script>
+(() => {
+  document.querySelectorAll('.photo').forEach(img => {
+    const rot = (Math.random()*6 - 3).toFixed(2);  // -3 ~ +3도
+    const tx  = Math.round(Math.random()*8 - 4);   // -4 ~ +4px
+    const ty  = Math.round(Math.random()*8 - 4);   // -4 ~ +4px
+    img.style.setProperty('--rot', rot + 'deg');
+    img.style.setProperty('--tx',  tx  + 'px');
+    img.style.setProperty('--ty',  ty  + 'px');
+    img.loading = 'lazy';
+    img.decoding = 'async';
+  });
+})();
+</script>
 
 <script>
 (() => {
