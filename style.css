@@ -128,7 +128,7 @@ body {
   transition: trnasform 0.3s ease, box-shadow 0.3 ease;
 }
 .photo:hover {
-  transform: rotate(-3deg) scale(1.05); /* hover 시 기울이고 확대 */
+  transform: scale(1.05); /* hover 시 기울이고 확대 */
   box-shadow: 0 10px 26px rgba(0,0,0,0.18);
 }
 
