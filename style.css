@@ -136,7 +136,11 @@ body {
   letter-spacing: -0.4px;    /* 글자 간격 좁힘 */
   line-height: 1.4;
 }
-
+.content{
+  margin-left: calc(var(--side-width) + 20px);
+  padding: 24px;
+  box-sizing: border-box;
+}
 
 /* 갤러리 영역 */
 .photos{
