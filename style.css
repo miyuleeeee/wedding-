@@ -120,19 +120,24 @@ body {
   .sidebar {width: 140px ; }
 }
 
+/* 상단 타이틀 */
 .sidebar h1 {
-  margin-bottom: 24px;
-  font-size: 20px;
-  font-weight: 700;
-}
-.menu {
-  margin-bottom: 40px;
+  font-size: 18px;
+  font-weight: 400;          /* 폰트 얇게 */
+  letter-spacing: -0.3px;    /* 자간 약간 줄임 */
+  margin-bottom: 26px;
 }
 
-.menu p {
-  margin: 8px 0;
-  font-size: 16px;
+/* 하단 문구 (각 줄) */
+.sidebar nav p {
+  margin: 6px 0;
+  font-size: 17px;
+  font-weight: 300;          /* 더 가는 폰트 */
+  letter-spacing: -0.4px;    /* 글자 간격 좁힘 */
+  line-height: 1.4;
 }
+
+
 /* 갤러리 영역 */
 .photos{
   position: relative;
