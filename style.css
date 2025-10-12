@@ -196,7 +196,7 @@ body {
     max-width: 180px;
     border-radius: 0px;
   }
-.p1{ top: 20px; left: 6%; }   /* ← 여기 숫자 줄이면 더 위로 */
+.p1{ top: 0px; left: 6%; }   /* ← 여기 숫자 줄이면 더 위로 */
 .p2{ top: 180px; right: 10%; }
 .p3{ top: 360px; left: 12%; }
 .p4{ top: 540px; right: 14%; }
