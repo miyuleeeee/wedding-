@@ -116,6 +116,9 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
 }
+@media (max-width:480px) {
+  .sidebar {width: 140px ; }
+}
 
 .sidebar h1 {
   margin-bottom: 24px;
