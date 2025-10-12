@@ -190,17 +190,7 @@ body {
 }
 
 /* 📱 모바일 튜닝 */
-@media (max-width: 480px){
-  .photo{
-    width: 62%;
-    max-width: 180px;
-    border-radius: 0px;
-  }
-.p1{ top: 0px; left: 6%; }   /* ← 여기 숫자 줄이면 더 위로 */
-.p2{ top: 180px; right: 10%; }
-.p3{ top: 360px; left: 12%; }
-.p4{ top: 540px; right: 14%; }
-.photos::after{ height: 820px; }  /* 마지막 사진 바닥보다 조금 크게 */
+
 
 @media (max-width:480px){
   .photo{ width:62%; max-width:180px; }
