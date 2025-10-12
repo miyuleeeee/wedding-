@@ -111,7 +111,7 @@ body {
   left: 0;
   bottom: 0;
   width: var(--side-width);       /* ← 변수 사용 */
-  background: #fff;
+  background: transparent;
   border-right: 1px solid #eee;
   /* padding: 0;  -> 완전 0이면 글자가 모서리에 붙어 답답해요 */
   padding: 16px 12px;             /* ← 아주 얇게만 줘도 인상 확 좋아짐 */
