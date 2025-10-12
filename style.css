@@ -99,6 +99,29 @@ body {
     padding: 15px;
   }
 }
+
+
+
+.sidebar {
+  position: fixed;       /* 화면 왼쪽에 고정 */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--side-width);
+  background: #fff;
+  border-right: 1px solid #eee;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.sidebar h1 {
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-weight: 700;
+}
 .menu {
   margin-bottom: 40px;
 }
