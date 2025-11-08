@@ -138,7 +138,7 @@ body {
 .p4{ top: 570px; left: 12%; }
 .p5{ top: 600px; right:16%; } 
 .p6{ top: 770px; left:0%; } 
-.p7{ top: 1300px; right:12%; }
+.p7{ top: 1150px; right:12%; }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 .photos::after{
   content:"";
