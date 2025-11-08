@@ -2,564 +2,440 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
- <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>유미, 진훈 결혼합니다!</title>
-  <link rel="stylesheet" href="style.css">
 
+  <!-- 폰트 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Nanum+Gothic&family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet" />
 
+  <!-- style.css: 중복 링크 제거 → 한 번만 -->
+  <link rel="stylesheet" href="style.css" />
 
-  <!-- style.css 연결 -->
-<link rel="stylesheet" href="style.css">
+  <!-- (선택) 페이지 내부 보조 스타일: 필요하면 style.css로 옮겨도 됨 -->
+  <style>
+    /* 상단 고정 배너 */
+    .top-banner{
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
+      /* 필요하면 배경색 지정 */
+      /* background-color: #fff; */
+    }
+    .top-banner img{ max-width:100%; height:auto; display:block; margin:0 auto; }
+
+    /* 본문이 배너에 가리지 않도록 */
+    .content{
+      margin-top: 200px; /* 배너 높이에 맞춰 조절 */
+      padding: 20px;
+      /* 혹시 사이드바 제거 전 남은 여백이 있다면 보정 */
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    @media (max-width: 600px){
+      h1{ font-size: 1.5em; }
+      p{ font-size: 1em; }
+    }
+    @media (min-width: 601px) and (max-width: 1024px){
+      h1{ font-size: 1.8em; }
+      p{ font-size: 1.1em; }
+    }
+    @media (min-width: 1025px){
+      .container{
+        max-width: 1000px;  /* PC에서 1000px 제한 */
+        padding: 30px;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <!-- 팝업 -->
   <div class="popup-overlay" id="popup">
     <div class="popup">
-      <!-- 🔽 닫기 화살표 버튼 -->
       <button class="popup-close" onclick="closePopup()" aria-label="닫기">
-       <span> click !</span>  
-       
-         
+        <span> click !</span>
       </button>
-
-      <img src="images/ex2.png" alt="공지 이미지">
+      <img src="images/ex2.png" alt="공지 이미지" />
       <p></p>
     </div>
   </div>
 
-  <script>
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-    }
-  </script>
-</body>
+  <main class="content">
+    <!-- ✅ 사이드바 삭제됨 -->
 
-</html>
-
-
-  <style>
-    /* 상단 고정 배너 */
-    .top-banner {
-      position: fixed;   /* 스크롤해도 고정 */
-      top: 0;
-      left: 0;
-      width: 100%;       /* 화면 전체 너비 */
-      z-index: 1000;     /* 다른 요소보다 위에 표시 */
-      background-color:  /* 필요 시 배경색 */
-    }
-    .top-banner img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-    }
-    /* 본문이 이미지에 가려지지 않도록 여백 추가 */
-    .content {
-      margin-top: 200px; /* 이미지 높이에 맞춰 조절 */
-      padding: 20px;
-    }
-      @media (max-width: 600px) {
-      h1 {
-        font-size: 1.5em;
-      }
-      p {
-        font-size: 1em;
-      }
-    }
-    @media (min-width: 601px) and (max-width: 1024px) {
-      h1 {
-        font-size: 1.8em;
-      }
-      p {
-        font-size: 1.1em;
-      }
-    }
-
-   @media (min-width: 1025px) {
-  .container {
-    max-width: 1000px;  /* PC일 때는 1000px 안쪽에서만 보여줌 */
-    padding: 30px;
-      }
-    }
-  </style>
-  </head>
-<body>
- 
-<main class="content">
-<aside class="sidebar">
-  <h1>Our wedding day!</h1>
-  <nav>
-    <p>유미, 진훈</p>
-    <p>우리 결혼합니다!</p>
-    <p>2026.04.18</p>
-  </nav>
-</aside>
-
-
-  
+    <!-- 불규칙 사진 -->
     <div class="photos">
-    <img src="images/1.jpeg" class="photo p1" alt="">
-    <img src="images/2.jpg" class="photo p2" alt="">
-    <img src="images/3.jpeg" class="photo p3" alt="">
-    <img src="images/4.jpeg" class="photo p4" alt="">
-    <img src="images/5.jpg" class="photo p5" alt="">
-    <img src="images/6.jpg" class="photo p6" alt="">
-    <img src="images/7.jpg" class="photo p7" alt="">
-    
-  </div>
-
-<!-- ========== 1) HTML ========== -->
-<section class="carousel-wrap">
-  <div class="carousel" id="carousel">
-    <figure class="slide">
-      <img src="images/3472.jpeg" alt="우리 사진 1" loading="lazy">
-    </figure>
-    <figure class="slide">
-      <img src="images/2.jpeg" alt="우리 사진 2" loading="lazy">
-    </figure>
-    <figure class="slide">
-      <img src="images/03.jpg" alt="우리 사진 3" loading="lazy">
-    </figure>
-    <figure class="slide">
-      <img src="images/04.jpg" alt="우리 사진 4" loading="lazy">
-    </figure>
-  </div>
-
-  <div class="dots" id="dots" aria-label="슬라이드 위치 표시">
-    <button class="dot" aria-label="1번 슬라이드"></button>
-    <button class="dot" aria-label="2번 슬라이드"></button>
-    <button class="dot" aria-label="3번 슬라이드"></button>
-    <button class="dot" aria-label="4번 슬라이드"></button>
-  </div>
-
-  <div class="nav">
-    <button class="prev" aria-label="이전">&larr;</button>
-    <button class="next" aria-label="다음">&rarr;</button>
-  </div>
-</section>
-
-<!-- 연락하기 버튼 -->
-<!-- 연락하기 섹션 -->
-<section class="contact-section">
-  <div class="contact-box">
-    <button id="openContact" class="contact-cta" type="button">연락하기</button>
-  </div>
-</section>
-
-
-<!-- 바텀시트 모달 -->
-<div id="contactSheet" class="sheet" aria-hidden="true">
-  <div class="sheet-backdrop" data-close></div>
-
-  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <div class="sheet-header">
-      <h3 id="sheetTitle">연락하기</h3>
-      <button class="sheet-close" aria-label="닫기" data-close type="button">✕</button>
+      <img src="images/1.jpeg" class="photo p1" alt="">
+      <img src="images/2.jpg"  class="photo p2" alt="">
+      <img src="images/3.jpeg" class="photo p3" alt="">
+      <img src="images/4.jpeg" class="photo p4" alt="">
+      <img src="images/5.jpg"  class="photo p5" alt="">
+      <img src="images/6.jpg"  class="photo p6" alt="">
+      <img src="images/7.jpg"  class="photo p7" alt="">
     </div>
 
-    <div class="sheet-body">
-      <!-- 신랑 측 -->
-      <div class="group">
-        <div class="group-title">신랑측</div>
-
-        <div class="row">
-          <div class="who">
-            <div class="role">신랑</div>
-            <div class="name">박진훈</div>
-          </div>
-          <div class="acts">
-            <a href="tel:01030032464" aria-label="박진훈 전화">
-              <img src="images/call.svg" alt="전화">
-            </a>
-            <a href="sms:01030032464" aria-label="박진훈 문자">
-              <img src="images/mail.svg" alt="문자">
-            </a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="who">
-            <div class="role">신랑 아버지</div>
-            <div class="name">아버지</div>
-          </div>
-          <div class="acts">
-            <a href="tel:010xxx" aria-label="아버지 전화">
-              <img src="images/call.svg" alt="전화">
-            </a>
-            <a href="sms:01030032464" aria-label="아버지 문자">
-              <img src="images/mail.svg" alt="문자">
-            </a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="who">
-            <div class="role">신랑 어머니</div>
-            <div class="name">어머니</div>
-          </div>
-          <div class="acts">
-            <a href="tel:01030032464" aria-label="어머니 전화">
-              <img src="images/call.svg" alt="전화">
-            </a>
-            <a href="sms:01030032464" aria-label="어머니 문자">
-              <img src="images/mail.svg" alt="문자">
-            </a>
-          </div>
-        </div>
+    <!-- 캐러셀 -->
+    <section class="carousel-wrap">
+      <div class="carousel" id="carousel">
+        <figure class="slide"><img src="images/3472.jpeg" alt="우리 사진 1" loading="lazy"></figure>
+        <figure class="slide"><img src="images/2.jpeg"    alt="우리 사진 2" loading="lazy"></figure>
+        <figure class="slide"><img src="images/03.jpg"   alt="우리 사진 3" loading="lazy"></figure>
+        <figure class="slide"><img src="images/04.jpg"   alt="우리 사진 4" loading="lazy"></figure>
       </div>
 
-      <!-- 신부 측 -->
-      <div class="group">
-        <div class="group-title">신부측</div>
-
-        <div class="row">
-          <div class="who">
-            <div class="role">신부</div>
-            <div class="name">이유미</div>
-          </div>
-          <div class="acts">
-            <a href="tel:01077327709" aria-label="이유미 전화">
-              <img src="images/call.svg" alt="전화">
-            </a>
-            <a href="sms:01030032464" aria-label="이유미 문자">
-              <img src="images/mail.svg" alt="문자">
-            </a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="who">
-            <div class="role">신부 아버지</div>
-            <div class="name">이재준</div>
-          </div>
-          <div class="acts">
-            <a href="tel:010xxx" aria-label="이재준 전화">
-              <img src="images/call.svg" alt="전화">
-            </a>
-            <a href="sms:010xxx" aria-label="이재준 문자">
-              <img src="images/mail.svg" alt="문자">
-            </a>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="who">
-            <div class="role">신부 어머니</div>
-            <div class="name">김윤정</div>
-          </div>
-          <div class="acts">
-            <a href="tel:010xxx" aria-label="김윤정 전화">
-              <img src="images/call.svg" alt="전화">
-            </a>
-            <a href="sms:010xxx" aria-label="김윤정 문자">
-              <img src="images/mail.svg" alt="문자">
-            </a>
-          </div>
-        </div>
-      </div>
-    </div> <!-- /sheet-body -->
-  </div> <!-- /sheet-panel -->
-</div> <!-- /sheet -->
-
-
-<section class="account-section">
-  <div class="account-box">
-    <button id="openAccount" class="contact-cta" type="button">마음 전달하기</button>
-  </div>
-</section>
-
-<!-- 💌 계좌 시트 -->
-<div class="sheet" id="accountSheet" aria-hidden="true">
-  <div class="sheet-backdrop"></div>
-  <div class="sheet-panel">
-    <div class="sheet-header">
-      <h3>마음을 전하는 곳</h3>
-      <button class="sheet-close" aria-label="닫기">&times;</button>
-    </div>
-
-    <div class="sheet-body">
-      <div class="group">
-        <div class="group-title">신랑측</div>
-        <div class="row">
-          <div class="who">
-            <div class="name">박진훈</div>
-            <div class="role">카카오뱅크 3333-34-9794264</div>
-          </div>
-          <button class="copy-btn" onclick="copyAccount('3333349794264')">복사</button>
-        </div>
-        <div class="row">
-          <div class="who">
-            <div class="name">박창원</div>
-            <div class="role">경남은행 537-21-0109505</div>
-          </div>
-          <button class="copy-btn" onclick="copyAccount('537210109505')">복사</button>
-        </div>
+      <div class="dots" id="dots" aria-label="슬라이드 위치 표시">
+        <button class="dot" aria-label="1번 슬라이드"></button>
+        <button class="dot" aria-label="2번 슬라이드"></button>
+        <button class="dot" aria-label="3번 슬라이드"></button>
+        <button class="dot" aria-label="4번 슬라이드"></button>
       </div>
 
-      <div class="group">
-        <div class="group-title">신부측</div>
-        <div class="row">
-          <div class="who">
-            <div class="name">김유미</div>
-            <div class="role">국민은행 110-123-456789</div>
-          </div>
-          <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
+      <div class="nav">
+        <button class="prev" aria-label="이전">&larr;</button>
+        <button class="next" aria-label="다음">&rarr;</button>
+      </div>
+    </section>
+
+    <!-- 연락하기 -->
+    <section class="contact-section">
+      <div class="contact-box">
+        <button id="openContact" class="contact-cta" type="button">연락하기</button>
+      </div>
+    </section>
+
+    <!-- 연락처 바텀시트 -->
+    <div id="contactSheet" class="sheet" aria-hidden="true">
+      <div class="sheet-backdrop" data-close></div>
+      <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+        <div class="sheet-header">
+          <h3 id="sheetTitle">연락하기</h3>
+          <button class="sheet-close" aria-label="닫기" data-close type="button">✕</button>
         </div>
-        <div class="row">
-          <div class="who">
-            <div class="name">김유미</div>
-            <div class="role">신한은행 110-987-654321</div>
+        <div class="sheet-body">
+          <!-- 신랑측 -->
+          <div class="group">
+            <div class="group-title">신랑측</div>
+            <div class="row">
+              <div class="who">
+                <div class="role">신랑</div>
+                <div class="name">박진훈</div>
+              </div>
+              <div class="acts">
+                <a href="tel:01030032464" aria-label="박진훈 전화"><img src="images/call.svg" alt="전화"></a>
+                <a href="sms:01030032464" aria-label="박진훈 문자"><img src="images/mail.svg" alt="문자"></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="who">
+                <div class="role">신랑 아버지</div>
+                <div class="name">아버지</div>
+              </div>
+              <div class="acts">
+                <a href="tel:010xxx" aria-label="아버지 전화"><img src="images/call.svg" alt="전화"></a>
+                <a href="sms:01030032464" aria-label="아버지 문자"><img src="images/mail.svg" alt="문자"></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="who">
+                <div class="role">신랑 어머니</div>
+                <div class="name">어머니</div>
+              </div>
+              <div class="acts">
+                <a href="tel:01030032464" aria-label="어머니 전화"><img src="images/call.svg" alt="전화"></a>
+                <a href="sms:01030032464" aria-label="어머니 문자"><img src="images/mail.svg" alt="문자"></a>
+              </div>
+            </div>
           </div>
-          <button class="copy-btn" onclick="copyAccount('110987654321')">복사</button>
+
+          <!-- 신부측 -->
+          <div class="group">
+            <div class="group-title">신부측</div>
+            <div class="row">
+              <div class="who">
+                <div class="role">신부</div>
+                <div class="name">이유미</div>
+              </div>
+              <div class="acts">
+                <a href="tel:01077327709" aria-label="이유미 전화"><img src="images/call.svg" alt="전화"></a>
+                <a href="sms:01030032464" aria-label="이유미 문자"><img src="images/mail.svg" alt="문자"></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="who">
+                <div class="role">신부 아버지</div>
+                <div class="name">이재준</div>
+              </div>
+              <div class="acts">
+                <a href="tel:010xxx" aria-label="이재준 전화"><img src="images/call.svg" alt="전화"></a>
+                <a href="sms:010xxx" aria-label="이재준 문자"><img src="images/mail.svg" alt="문자"></a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="who">
+                <div class="role">신부 어머니</div>
+                <div class="name">김윤정</div>
+              </div>
+              <div class="acts">
+                <a href="tel:010xxx" aria-label="김윤정 전화"><img src="images/call.svg" alt="전화"></a>
+                <a href="sms:010xxx" aria-label="김윤정 문자"><img src="images/mail.svg" alt="문자"></a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /sheet-body -->
+      </div><!-- /sheet-panel -->
+    </div><!-- /sheet -->
+
+    <!-- 마음 전달하기 -->
+    <section class="account-section">
+      <div class="account-box">
+        <button id="openAccount" class="contact-cta" type="button">마음 전달하기</button>
+      </div>
+    </section>
+
+    <!-- 계좌 시트 -->
+    <div class="sheet" id="accountSheet" aria-hidden="true">
+      <div class="sheet-backdrop"></div>
+      <div class="sheet-panel">
+        <div class="sheet-header">
+          <h3>마음을 전하는 곳</h3>
+          <button class="sheet-close" aria-label="닫기">&times;</button>
+        </div>
+        <div class="sheet-body">
+          <div class="group">
+            <div class="group-title">신랑측</div>
+            <div class="row">
+              <div class="who">
+                <div class="name">박진훈</div>
+                <div class="role">카카오뱅크 3333-34-9794264</div>
+              </div>
+              <button class="copy-btn" onclick="copyAccount('3333349794264')">복사</button>
+            </div>
+            <div class="row">
+              <div class="who">
+                <div class="name">박창원</div>
+                <div class="role">경남은행 537-21-0109505</div>
+              </div>
+              <button class="copy-btn" onclick="copyAccount('537210109505')">복사</button>
+            </div>
+          </div>
+          <div class="group">
+            <div class="group-title">신부측</div>
+            <div class="row">
+              <div class="who">
+                <div class="name">김유미</div>
+                <div class="role">국민은행 110-123-456789</div>
+              </div>
+              <button class="copy-btn" onclick="copyAccount('110123456789')">복사</button>
+            </div>
+            <div class="row">
+              <div class="who">
+                <div class="name">김유미</div>
+                <div class="role">신한은행 110-987-654321</div>
+              </div>
+              <button class="copy-btn" onclick="copyAccount('110987654321')">복사</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
- 
-<section class="map">
+    <!-- 지도 -->
+    <section class="map">
+      <section id="map" class="location">
+        <h3>오시는 길</h3>
+        <div class="map-wrap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10871.294080997917!2d129.269011394831!3d35.8509035196251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3566527d226d34e1%3A0x99f295bc28f151b1!2z65287ZWc7IWA66CJ7Yq4IOqyveyjvA!5e0!3m2!1sko!2skr!4v1760084782795!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </section>
 
-  <!-- 지도 모양 -->
-<section id="map" class="location">
-  <h3>오시는 길</h3>
+      <p class="addr">
+        장소: 경북 경주시 보문로 338<br />
+        라한셀렉트 경주 호텔<br />
+        시간: 오후 12시 30분
+      </p>
 
-  <div class="map-wrap">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10871.294080997917!2d129.269011394831!3d35.8509035196251!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3566527d226d34e1%3A0x99f295bc28f151b1!2z65287ZWc7IWA66CJ7Yq4IOqyveyjvA!5e0!3m2!1sko!2skr!4v1760084782795!5m2!1sko!2skr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
- 
-</iframe>
+      <div class="map-buttons">
+        <a id="btnKakao" class="btn kakao" href="https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225" target="_blank">카카오맵</a>
+        <a id="btnNaver" class="btn naver" href="https://map.naver.com/v5/search/라한셀렉트%20경주?c=129.2770225,35.8503198,15,0,0,0,dh" target="_blank">네이버지도</a>
+      </div>
+    </section>
 
-   
-  </div>
-</section>
+    <!-- 음악 -->
+    <audio id="bgm" preload="auto" loop playsinline>
+      <source src="bgm/Uu.mp3" type="audio/mpeg" />
+      당신의 브라우저는 오디오 태그를 지원하지 않습니다.
+    </audio>
 
-  <!-- 주소 -->
-  <p class="addr">
-    장소: 경북 경주시 보문로 338<br>
-    라한셀렉트 경주 호텔
+    <button id="musicToggle" class="music-btn" aria-label="음악 켜기" aria-pressed="false">
+      <img src="images/off.svg" alt="음악 꺼짐" class="icon-off" />
+      <img src="images/on.svg"  alt="음악 켜짐" class="icon-on" />
+    </button>
+  </main>
 
-    시간: 오후 12시 30분
-  </p>
+  <!-- 스크립트들 -->
+  <script>
+    function closePopup(){ document.getElementById('popup').style.display='none'; }
+  </script>
 
-  <!-- 버튼 -->
-  <div class="map-buttons">
-    <a id="btnKakao" class="btn kakao"
-       href="https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225"
-       target="_blank">카카오맵</a>
-    <a id="btnNaver" class="btn naver"
-       href="https://map.naver.com/v5/search/라한셀렉트%20경주?c=129.2770225,35.8503198,15,0,0,0,dh"
-       target="_blank">네이버지도</a>
-  </div>
-</section>
+  <script>
+  (() => {
+    const carousel = document.getElementById('carousel');
+    const slides   = Array.from(carousel.querySelectorAll('.slide'));
+    const dotsWrap = document.getElementById('dots');
+    const dots     = Array.from(dotsWrap.querySelectorAll('.dot'));
+    const prevBtn  = document.querySelector('.nav .prev');
+    const nextBtn  = document.querySelector('.nav .next');
 
-<audio id="bgm" preload="auto" loop playsinline>
-    <source src="bgm/Uu.mp3" type="audio/mpeg" />
-    당신의 브라우저는 오디오 태그를 지원하지 않습니다.
-  </audio>
+    const getIndex = () => Math.round(carousel.scrollLeft / carousel.clientWidth);
 
-<button id="musicToggle" class="music-btn" aria-label="음악 켜기" aria-pressed="false">
-  <!-- 꺼진 상태 아이콘 -->
-  <img src="images/off.svg" alt="음악 꺼짐" class="icon-off">
-  <!-- 켜진 상태 아이콘 -->
-  <img src="images/on.svg" alt="음악 켜짐" class="icon-on">
-</button>
+    function setActive(i){
+      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === i));
+      dots.forEach((d, idx) => d.setAttribute('aria-current', idx === i ? 'true' : 'false'));
+    }
 
+    let ticking = false;
+    function onScroll(){
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { setActive(getIndex()); ticking = false; });
+    }
+    carousel.addEventListener('scroll', onScroll, { passive: true });
 
-<script>
-(() => {
-  const carousel = document.getElementById('carousel');
-  const slides   = Array.from(carousel.querySelectorAll('.slide'));
-  const dotsWrap = document.getElementById('dots');
-  const dots     = Array.from(dotsWrap.querySelectorAll('.dot'));
-  const prevBtn  = document.querySelector('.nav .prev');
-  const nextBtn  = document.querySelector('.nav .next');
-
-  // 현재 인덱스 계산 (scroll-snap 기준)
-  const getIndex = () => Math.round(carousel.scrollLeft / carousel.clientWidth);
-
-  // dot 상태 업데이트
-  function setActive(i){
-    dots.forEach((d, idx) => d.classList.toggle('is-active', idx === i));
-    // aria-current로 접근성도 표시
-    dots.forEach((d, idx) => d.setAttribute('aria-current', idx === i ? 'true' : 'false'));
-  }
-
-  // 캐러셀 스크롤할 때 dot 동기화
-  let ticking = false;
-  function onScroll(){
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      setActive(getIndex());
-      ticking = false;
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
+      }, { passive: true });
     });
-  }
-  carousel.addEventListener('scroll', onScroll, { passive: true });
 
-  // dot 클릭 → 해당 슬라이드로 스크롤
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
-    }, { passive: true });
-  });
+    function goto(i){
+      const clamped = Math.max(0, Math.min(slides.length - 1, i));
+      carousel.scrollTo({ left: clamped * carousel.clientWidth, behavior: 'smooth' });
+    }
+    prevBtn?.addEventListener('click', () => goto(getIndex() - 1));
+    nextBtn?.addEventListener('click', () => goto(getIndex() + 1));
 
-  // 이전/다음 버튼
-  function goto(i){
-    const clamped = Math.max(0, Math.min(slides.length - 1, i));
-    carousel.scrollTo({ left: clamped * carousel.clientWidth, behavior: 'smooth' });
-  }
-  prevBtn?.addEventListener('click', () => goto(getIndex() - 1));
-  nextBtn?.addEventListener('click', () => goto(getIndex() + 1));
+    let current = 0;
+    const onResize = () => {
+      current = getIndex();
+      carousel.scrollTo({ left: current * carousel.clientWidth, behavior: 'auto' });
+      setActive(current);
+    };
+    window.addEventListener('resize', onResize);
 
-  // 리사이즈 시 현재 인덱스 유지한 채 위치 재계산
-  let current = 0;
-  const onResize = () => {
-    current = getIndex();
-    carousel.scrollTo({ left: current * carousel.clientWidth, behavior: 'instant' in window ? 'instant' : 'auto' });
-    setActive(current);
-  };
-  window.addEventListener('resize', onResize);
+    setActive(0);
+  })();
+  </script>
 
-  // 초기 활성화
-  setActive(0);
-})();
-</script>
+  <script>
+  (function () {
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (!isMobile) return;
+    document.getElementById('btnKakao')
+      .setAttribute('href','kakaomap://look?p=35.8503198,129.2770225');
+    document.getElementById('btnNaver')
+      .setAttribute('href','nmap://place?lat=35.8503198&lng=129.2770225&name='+encodeURIComponent('라한셀렉트경주'));
+  })();
+  </script>
 
+  <script>
+  (function(){
+    const openBtn = document.getElementById('openContact');
+    const sheet = document.getElementById('contactSheet');
+    const closes = sheet.querySelectorAll('[data-close]');
 
-<script>
-(function () {
-  var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  if (!isMobile) return;
-  document.getElementById('btnKakao')
-    .setAttribute('href','kakaomap://look?p=35.8503198,129.2770225');
-  document.getElementById('btnNaver')
-    .setAttribute('href','nmap://place?lat=35.8503198&lng=129.2770225&name='+encodeURIComponent('라한셀렉트경주'));
-})();
-</script>
+    const open = () => { sheet.setAttribute('aria-hidden','false'); document.body.classList.add('no-scroll'); };
+    const close = () => { sheet.setAttribute('aria-hidden','true');  document.body.classList.remove('no-scroll'); };
 
-<script>
-(function(){
-  const openBtn = document.getElementById('openContact');
-  const sheet = document.getElementById('contactSheet');
-  const closes = sheet.querySelectorAll('[data-close]');
+    openBtn && openBtn.addEventListener('click', open);
+    closes.forEach(el => el.addEventListener('click', close));
 
-  const open = () => {
-    sheet.setAttribute('aria-hidden','false');
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape' && sheet.getAttribute('aria-hidden')==='false'){ close(); }
+    });
+  })();
+  </script>
+
+  <script>
+  // 계좌 시트
+  const accountBtn = document.getElementById('openAccount');
+  const accountSheet = document.getElementById('accountSheet');
+
+  accountBtn?.addEventListener('click', () => {
+    accountSheet.setAttribute('aria-hidden', 'false');
     document.body.classList.add('no-scroll');
-  };
-
-  const close = () => {
-    sheet.setAttribute('aria-hidden','true');
-    document.body.classList.remove('no-scroll');
-  };
-
-  openBtn && openBtn.addEventListener('click', open);
-  closes.forEach(el => el.addEventListener('click', close));
-
-  // ESC로 닫기
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape' && sheet.getAttribute('aria-hidden')==='false'){ close(); }
-  });
-})();
-</script>
-
-<script>
-// 시트 열기/닫기
-const accountBtn = document.getElementById('openAccount');
-const accountSheet = document.getElementById('accountSheet');
-
-accountBtn?.addEventListener('click', () => {
-  accountSheet.setAttribute('aria-hidden', 'false');
-  document.body.classList.add('no-scroll');
-});
-
-accountSheet?.addEventListener('click', (e) => {
-  if (e.target.classList.contains('sheet-backdrop')) {
-    accountSheet.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('no-scroll');
-  }
-});
-
-accountSheet.querySelectorAll('.sheet-close')
-  .forEach(btn => btn.addEventListener('click', () => {
-    accountSheet.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('no-scroll');
-  }));
-
-// 복사 기능
-function copyAccount(text) {
-  navigator.clipboard.writeText(text);
-  alert('계좌번호가 복사되었습니다 ✦ ⌒⌵⌒✦✦');
-}
-</script>
-
-<script>
-(() => {
-  const audio = document.getElementById('bgm');
-  const btn   = document.getElementById('musicToggle');
-
-  // UI 상태 갱신
-  function render(on){
-    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    try { localStorage.setItem('bgm_on', on ? '1' : '0'); } catch(e){}
-  }
-
-  async function playBGM(){
-    try { await audio.play(); render(true); }
-    catch(e){ render(false); } // 자동재생 실패 시 버튼으로만 켜기
-  }
-
-  function pauseBGM(){
-    audio.pause();
-    render(false);
-  }
-
-  // 버튼 클릭으로 재생/정지
-  btn.addEventListener('click', () => {
-    if (audio.paused) playBGM();
-    else pauseBGM();
   });
 
-  // 첫 사용자 제스처 이후 자동재생 (iOS 대응)
-  let primed = false;
-  const prime = () => {
-    if (primed) return;
-    primed = true;
-    const wantOn = (localStorage.getItem('bgm_on') ?? '1') === '1';
-    if (wantOn) playBGM(); else render(false);
-    window.removeEventListener('pointerdown', prime);
-    window.removeEventListener('touchstart', prime);
-    window.removeEventListener('keydown', prime);
-    window.removeEventListener('scroll', prime);
-  };
-  window.addEventListener('pointerdown', prime, {passive:true});
-  window.addEventListener('touchstart', prime, {passive:true});
-  window.addEventListener('keydown', prime);
-  window.addEventListener('scroll', prime, {passive:true});
-
-  // 탭 전환 시 일시정지/복원
-  let wasPlaying = false;
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      wasPlaying = !audio.paused;
-      if (wasPlaying) pauseBGM();
-    } else {
-      if (wasPlaying && (localStorage.getItem('bgm_on') === '1')) playBGM();
+  accountSheet?.addEventListener('click', (e) => {
+    if (e.target.classList.contains('sheet-backdrop')) {
+      accountSheet.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
     }
   });
 
-  // 초기 상태
-  render(false);
-})();
-</script>
+  accountSheet.querySelectorAll('.sheet-close')
+    .forEach(btn => btn.addEventListener('click', () => {
+      accountSheet.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+    }));
 
+  function copyAccount(text) {
+    navigator.clipboard.writeText(text);
+    alert('계좌번호가 복사되었습니다 ✦ ⌒⌵⌒✦✦');
+  }
+  </script>
 
+  <script>
+  (() => {
+    const audio = document.getElementById('bgm');
+    const btn   = document.getElementById('musicToggle');
 
- </main>
+    function render(on){
+      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      try { localStorage.setItem('bgm_on', on ? '1' : '0'); } catch(e){}
+    }
+
+    async function playBGM(){
+      try { await audio.play(); render(true); }
+      catch(e){ render(false); }
+    }
+    function pauseBGM(){ audio.pause(); render(false); }
+
+    btn.addEventListener('click', () => { if (audio.paused) playBGM(); else pauseBGM(); });
+
+    let primed = false;
+    const prime = () => {
+      if (primed) return;
+      primed = true;
+      const wantOn = (localStorage.getItem('bgm_on') ?? '1') === '1';
+      if (wantOn) playBGM(); else render(false);
+      window.removeEventListener('pointerdown', prime);
+      window.removeEventListener('touchstart', prime);
+      window.removeEventListener('keydown', prime);
+      window.removeEventListener('scroll', prime);
+    };
+    window.addEventListener('pointerdown', prime, {passive:true});
+    window.addEventListener('touchstart', prime, {passive:true});
+    window.addEventListener('keydown', prime);
+    window.addEventListener('scroll', prime, {passive:true});
+
+    let wasPlaying = false;
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        wasPlaying = !audio.paused;
+        if (wasPlaying) pauseBGM();
+      } else {
+        if (wasPlaying && (localStorage.getItem('bgm_on') === '1')) playBGM();
+      }
+    });
+
+    render(false);
+  })();
+  </script>
+
 </body>
 </html>
