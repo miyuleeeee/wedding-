@@ -223,7 +223,7 @@ body {
   aspect-ratio: 4/5;            /* 인스타 느낌 비율(원하면 수정) */
   object-fit: cover;
   border-radius: var(--radius);
-  
+  vertical-align: middle;  
 }
 
 /* 점 */
