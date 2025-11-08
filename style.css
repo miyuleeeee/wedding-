@@ -192,7 +192,7 @@ body {
   max-width: 640px;
   margin: 0px auto;
   position: relative;
-  padding-bottom: 28px;
+  padding-bottom: 0px;
   --radius: 5px;
 }
 
@@ -212,6 +212,7 @@ body {
   scroll-snap-align: start;   /* ✅ center → start 로 변경 */
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 
