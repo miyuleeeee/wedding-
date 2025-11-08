@@ -228,12 +228,14 @@ body {
 }
 
 /* 점 */
-.dots{
+.dots {
   display: flex;
   gap: 8px;
   justify-content: center;
+  align-items: center; /* ✅ 세로 정렬 고정 */
   position: absolute;
-  left: 0; right: 0; bottom: 0;
+  left: 0; right: 0; bottom: 8px;
+  height: 12px;        /* ✅ 도트 비율 보호 */
 }
 .dot {
   width: 6px;
