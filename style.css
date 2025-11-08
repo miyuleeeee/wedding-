@@ -157,7 +157,15 @@ body {
 
 /* 📱 모바일 튜닝 */
 
-
+.message {
+  font-family: "Hahmlet", "Noto Sans KR", sans-serif;
+  font-size: 15.5px;
+  line-height: 1.9;
+  color: #222;
+  text-align: center;
+  max-width: 600px;
+  white-space: pre-line;
+}
 @media (max-width:480px){
   .photo{ width:62%; max-width:180px; }
   .p1{ top: 0px; left:12%; }
