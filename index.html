@@ -287,53 +287,68 @@
   </script>
 
   <script>
-  (() => {
-    const carousel = document.getElementById('carousel');
-    const slides   = Array.from(carousel.querySelectorAll('.slide'));
-    const dotsWrap = document.getElementById('dots');
-    const dots     = Array.from(dotsWrap.querySelectorAll('.dot'));
-    const prevBtn  = document.querySelector('.nav .prev');
-    const nextBtn  = document.querySelector('.nav .next');
+(() => {
+  const carousel = document.getElementById('carousel');
+  const slides   = Array.from(carousel.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const dots     = Array.from(dotsWrap.querySelectorAll('.dot'));
+  const prevBtn  = document.querySelector('.nav .prev');
+  const nextBtn  = document.querySelector('.nav .next');
 
-    const getIndex = () => Math.round(carousel.scrollLeft / carousel.clientWidth);
+  // 인덱스 계산 (소수오차, 경계값 보정)
+  const getIndex = () => {
+    const w = carousel.clientWidth || 1;
+    const i = Math.round(carousel.scrollLeft / w);
+    return Math.max(0, Math.min(slides.length - 1, i));
+  };
 
-    function setActive(i){
-      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === i));
-      dots.forEach((d, idx) => d.setAttribute('aria-current', idx === i ? 'true' : 'false'));
-    }
-
-    let ticking = false;
-    function onScroll(){
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => { setActive(getIndex()); ticking = false; });
-    }
-    carousel.addEventListener('scroll', onScroll, { passive: true });
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
-      }, { passive: true });
+  function setActive(i){
+    dots.forEach((d, idx) => {
+      const on = idx === i;
+      d.classList.toggle('is-active', on);
+      d.setAttribute('aria-current', on ? 'true' : 'false');
     });
+  }
 
-    function goto(i){
-      const clamped = Math.max(0, Math.min(slides.length - 1, i));
-      carousel.scrollTo({ left: clamped * carousel.clientWidth, behavior: 'smooth' });
-    }
-    prevBtn?.addEventListener('click', () => goto(getIndex() - 1));
-    nextBtn?.addEventListener('click', () => goto(getIndex() + 1));
+  // 스크롤 이벤트 rAF 디바운스
+  let ticking = false;
+  carousel.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      setActive(getIndex());
+      ticking = false;
+    });
+  }, { passive: true });
 
-    let current = 0;
-    const onResize = () => {
-      current = getIndex();
-      carousel.scrollTo({ left: current * carousel.clientWidth, behavior: 'auto' });
-      setActive(current);
-    };
-    window.addEventListener('resize', onResize);
+  // 도트 클릭 → 해당 슬라이드로
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
+    }, { passive: true });
+  });
 
-    setActive(0);
-  })();
-  </script>
+  // 버튼
+  const goto = (i) => {
+    const idx = Math.max(0, Math.min(slides.length - 1, i));
+    carousel.scrollTo({ left: idx * carousel.clientWidth, behavior: 'smooth' });
+    setActive(idx);
+  };
+  prevBtn?.addEventListener('click', () => goto(getIndex() - 1));
+  nextBtn?.addEventListener('click', () => goto(getIndex() + 1));
+
+  // 리사이즈 시 현재 슬라이드에 재스냅 (가로폭 변동 대응)
+  const onResize = () => {
+    const current = getIndex();
+    carousel.scrollTo({ left: current * carousel.clientWidth, behavior: 'auto' });
+    setActive(current);
+  };
+  window.addEventListener('resize', onResize);
+
+  // 초기 활성화
+  setActive(0);
+})();
+</script>
 
   <script>
   (function () {
