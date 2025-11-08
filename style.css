@@ -114,7 +114,17 @@ body {
 /* 1) 전역 변수로 폭 관리 */
 :root { --side-width: 200px; }   /* PC 기본폭 */
 
-
+.message {
+  font-family: "Hahmlet", "Noto Sans KR", sans-serif;
+  font-size: 8.5px;
+  line-height: 1.9;
+  color: #222;
+  text-align right;
+  max-width: 600px;
+  margin-left: 0;
+  margin-right: auto ;
+  white-space: pre-line;
+}
 /* 갤러리 영역 */
 .photos{
   position: relative;
@@ -157,17 +167,7 @@ body {
 
 /* 📱 모바일 튜닝 */
 
-.message {
-  font-family: "Hahmlet", "Noto Sans KR", sans-serif;
-  font-size: 8.5px;
-  line-height: 1.9;
-  color: #222;
-  text-align right;
-  max-width: 600px;
-  margin-left: 0;
-  margin-right: auto ;
-  white-space: pre-line;
-}
+
 @media (max-width:480px){
   .photo{ width:62%; max-width:180px; }
   .p1{ top: 0px; left:12%; }
