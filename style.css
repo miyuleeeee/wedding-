@@ -159,10 +159,10 @@ body {
 
 .message {
   font-family: "Hahmlet", "Noto Sans KR", sans-serif;
-  font-size: 15.5px;
+  font-size: 8.5px;
   line-height: 1.9;
   color: #222;
-  text-align: center;
+  text-align right;
   max-width: 600px;
   white-space: pre-line;
 }
