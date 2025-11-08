@@ -1,31 +1,9 @@
-/* ✅ 0. 전역 설정 추가 */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-:root{
-  --page-max: 700px;   /* 전체 콘텐츠 최대폭 */
-  --gutter: 16px;      /* 좌우 여백 (모바일 기본) */
-}
-@media (min-width:768px){
-  :root{ --gutter: 20px; }  /* 큰 화면일 때 약간 여유 */
-}
-
-
-
 body {
   font-family: "Noto Sans KR", sans-serif;
   margin: 0;
-  padding: 0px;
+  padding: 20px;
   background: #fff;
   color: #111;
-}
-
-/* ✅ 2. 전체 페이지 래퍼: 모든 섹션은 이 안에 들어가야 함 */
-.page{
-  max-width: var(--page-max);
-  margin: 0 auto;                 /* 가운데 정렬 */
-  padding: 0 var(--gutter);       /* 좌우 여백은 여기서만 관리 */
 }
 /* 팝업 기본 */
 /* 전체 배경 오버레이 (반투명) */
@@ -131,8 +109,8 @@ body {
 /* 갤러리 영역 */
 .photos{
   position: relative;
-  width: 50%;
-  max-width:vnone;
+  width: 100%;
+  max-width: 700px;
   margin: 0 auto 100px;
   /* absolute로 배치하므로 총 높이는 아래 ::after로 확보 */
 }
@@ -140,8 +118,8 @@ body {
 /* 공통 이미지 */
 .photo{
   position: absolute;
-  width: 50%;            /* 화면 폭 대비 */
-  max-width: none;      /* 너무 커지지 않게 상한 */
+  width: 45%;            /* 화면 폭 대비 */
+  max-width: 260px;      /* 너무 커지지 않게 상한 */
   border-radius: 0px;
   object-fit: cover;
   box-shadow: 0 6px 18px rgba(0,0,0,.12);
@@ -202,7 +180,7 @@ body {
 
 /* 영역 */
 .carousel-wrap{
-  max-width: none;
+  max-width: 640px;
   margin: 0px auto;
   position: relative;
   padding-bottom: 28px;
@@ -503,7 +481,7 @@ body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
 
 /* 📱 모바일에서 여백 조금 줄이기 */
 @media (max-width: 480px) {
-  .map-wrap { width: 100%; border-radius: 10px; }
+  .map-wrap { width: 94%; border-radius: 10px; }
   .map-wrap::before { padding-top: 70%; } /* 좀 더 세로 넓게 */
 }
 
