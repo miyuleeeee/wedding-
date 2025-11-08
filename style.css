@@ -197,7 +197,10 @@ body {
   .p1{ top: 10px; left:12%; }
   .p2{ top: 190px; right:10%; }
   .p3{ top: 360px; left:16%; }
-  .p4{ top: 530px; right:12%; }   /* ← 6000px → 600px 또는 530px 등으로 */
+  .p4{ top: 530px; right:12%; } 
+  .p5{ top: 700px; right:16%; } 
+  .p6{ top: 870px; right:12%; } 
+  .p7{ top: 1040px; right:16%; } /* ← 6000px → 600px 또는 530px 등으로 */
   .photos::after{ height: 700px; }
 }
 
