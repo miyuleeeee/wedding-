@@ -137,8 +137,8 @@ body {
 .p3{ top: 400px; left: 12%; }
 .p4{ top: 5200px; right: 14%; }
 .p5{ top: 600px; right:16%; } 
-  .p6{ top: 770px; left:12%; } 
-  .p7{ top: 900px; right:16%; }
+.p6{ top: 770px; left:12%; } 
+.p7{ top: 900px; right:16%; }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 .photos::after{
   content:"";
@@ -172,7 +172,7 @@ body {
   margin-bottom: 120px;
 }
 @media (max-width:480px){
-  .photos { margin-bottom: 60px; }
+  .photos { margin-bottom: 120px; }
 }
 
 /* 영역 */
