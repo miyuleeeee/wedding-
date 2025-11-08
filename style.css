@@ -226,7 +226,7 @@ body {
 .dot{
   width: 6px; height: 6px;
   border-radius: 999px;
-  background: #5af857;
+  background: #ff0000;
   border: 0;
   padding: 0;
   opacity: .9;
