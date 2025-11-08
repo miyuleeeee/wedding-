@@ -162,25 +162,28 @@ body {
 }
 
 /* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
+/* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
 @media (prefers-reduced-motion: reduce){
   .photo{ transition: none; }
   .photo:hover{ transform:none; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
 }
 
+/* ✅ 추가/수정된 간격 설정 */
 .photos {
   position: relative;
-  margin-bottom: 120px;
+  margin-bottom: 120px;   /* PC 간격 */
 }
+
 @media (max-width:480px){
-  .photos { margin-bottom: 120px; }
+  .photos { margin-bottom: 60px; }  /* 모바일 간격 */
 }
 
 /* 영역 */
 .carousel-wrap{
-  max-width: 640px;           /* PC에서 너무 퍼지지 않게 */
+  max-width: 640px;
   margin: 24px auto;
   position: relative;
-  padding-bottom: 28px;        /* 점 영역 여백 */
+  padding-bottom: 28px;
   --radius: 5px;
 }
 
