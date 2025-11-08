@@ -202,7 +202,7 @@ body {
 /* 각 슬라이드 */
 .slide{
   flex: 0 0 100%;               /* 화면 너비 100% */
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   margin: 0;
   padding: 0;
   position: relative;
