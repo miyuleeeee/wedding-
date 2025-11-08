@@ -287,13 +287,7 @@
   const prevBtn  = document.querySelector('.nav .prev');
   const nextBtn  = document.querySelector('.nav .next');
 
-  // 인덱스 계산 (소수오차, 경계값 보정)
-  const getIndex = () => {
-    const w = carousel.clientWidth || 1;
-    const i = Math.round(carousel.scrollLeft / w);
-    return Math.max(0, Math.min(slides.length - 1, i));
-  };
-
+  // 도트 활성화
   function setActive(i){
     dots.forEach((d, idx) => {
       const on = idx === i;
@@ -302,42 +296,49 @@
     });
   }
 
-  // 스크롤 이벤트 rAF 디바운스
-  let ticking = false;
-  carousel.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      setActive(getIndex());
-      ticking = false;
+  // 👉 IntersectionObserver: 화면에 60% 이상 보이는 슬라이드를 "현재"로 판정
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+        const idx = slides.indexOf(entry.target);
+        if (idx !== -1) setActive(idx);
+      }
     });
-  }, { passive: true });
+  }, {
+    root: carousel,
+    threshold: [0.6]
+  });
+  slides.forEach(s => io.observe(s));
 
-  // 도트 클릭 → 해당 슬라이드로
+  // 도트 클릭 → 해당 슬라이드로 (도트는 IO가 갱신)
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => {
-      carousel.scrollTo({ left: i * carousel.clientWidth, behavior: 'smooth' });
+      const smoothOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      carousel.scrollTo({ left: i * carousel.clientWidth, behavior: smoothOK ? 'smooth' : 'auto' });
     }, { passive: true });
   });
 
-  // 버튼
+  // 버튼 이동 (도트는 IO가 갱신)
+  const getIndex = () => {
+    const w = carousel.clientWidth || 1;
+    return Math.max(0, Math.min(slides.length - 1, Math.round(carousel.scrollLeft / w)));
+  };
   const goto = (i) => {
     const idx = Math.max(0, Math.min(slides.length - 1, i));
-    carousel.scrollTo({ left: idx * carousel.clientWidth, behavior: 'smooth' });
-    setActive(idx);
+    const smoothOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    carousel.scrollTo({ left: idx * carousel.clientWidth, behavior: smoothOK ? 'smooth' : 'auto' });
   };
   prevBtn?.addEventListener('click', () => goto(getIndex() - 1));
   nextBtn?.addEventListener('click', () => goto(getIndex() + 1));
 
-  // 리사이즈 시 현재 슬라이드에 재스냅 (가로폭 변동 대응)
+  // 리사이즈 시 현재 위치로 재스냅 (도트는 IO가 갱신)
   const onResize = () => {
     const current = getIndex();
     carousel.scrollTo({ left: current * carousel.clientWidth, behavior: 'auto' });
-    setActive(current);
   };
   window.addEventListener('resize', onResize);
 
-  // 초기 활성화
+  // 초기 도트 표시
   setActive(0);
 })();
 </script>
