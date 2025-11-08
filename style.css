@@ -188,23 +188,23 @@ body {
 }
 
 /* 가로 스크롤 트랙 */
-.carousel{
+.carousel {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;         /* 스냅! */
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;                  /* firefox */
+  scrollbar-width: none;
 }
-.carousel::-webkit-scrollbar{ display:none; }  /* webkit */
+.carousel::-webkit-scrollbar { display:none; }
 
-/* 각 슬라이드 */
-.slide{
-  flex: 0 0 100%;               /* 화면 너비 100% */
-  scroll-snap-align: center;
-  margin: 0;
-  padding: 0;
+.slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;   /* ✅ center → start 로 변경 */
+  display: flex;
+  justify-content: center;
   position: relative;
 }
+
 .slide img{
   width: 100%;
   height: auto;
