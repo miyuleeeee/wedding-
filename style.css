@@ -216,7 +216,7 @@ body {
 }
 
 .slide img{
-  width: 100%;
+  width: 90%;
   height: auto;
   display: block;
   aspect-ratio: 4/5;            /* 인스타 느낌 비율(원하면 수정) */
