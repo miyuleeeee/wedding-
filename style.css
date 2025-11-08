@@ -167,6 +167,13 @@ body {
   .photo:hover{ transform:none; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
 }
 
+.photos {
+  position: relative;
+  margin-bottom: 120px;
+}
+@media (max-width:480px){
+  .photos { margin-bottom: 60px; }
+}
 
 /* 영역 */
 .carousel-wrap{
