@@ -133,7 +133,7 @@ body {
 
 /* 불규칙 배치 (pica 스타일) — 값만 감각적으로 조정됨 */
 .p1{ top: 0;     left: 6%; }
-.p2{ top: 200px; right: 10%; }
+.p2{ top: 0px; right: 10%; }
 .p3{ top: 400px; left: 12%; }
 .p4{ top: 5200px; right: 14%; }
 .p5{ top: 600px; right:16%; } 
