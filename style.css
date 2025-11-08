@@ -153,12 +153,12 @@ body {
   .photo{ width:62%; max-width:180px; }
   .p1{ top: 0px; left:12%; }
   .p2{ top: 190px; right:10%; }
-  .p3{ top: 450px; left:20%; }
-  .p4{ top: 530px; right:20%; } 
+  .p3{ top: 470px; left:12%; }
+  .p4{ top: 600px; right:20%; } 
   .p5{ top: 700px; right:16%; } 
-  .p6{ top: 920px; right:25%; } 
-  .p7{ top: 1100px; left:5%; } /* ← 6000px → 600px 또는 530px 등으로 */
-  .photos::after{ height: 1200px; }
+  .p6{ top: 920px; left:0%; } 
+  .p7{ top: 1100px; right:0%; } /* ← 6000px → 600px 또는 530px 등으로 */
+  .photos::after{ height: 1500px; }
 }
 
 /* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
