@@ -135,15 +135,15 @@ body {
 .p1{ top: 0;     left: 6%; }
 .p2{ top: 130px; right: 10%; }
 .p3{ top: 400px; left: 12%; }
-.p4{ top: 520px; right: 14%; }
+.p4{ top: 570px; left: 12%; }
 .p5{ top: 600px; right:16%; } 
 .p6{ top: 770px; left:0%; } 
-.p7{ top: 1100px; right:0%; }
+.p7{ top: 1300px; right:12%; }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 .photos::after{
   content:"";
   display:block;
-  height: 1300px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
+  height: 1500px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
 }
 
 /* 📱 모바일 튜닝 */
