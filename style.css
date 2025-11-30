@@ -207,82 +207,87 @@ body {
 }
 
 /* 가로 스크롤 트랙 */
+.carousel-wrap {
+  max-width: 480px;
+  margin: 0 auto 24px;
+  position: relative;
+  overflow: hidden;
+}
+
 .carousel {
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
   scrollbar-width: none;
-  scroll-snap-stop: always; /* 스냅 중간에 멈추지 않도록 */
 }
-.carousel::-webkit-scrollbar { display:none; }
+.carousel::-webkit-scrollbar { display: none; }
 
 .slide {
   flex: 0 0 100%;
-  scroll-snap-align: start;   /* ✅ center → start 로 변경 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  scroll-snap-align: center;
 }
-
-.slide img{
-  width: 90%;
+.slide img {
+  width: 100%;
   height: auto;
-  display: block;
-  aspect-ratio: 4/5;            /* 인스타 느낌 비율(원하면 수정) */
-  object-fit: cover;
-  border-radius: var(--radius);
-  box-shadow: none;
-  vertical-align: middle;  
+  border-radius: 12px;
+  background: #fff;
 }
 
 /* 점 */
 .dots {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  margin: 8px 0 6px;
+}
+.dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 3px;
+  background: #d9d9d9;
+  transition: background 0.3s;
+}
+.dots .dot.active {
+  background: #111;
+}
+
+/* 화살표 버튼 (필요하면 표시) */
+.nav {
   position: absolute;
-  left: 0; right: 0; bottom: 8px;
-  height: 12px;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.nav button {
+  background: rgba(255,255,255,0.6);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  pointer-events: auto;
 }
 
-.dot {
-  display: inline-block;   /* ✅ inline → 크기 고정 */
-  width: 8px;
-  height: 8px;
-  aspect-ratio: 1 / 1;     /* ✅ 1:1 비율 보장(보조) */
-  border-radius: 50%;      /* ✅ 완전 원형 */
-  border: 1px solid #111;
-  background: transparent;
-  opacity: 0.8;
-  line-height: 0;          /* ✅ 글줄 높이 영향 제거 */
-  box-sizing: border-box;  /* ✅ 테두리 포함해도 정확한 크기 */
-  flex: 0 0 auto;          /* ✅ flex 늘어남 방지 */
-  transition: transform .2s ease, opacity .2s ease;
+/* 🔹 얇은 진행바 추가 */
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: #eee;
+  border-radius: 2px;
+  overflow: hidden;
 }
-/* 활성 도트 (채워진 검정 원) */
-.dot.is-active {
-  background: #00ff6e;
-  border-color: #00ff6e;
-  opacity: 1;
+.progress {
+  width: 0%;
+  height: 100%;
+  background: #111;
+  transition: width 0.3s ease;
 }
 
-/* 화살표 (옵션) */
-.nav{
-  position:absolute; inset: 0;
-  display:flex; align-items:center; justify-content:space-between;
-  pointer-events:none;           /* 버튼만 클릭 가능하게 아래에서 재활성화 */
-}
-.nav button{
-  pointer-events:auto;
-  border:0; background:rgba(0,0,0,.28);
-  color:#fff; width:36px; height:36px; border-radius:999px;
-  font-size:18px; line-height:36px;
-}
-@media (hover:none){ .nav{ display:none; } } /* 모바일은 보통 화살표 숨김 */
-</style>
 
 /* 네모박스 */
 .contact-box {
