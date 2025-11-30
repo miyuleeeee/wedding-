@@ -227,6 +227,30 @@ body {
   border-radius: 12px;
   background: #fff;
 }
+.dots {
+  position: absolute;
+  top: 12px;           /* 사진 위쪽 여백 (필요 시 조절 가능) */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;            /* 도트 간격 */
+  z-index: 2;          /* 사진 위로 올라오게 */
+}
+
+.dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  border: none;
+  background: #d9d9d9;
+  transition: background 0.3s ease;
+}
+
+.dots .dot.active {
+  background: #111;    /* 현재 슬라이드 도트 */
+}
 
 
 /* 화살표 버튼 (필요하면 표시) */
