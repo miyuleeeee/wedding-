@@ -207,6 +207,7 @@ body {
   overflow: hidden;
 }
 
+/* 슬라이드 */
 .carousel {
   display: flex;
   overflow-x: auto;
@@ -224,62 +225,40 @@ body {
 .slide img {
   width: 100%;
   height: auto;
+  display: block;
   border-radius: 12px;
-  background: #fff;
-}
-.dots {
-  position: absolute;
-  top: 12px;           /* 사진 위쪽 여백 (필요 시 조절 가능) */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;            /* 도트 간격 */
-  z-index: 2;          /* 사진 위로 올라오게 */
 }
 
-.dots .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: none;
-  background: #d9d9d9;
-  transition: background 0.3s ease;
-}
-
-.dots .dot.active {
-  background: #111;    /* 현재 슬라이드 도트 */
-}
-
-
-/* 화살표 버튼 (필요하면 표시) */
+/* 양 옆 검정 점 */
 .nav {
   position: absolute;
   top: 50%;
-  width: 100%;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
-  pointer-events: none;
+  pointer-events: none;          /* 전체 레이어는 클릭X */
 }
 .nav button {
-  background: rgba(255,255,255,0.6);
-  border: none;
+  pointer-events: auto;          /* 버튼만 클릭O */
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 18px;
-  pointer-events: auto;
+  border: none;
+  background: #111;
+  opacity: 0.9;
+  margin: 0 16px;
 }
 
-/* 🔹 얇은 진행바 추가 */
+/* 아래 얇은 막대바 */
 .progress-bar {
   width: 100%;
   height: 2px;
   background: #eee;
   border-radius: 2px;
   overflow: hidden;
+  margin-top: 10px;
 }
 .progress {
   width: 0%;
@@ -287,7 +266,6 @@ body {
   background: #111;
   transition: width 0.3s ease;
 }
-
 
 /* 네모박스 */
 .contact-box {
