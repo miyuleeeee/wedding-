@@ -282,71 +282,35 @@
     function closePopup(){ document.getElementById('popup').style.display='none'; }
   </script>
 
-  <script>
-(() => {
-  const carousel = document.getElementById('carousel');
-  const slides   = Array.from(carousel.querySelectorAll('.slide'));
-  const dotsWrap = document.getElementById('dots');
-  const dots     = Array.from(dotsWrap.querySelectorAll('.dot'));
-  const prevBtn  = document.querySelector('.nav .prev');
-  const nextBtn  = document.querySelector('.nav .next');
+<script>
+const carousel = document.getElementById("carousel");
+const dots = document.querySelectorAll(".dot");
+const progressBar = document.createElement("div");
+progressBar.className = "progress-bar";
+const progress = document.createElement("div");
+progress.className = "progress";
+progressBar.appendChild(progress);
+document.querySelector(".carousel-wrap").appendChild(progressBar);
 
-  // 도트 활성화
-  function setActive(i){
-    dots.forEach((d, idx) => {
-      const on = idx === i;
-      d.classList.toggle('is-active', on);
-      d.setAttribute('aria-current', on ? 'true' : 'false');
+// 점 클릭 이동
+dots.forEach((dot, i) => {
+  dot.addEventListener("click", () => {
+    carousel.scrollTo({
+      left: carousel.clientWidth * i,
+      behavior: "smooth"
     });
-  }
-
-  // 👉 IntersectionObserver: 화면에 60% 이상 보이는 슬라이드를 "현재"로 판정
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
-        const idx = slides.indexOf(entry.target);
-        if (idx !== -1) setActive(idx);
-      }
-    });
-  }, {
-    root: carousel,
-    threshold: [0.6]
   });
-  slides.forEach(s => io.observe(s));
+});
 
-  // 도트 클릭 → 해당 슬라이드로 (도트는 IO가 갱신)
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      const smoothOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      carousel.scrollTo({ left: i * carousel.clientWidth, behavior: smoothOK ? 'smooth' : 'auto' });
-    }, { passive: true });
-  });
+// 스크롤 시 업데이트
+carousel.addEventListener("scroll", () => {
+  const index = Math.round(carousel.scrollLeft / carousel.clientWidth);
+  dots.forEach((d, i) => d.classList.toggle("active", i === index));
 
-  // 버튼 이동 (도트는 IO가 갱신)
-  const getIndex = () => {
-    const w = carousel.clientWidth || 1;
-    return Math.max(0, Math.min(slides.length - 1, Math.round(carousel.scrollLeft / w)));
-  };
-  const goto = (i) => {
-    const idx = Math.max(0, Math.min(slides.length - 1, i));
-    const smoothOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    carousel.scrollTo({ left: idx * carousel.clientWidth, behavior: smoothOK ? 'smooth' : 'auto' });
-  };
-  prevBtn?.addEventListener('click', () => goto(getIndex() - 1));
-  nextBtn?.addEventListener('click', () => goto(getIndex() + 1));
-
-  // 리사이즈 시 현재 위치로 재스냅 (도트는 IO가 갱신)
-  const onResize = () => {
-    const current = getIndex();
-    carousel.scrollTo({ left: current * carousel.clientWidth, behavior: 'auto' });
-  };
-  window.addEventListener('resize', onResize);
-
-  // 초기 도트 표시
-  setActive(0);
-})();
+  const percent = (carousel.scrollLeft / (carousel.scrollWidth - carousel.clientWidth)) * 100;
+  progress.style.width = percent + "%";
+});
 </script>
-
   <script>
   (function () {
     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
