@@ -241,14 +241,23 @@ body {
   pointer-events: none;          /* 전체 레이어는 클릭X */
 }
 .nav button {
-  pointer-events: auto;/* 버튼만 클릭O */
-  background: #111;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
+  pointer-events: auto;
+  width: 14px;                /* 크기 키워서 더 동그랗게 */
+  height: 14px;               /* width = height → 완전한 원형 */
+  border-radius: 50%;         /* 완전한 동그라미 */
   border: none;
-  margin: 0 12px;
+  background: #111;           /* 진한 검정 원 */
+  opacity: 0.9;
+  margin: 0 18px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1); /* 은은한 입체감 (sosa 느낌) */
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
+
+.nav button:hover {
+  transform: scale(1.15);     /* 터치 시 살짝 커짐 */
+  opacity: 1;
+}
+
 
 /* 아래 얇은 막대바 */
 .progress-bar {
