@@ -228,23 +228,6 @@ body {
   background: #fff;
 }
 
-/* 점 */
-.dots {
-  text-align: center;
-  margin: 8px 0 6px;
-}
-.dots .dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  border: none;
-  margin: 0 3px;
-  background: #d9d9d9;
-  transition: background 0.3s;
-}
-.dots .dot.active {
-  background: #111;
-}
 
 /* 화살표 버튼 (필요하면 표시) */
 .nav {
