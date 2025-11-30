@@ -251,8 +251,8 @@ body {
   appearance: none;
 
   /* 동그란 점 모양 */
-  width: 7px;
-  height: 7px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   display: block;        /* 인라인 대신 블록으로 */
   opacity: 0.9;
