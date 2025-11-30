@@ -198,13 +198,6 @@ body {
 }
 
 /* 영역 */
-.carousel-wrap{
-  max-width: 640px;
-  margin: 0px auto;
-  position: relative;
-  padding-bottom: 0px;
-  --radius: 5px;
-}
 
 /* 가로 스크롤 트랙 */
 .carousel-wrap {
