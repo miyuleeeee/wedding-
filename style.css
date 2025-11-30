@@ -226,7 +226,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 /* 양 옆 검정 점 */
@@ -242,8 +242,8 @@ body {
 }
 .nav button {
   pointer-events: auto;
-  width: 14px;                /* 크기 키워서 더 동그랗게 */
-  height: 14px;               /* width = height → 완전한 원형 */
+  width: 7px;                /* 크기 키워서 더 동그랗게 */
+  height: 7px;               /* width = height → 완전한 원형 */
   border-radius: 50%;         /* 완전한 동그라미 */
   border: none;
   background: #111;           /* 진한 검정 원 */
