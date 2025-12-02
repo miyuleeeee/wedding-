@@ -97,7 +97,14 @@
     <div class="progress" id="progress"></div>
   </div>
 </section>
-
+<script>
+  window.addEventListener("load", () => {
+    const carousel = document.getElementById("carousel");
+    if (carousel) {
+      carousel.scrollTo({ left: 0, behavior: "instant" });
+    }
+  });
+</script>
     <!-- 연락하기 -->
     <section class="contact-section">
       <div class="contact-box">
