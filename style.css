@@ -116,6 +116,21 @@ body {
 /* 1) 전역 변수로 폭 관리 */
 :root { --side-width: 200px; }   /* PC 기본폭 */
 
+
+
+.top {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.photo {
+  display: block;
+  margin: 0 auto;
+  box-shadow: none;
+  filter: none;
+}
+
+
 .message {
   font-family: 'Noto Sans KR', sans-serif;
   line-height: 1.7;
