@@ -127,11 +127,25 @@ body {
   letter-spacing: 0.02em;
 }
 /* 이름 */
-.names {
+.name1 {
   display: block;
   font-size: 20px;
-  letter-spacing: 0.08em;
-  text-align: right;
+  letter-spacing: 0.02em;
+  text-align: center;
+
+}
+.and{
+  display: block;
+  font-size: 40px;
+  letter-spacing: 0.02em;
+  text-align: center;
+
+}
+.name2 {
+  display: block;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-align: center;
 
 }
 /* SAVE */
