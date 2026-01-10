@@ -359,6 +359,30 @@ body {
   transition: width 0.3s ease;
 }
 
+.bottom-im {
+  position: relative;
+  text-align: center;
+  margin: 24px auto;   /* 위아래 간격 */
+}
+
+/* silk.png */
+.silk {
+  display: block;
+  margin: 0 auto;
+  width: 72px;         /* 크기 조절 */
+  height: auto;
+
+  /* 카드/호버/움직임 전부 차단 */
+  position: static;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  pointer-events: none;
+}
+
+
+
 /* 네모박스 */
 .contact-box {
   background: none;       /* 배경 제거 */
