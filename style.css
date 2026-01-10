@@ -117,16 +117,33 @@ body {
 :root { --side-width: 200px; }   /* PC 기본폭 */
 
 .message {
-  font-family: "Hahmlet", "Noto Sans KR", sans-serif;
-  font-size: 8.5px;
-  line-height: 1.9;
-  color: #222;
-  text-align right;
-  max-width: 600px;
-  margin-left: 0;
-  margin-right: auto ;
-  white-space: pre-line;
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.7;
 }
+/* 날짜 */
+.date {
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+/* 이름 */
+.names {
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+}
+/* SAVE */
+.save {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  font-weight: 500;
+}
+/* 장소 */
+.location {
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  opacity: 0.7;
+}
+
 /* 갤러리 영역 */
 .photos{
   position: relative;
