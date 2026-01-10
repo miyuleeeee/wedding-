@@ -10,7 +10,7 @@ body {
 .content {
   width: 100%;
   max-width: 860px;
-  margin: 200px auto 0;
+  margin: 40px auto 0;
   padding: 0 16px;
   padding-left:  max(16px, env(safe-area-inset-left));
   padding-right: max(16px, env(safe-area-inset-right));
