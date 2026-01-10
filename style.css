@@ -123,12 +123,24 @@ body {
   text-align: center;
 }
 
-.photo {
+.silk {
   display: block;
   margin: 0 auto;
-  box-shadow: none;
-  filter: none;
+  position: static;        /* absolute 갤러리 영향 차단 */
+  width: min(560px, 92%);
+  height: auto;
+
+  /* ❌ 카드/호버/움직임 완전 차단 */
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+
+  /* ❌ 마우스 반응 제거 */
+  pointer-events: none;
+  cursor: default;
 }
+
 
 
 .message {
