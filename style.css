@@ -197,11 +197,18 @@ body {
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 
 .message {
-  display: block;
-  margin: 0 auto;
-  width: 100px;         /* 크기 조절 */
+  margin: 0 auto 10px;
+  padding: 0;
+}
+
+.message img {
+  display: block;     /* ⭐ 여백 제거 */
+  width: 160px;       /* 👈 여기서 크기 조절 */
+  max-width: 100%;
   height: auto;
-  margin-bottom;10px
+  margin: 0 auto;
+}
+
 
   /* 카드/호버/움직임 전부 차단 */
   position: static;
