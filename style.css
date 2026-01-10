@@ -166,7 +166,7 @@ body {
 .p0 {
   display: block;
   margin: 0 auto;
-  width: 56px;         /* 크기 조절 */
+  width: 100px;         /* 크기 조절 */
   height: auto;
   margin-bottom;10px
 
@@ -195,6 +195,25 @@ body {
 .p6{ top: 770px; left:0%; } 
 .p7{ top: 1150px; right:12%; }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
+
+.message {
+  display: block;
+  margin: 0 auto;
+  width: 100px;         /* 크기 조절 */
+  height: auto;
+  margin-bottom;10px
+
+  /* 카드/호버/움직임 전부 차단 */
+  position: static;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  pointer-events: none;
+}
+
+
+
 .photos::after{
   content:"";
   display:block;
