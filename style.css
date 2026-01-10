@@ -1,3 +1,4 @@
+
 body {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 400;
@@ -117,6 +118,19 @@ body {
 :root { --side-width: 200px; }   /* PC 기본폭 */
 
 
+
+.top {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.silk {
+  display: block;
+  margin: 0 auto;
+  position: static;        /* absolute 갤러리 영향 차단 */
+  width: min(560px, 92%);
+  height: auto;
+
   /* ❌ 카드/호버/움직임 완전 차단 */
   box-shadow: none !important;
   filter: none !important;
@@ -129,6 +143,54 @@ body {
 }
 
 
+
+.message {
+  font-family: 'Noto Sans KR', sans-serif;
+  line-height: 1.7;
+  
+}
+/* 날짜 */
+.date {
+  font-size: 15px;
+  letter-spacing: 0.02em;
+   text-align: right;
+}
+/* 이름 */
+.name1 {
+  display: block;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-align: center;
+
+}
+.and{
+  display: block;
+  font-size: 40px;
+  letter-spacing: 0.02em;
+  text-align: center;
+
+}
+.name2 {
+  display: block;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-align: center;
+  margin-bottom: 0;
+
+}
+/* SAVE */
+.save {
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  font-weight: 500;
+   text-align: right;
+}
+/* 시간 */
+.at {
+  font-size: 15px;
+  letter-spacing: 0.01em;
+   text-align: right;
+}
 
 /* 갤러리 영역 */
 .photos{
@@ -166,7 +228,7 @@ body {
 .p0 {
   display: block;
   margin: 0 auto;
-  width: 100px;         /* 크기 조절 */
+  width: 56px;         /* 크기 조절 */
   height: auto;
   margin-bottom;10px
 
@@ -182,38 +244,20 @@ body {
 
 .p1{ top: 0;     left: 6%; }
 .p2{ top: 130px; right: 10%; }
+.between {position: absolute;
+  top: 200px;        /* ✅ 핵심: 여기 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;        /* 사진 위로 */
+  text-align: left;
+  pointer-events: none;
+}
 .p3{ top: 400px; left: 12%; }
 .p4{ top: 570px; left: 12%; }
 .p5{ top: 600px; right:16%; } 
 .p6{ top: 770px; left:0%; } 
 .p7{ top: 1150px; right:12%; }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
-
-.message {
-  margin: 0 auto 10px;
-  padding: 0;
-}
-
-.message img {
-  display: block;     /* ⭐ 여백 제거 */
-  width: 160px;       /* 👈 여기서 크기 조절 */
-  max-width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-
-
-  /* 카드/호버/움직임 전부 차단 */
-  position: static;
-  box-shadow: none !important;
-  filter: none !important;
-  transform: none !important;
-  transition: none !important;
-  pointer-events: none;
-}
-
-
-
 .photos::after{
   content:"";
   display:block;
