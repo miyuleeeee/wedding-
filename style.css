@@ -217,6 +217,30 @@ body {
 }
 
 /* 불규칙 배치 (pica 스타일) — 값만 감각적으로 조정됨 */
+.bottom-im {
+  position: relative;
+  text-align: center;
+  margin: 24px auto;   /* 위아래 간격 */
+}
+
+/* sprinkle.png */
+.p0 {
+  display: block;
+  margin: 0 auto;
+  width: 56px;         /* 크기 조절 */
+  height: auto;
+  margin-bottom;10px
+
+  /* 카드/호버/움직임 전부 차단 */
+  position: static;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+  transition: none !important;
+  pointer-events: none;
+}
+
+
 .p1{ top: 0;     left: 6%; }
 .p2{ top: 130px; right: 10%; }
 .between {position: absolute;
@@ -358,30 +382,6 @@ body {
   background: #111;
   transition: width 0.3s ease;
 }
-
-.bottom-im {
-  position: relative;
-  text-align: center;
-  margin: 24px auto;   /* 위아래 간격 */
-}
-
-/* silk.png */
-.silk {
-  display: block;
-  margin: 0 auto;
-  width: 56px;         /* 크기 조절 */
-  height: auto;
-  margin-bottom;10px
-
-  /* 카드/호버/움직임 전부 차단 */
-  position: static;
-  box-shadow: none !important;
-  filter: none !important;
-  transform: none !important;
-  transition: none !important;
-  pointer-events: none;
-}
-
 
 
 /* 네모박스 */
