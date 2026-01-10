@@ -224,7 +224,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;        /* 사진 위로 */
-  text-align: center;
+  text-align: left;
   pointer-events: none;
 }
 .p3{ top: 400px; left: 12%; }
