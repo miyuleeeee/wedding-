@@ -217,7 +217,7 @@ body {
 .photos::after{
   content:"";
   display:block;
-  height: 1500px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
+  height: 1100px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
 }
 
 /* 📱 모바일 튜닝 */
