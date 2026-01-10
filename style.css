@@ -219,6 +219,14 @@ body {
   .p7{ top: 1300px; right:0%; } /* ← 6000px → 600px 또는 530px 등으로 */
   .photos::after{ height: 1800px; }
 }
+.invite-img{
+  display: block;
+  width: 100%;          /* ✅ 컨텐츠 폭에 꽉 맞춤 */
+  max-width: 700px;     /* ✅ 너무 커지지 않게 상한 (원하면 조절) */
+  height: auto;         /* ✅ 비율 유지 */
+  margin: 28px auto 0;  /* ✅ 가운데 + 위쪽 간격 */
+  border-radius: 0;     /* 필요하면 12px로 */
+}
 
 /* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
 /* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
