@@ -185,7 +185,6 @@ body {
 .between {position: absolute;
   top: 200px;        /* ✅ 핵심: 여기 */
   left: 0%;
-  transform: translateX(-50%);
   z-index: 3;        /* 사진 위로 */
   text-align: left;
   pointer-events: none;
