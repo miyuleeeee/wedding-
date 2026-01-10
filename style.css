@@ -369,8 +369,9 @@ body {
 .silk {
   display: block;
   margin: 0 auto;
-  width: 72px;         /* 크기 조절 */
+  width: 56px;         /* 크기 조절 */
   height: auto;
+  margin-bottom;10px
 
   /* 카드/호버/움직임 전부 차단 */
   position: static;
