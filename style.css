@@ -176,7 +176,7 @@ body {
 .p0 {
   display: block;
   margin: 0 auto;
-  width: 56px;         /* 크기 조절 */
+  width: 100px;         /* 크기 조절 */
   height: auto;
   margin-bottom;10px
 
@@ -192,19 +192,20 @@ body {
 
 .p1{ top: 0;    left: 6%;  width: 42%; }
 .p2{ top: 130px; right:10%; width: 38%; }
-.p3{ top: 320px; right:10%; width: 53%; }
-.p4{ top: 400px; left:12%; width: 46%; }
-.p5{ top: 570px; left:12%; width: 40%; }
-.p6{ top: 600px; right:16%; width: 34%; } 
-.p7{ top: 770px; left:0%;  width: 48%; } 
-.p8{ top: 1150px; right:12%; width: 36%; }
-.p9{ top: 1550px; right:12%; width: 36%; }
+.p3{ top: 360px; right:10%; width: 53%; }  /* 320→360 */
+.p4{ top: 560px; left:12%; width: 46%; }   /* 400→560 */
+.p5{ top: 760px; left:12%; width: 40%; }   /* 570→760 */
+.p6{ top: 820px; right:16%; width: 34%; }  /* 600→820 */
+.p7{ top: 1020px; left:0%;  width: 48%; }  /* 770→1020 */
+.p8{ top: 1320px; right:12%; width: 36%; } /* 1150→1320 */
+.p9{ top: 1560px; right:12%; width: 36%; } /* 1550→1560 */
+
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 
 .photos::after{
   content:"";
   display:block;
-  height: 1800px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
+  height: 1850px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
 }
 .invite-img{
   display: block;
