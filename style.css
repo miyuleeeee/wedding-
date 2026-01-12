@@ -212,16 +212,29 @@ body {
 
 @media (max-width:480px){
   .photo{ width:65%; max-width:180px; }
-  .p1{ top: 0px; left:12%; }
+
+  .p1{ top:   0px; left:12%; }
   .p2{ top: 190px; right:10%; }
-  .p3{ top: 390px; right:15%; }
-  .p4{ top: 570px; left:12%; }
-  .p5{ top: 820px; right:20%; }  /* 🔥 +180px */
-  .p6{ top: 1050px; right:0%; } 
-  .p7{ top: 1350px; left:0%; } 
-  .p8{ top: 1650px; right:0%; } 
-  .p9{ top: 1950px; right:0%; }
-  .photos::after{ height: 2200px; }
+  .p3{ top: 520px; right:15%; }  /* ✅ 내려줌 */
+  .p4{ top: 720px; left:12%; }
+  .p5{ top: 980px; right:20%; }
+  .p6{ top: 1180px; right:0%; }
+  .p7{ top: 1450px; left:0%; }
+  .p8{ top: 1750px; right:0%; }
+
+  /* p9 중앙/크게 */
+  .p9{
+    top: 2050px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: 78%;
+    max-width: 260px;
+  }
+
+  .photos::after{ height: 2350px; }
+}
+}
   
 .invite-img{
   display: block;
