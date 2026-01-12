@@ -216,13 +216,13 @@ body {
   .p2{ top: 190px; right:10%; }
   .p3{ top: 390px; right:15%; }
   .p4{ top: 570px; left:12%; }
-  .p5{ top: 640px; right:20%; } 
-  .p6{ top: 750px; right:0%; } 
-  .p7{ top: 1000px; left:0%; } 
-  .p8{ top: 1300px; right:0%; } 
-  .p9{ top: 1800px; right:0%; } /* ← 6000px → 600px 또는 530px 등으로 */
-  .photos::after{ height: 2000px; }
-}
+  .p5{ top: 820px; right:20%; }  /* 🔥 +180px */
+  .p6{ top: 1050px; right:0%; } 
+  .p7{ top: 1350px; left:0%; } 
+  .p8{ top: 1650px; right:0%; } 
+  .p9{ top: 1950px; right:0%; }
+  .photos::after{ height: 2200px; }
+  
 .invite-img{
   display: block;
   width: 100%;          /* ✅ 컨텐츠 폭에 꽉 맞춤 */
