@@ -214,11 +214,11 @@ body {
   .p1{ top: 0px; left:12%; }
   .p2{ top: 190px; right:10%; }
   .p3{ top: 290px; right:10%; }
-  .p3{ top: 470px; left:12%; }
-  .p4{ top: 600px; right:20%; } 
-  .p5{ top: 720px; right:0%; } 
-  .p6{ top: 1000px; left:0%; } 
-  .p7{ top: 1300px; right:0%; } /* ← 6000px → 600px 또는 530px 등으로 */
+  .p4{ top: 470px; left:12%; }
+  .p5{ top: 600px; right:20%; } 
+  .p6{ top: 720px; right:0%; } 
+  .p7{ top: 1000px; left:0%; } 
+  .p8{ top: 1300px; right:0%; } /* ← 6000px → 600px 또는 530px 등으로 */
   .photos::after{ height: 1800px; }
 }
 .invite-img{
