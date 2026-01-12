@@ -206,7 +206,21 @@ body {
   display:block;
   height: 1800px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
 }
+.invite-img{
+  display: block;
+  width: 100%;          /* ✅ 컨텐츠 폭에 꽉 맞춤 */
+  max-width: 700px;     /* ✅ 너무 커지지 않게 상한 (원하면 조절) */
+  height: auto;         /* ✅ 비율 유지 */
+  margin: 28px auto 0;  /* ✅ 가운데 + 위쪽 간격 */
+  border-radius: 0;     /* 필요하면 12px로 */
+}
 
+/* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
+/* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
+@media (prefers-reduced-motion: reduce){
+  .photo{ transition: none; }
+  .photo:hover{ transform:none; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+}
 /* 📱 모바일 튜닝 */
 
 
