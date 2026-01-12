@@ -2,7 +2,7 @@
 body {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 400;
-  font-size : 30px;
+  font-size : 15px;
   margin: 0;
   padding: 0;
   background: #fff;
@@ -198,28 +198,30 @@ body {
 .p6{ top: 600px; right:16%; width: 34%; } 
 .p7{ top: 770px; left:0%;  width: 48%; } 
 .p8{ top: 1150px; right:12%; width: 36%; }
+.p9{ top: 1550px; right:12%; width: 36%; }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 
 .photos::after{
   content:"";
   display:block;
-  height: 1700px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
+  height: 1800px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
 }
 
 /* 📱 모바일 튜닝 */
 
 
 @media (max-width:480px){
-  .photo{ width:62%; max-width:180px; }
+  .photo{ width:65%; max-width:180px; }
   .p1{ top: 0px; left:12%; }
   .p2{ top: 190px; right:10%; }
-  .p3{ top: 320px; right:5%; }
-  .p4{ top: 470px; left:12%; }
-  .p5{ top: 600px; right:20%; } 
-  .p6{ top: 720px; right:0%; } 
+  .p3{ top: 390px; right:15%; }
+  .p4{ top: 570px; left:12%; }
+  .p5{ top: 640px; right:20%; } 
+  .p6{ top: 750px; right:0%; } 
   .p7{ top: 1000px; left:0%; } 
-  .p8{ top: 1300px; right:0%; } /* ← 6000px → 600px 또는 530px 등으로 */
-  .photos::after{ height: 1800px; }
+  .p8{ top: 1300px; right:0%; } 
+  .p9{ top: 1800px; right:0%; } /* ← 6000px → 600px 또는 530px 등으로 */
+  .photos::after{ height: 2000px; }
 }
 .invite-img{
   display: block;
