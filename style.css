@@ -192,20 +192,20 @@ body {
 
 .p1{ top: 0;    left: 6%;  width: 42%; }
 .p2{ top: 130px; right:10%; width: 38%; }
-.p3{ top: 360px; right:10%; width: 53%; }  /* 320→360 */
+.p3{ top: 480px; right:10%; width: 53%; }  /* 320→360 */
 .p4{ top: 560px; left:12%; width: 46%; }   /* 400→560 */
-.p5{ top: 760px; left:12%; width: 40%; }   /* 570→760 */
-.p6{ top: 820px; right:16%; width: 34%; }  /* 600→820 */
-.p7{ top: 1020px; left:0%;  width: 48%; }  /* 770→1020 */
-.p8{ top: 1320px; right:12%; width: 36%; } /* 1150→1320 */
-.p9{ top: 1560px; right:12%; width: 36%; } /* 1550→1560 */
+.p5{ top: 790px; left:12%; width: 40%; }   /* 570→760 */
+.p6{ top: 1000px; right:16%; width: 56%; }  /* 600→820 */
+.p7{ top: 1500px; left:0%;  width: 48%; }  /* 770→1020 */
+.p8{ top: 1800px; right:12%; width: 36%; } /* 1150→1320 */
+.p9{ top: 2300px; right:12%; width: 36%; } /* 1550→1560 */
 
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 
 .photos::after{
   content:"";
   display:block;
-  height: 1850px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
+  height: 2500px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
 }
 .invite-img{
   display: block;
@@ -232,8 +232,8 @@ body {
   .p2{ top: 190px; right:10%; }
   .p3{ top: 520px; right:15%; }  /* ✅ 내려줌 */
   .p4{ top: 720px; left:12%; }
-  .p5{ top: 980px; right:20%; }
-  .p6{ top: 1180px; right:0%; }
+  .p5{ top: 880px; right:20%; width:50;}
+  .p6{ top: 1200px; right:0%; }
   .p7{ top: 1450px; left:0%; }
   .p8{ top: 1750px; right:0%; }
 
