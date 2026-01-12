@@ -218,15 +218,10 @@ body {
 .photos::after{
   content:"";
   display:block;
-  height: 2600px;
+  height: 2700px;
 }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 
-.photos::after{
-  content:"";
-  display:block;
-  height: 2500px;   /* p1~p4의 마지막 top+이미지높이보다 조금 크게 */
-}
 .invite-img{
   display: block;
   width: 100%;          /* ✅ 컨텐츠 폭에 꽉 맞춤 */
