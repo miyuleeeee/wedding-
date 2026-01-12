@@ -192,11 +192,12 @@ body {
 
 .p1{ top: 0;    left: 6%;  width: 42%; }
 .p2{ top: 130px; right:10%; width: 38%; }
-.p3{ top: 400px; left:12%; width: 46%; }
-.p4{ top: 570px; left:12%; width: 40%; }
-.p5{ top: 600px; right:16%; width: 34%; } 
-.p6{ top: 770px; left:0%;  width: 48%; } 
-.p7{ top: 1150px; right:12%; width: 36%; }
+.p3{ top: 200px; right:10%; width: 43%; }
+.p4{ top: 400px; left:12%; width: 46%; }
+.p5{ top: 570px; left:12%; width: 40%; }
+.p6{ top: 600px; right:16%; width: 34%; } 
+.p7{ top: 770px; left:0%;  width: 48%; } 
+.p8{ top: 1150px; right:12%; width: 36%; }
 /* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 
 .photos::after{
