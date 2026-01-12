@@ -248,7 +248,9 @@ body {
   .p3{ top: 520px; right:15%; }  /* ✅ 내려줌 */
   .p4{ top: 720px; left:12%; }
   .p5{ top: 880px; right:20%; width:65;}
-  .p6{ top: 1000px; right:0%; }
+  .p6{ width: 75%;
+     max-width: 220px;
+  }
   .p7{ top: 1350px; left:0%; }
   .p8{ top: 1650px; right:0%; }
 
