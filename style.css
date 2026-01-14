@@ -1,13 +1,13 @@
-
 body {
   font-family: 'Noto Sans KR', sans-serif;
   font-weight: 400;
-  font-size : 15px;
+  font-size: 15px;
   margin: 0;
   padding: 0;
   background: #fff;
   color: #111;
 }
+
 .content {
   width: 100%;
   max-width: 860px;
@@ -17,8 +17,10 @@ body {
   padding-right: max(16px, env(safe-area-inset-right));
   box-sizing: border-box;
 }
-/* 팝업 기본 */
-/* 전체 배경 오버레이 (반투명) */
+
+/* ===========================
+   POPUP
+=========================== */
 .popup-overlay {
   position: fixed;
   inset: 0;
@@ -29,18 +31,16 @@ body {
   z-index: 9999;
 }
 
-/* 팝업 박스 — 투명하게! */
 .popup {
   position: relative;
-  background: transparent;   /* ✅ 하얀 배경 제거 */
+  background: transparent;
   border-radius: 0;
   padding: 0;
   box-shadow: none;
   text-align: center;
-  overflow: visible;         /* ✅ 화살표 버튼이 밖으로 나와도 보이게 */
+  overflow: visible;
 }
 
-/* 닫기 화살표 버튼 */
 .popup-close {
   position: absolute;
   left: 50%;
@@ -51,32 +51,20 @@ body {
   border: none;
   background: #fefe22;
   border-radius: 50%;
-  display: flex;              /* flex로 변경 */
-  flex-direction: column;     /* 세로 정렬 */
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4px;                   /* SVG와 글자 사이 간격 */
+  gap: 4px;
   cursor: pointer;
   box-shadow: 0 6px 18px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.08);
   z-index: 10;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 아이콘 */
-.popup-close img {
-  width: 22px;
-  height: 22px;
-  display: block;
-}
+.popup-close img { width: 22px; height: 22px; display: block; }
+.popup-close span { font-size: 12px; font-weight: 600; color: #333; }
 
-/* 텍스트 */
-.popup-close span {
-  font-size: 12px;
-  font-weight: 600;
-  color: #333;
-}
-
-/* hover & active */
 .popup-close:hover {
   transform: translateX(-50%) scale(1.1);
   box-shadow: 0 8px 22px rgba(0,0,0,.22);
@@ -85,8 +73,6 @@ body {
   transform: translateX(-50%) translateY(1px) scale(0.95);
 }
 
-
-/* 편지지 이미지 */
 .popup img {
   width: min(560px, 92%);
   height: auto;
@@ -95,94 +81,63 @@ body {
   border-radius: 12px;
 }
 
-/* ❌ 빨간 버튼 스타일 완전 제거 (아래 부분 삭제 또는 주석처리) */
-/*
-.popup button {
-  ... 이 부분 전부 지우기 ...
-}
-*/
-
-
-/* 모바일 전용 반응형 */
 @media (max-width: 480px) {
   .popup {
-    width: 90%;       
-    max-width: 350px; 
+    width: 90%;
+    max-width: 350px;
     padding: 15px;
   }
 }
 
+/* ===========================
+   ETC
+=========================== */
+:root { --side-width: 200px; }
 
-
-/* 1) 전역 변수로 폭 관리 */
-:root { --side-width: 200px; }   /* PC 기본폭 */
-
-
-
-.top {
-  margin-top: 40px;
-  text-align: center;
-}
+.top { margin-top: 40px; text-align: center; }
 
 .silk {
   display: block;
   margin: 0 auto;
-  position: static;        /* absolute 갤러리 영향 차단 */
+  position: static;
   width: min(560px, 92%);
   height: auto;
-
-  /* ❌ 카드/호버/움직임 완전 차단 */
   box-shadow: none !important;
   filter: none !important;
   transform: none !important;
   transition: none !important;
-
-  /* ❌ 마우스 반응 제거 */
   pointer-events: none;
   cursor: default;
 }
 
-
-
-
-/* 갤러리 영역 */
+/* ===========================
+   PHOTOS (ABSOLUTE LAYOUT)
+=========================== */
 .photos{
   position: relative;
   width: 100%;
   max-width: 700px;
-  margin: 0 auto 100px;
-  /* absolute로 배치하므로 총 높이는 아래 ::after로 확보 */
+  margin: 0 auto 120px; /* 기본 간격 */
 }
 
 /* 공통 이미지 */
 .photo{
   position: absolute;
-  width: 45%;            /* 화면 폭 대비 */
-  max-width: 260px;      /* 너무 커지지 않게 상한 */
+  width: 45%;
+  max-width: 260px;
   border-radius: 0px;
   object-fit: cover;
   box-shadow: 0 6px 18px rgba(0,0,0,.12);
-  transition: none;
-  transition: transform 0.3s ease, box-shadow 0.3 ease;
-}
-/* hover는 보일 때만 */
-.photo.is-visible:hover{
-  transform: translateY(0) scale(1.05);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-
-/* 불규칙 배치 (pica 스타일) — 값만 감각적으로 조정됨 */
-
-/* sprinkle.png */
+/* sprinkle.png (p0) */
 .p0 {
   display: block;
   margin: 0 auto;
-  width: 300px;         /* 크기 조절 */
+  width: 300px;
   height: auto;
-  margin-bottom;10px
-
-  /* 카드/호버/움직임 전부 차단 */
+  margin-bottom: 10px;
   position: static;
   box-shadow: none !important;
   filter: none !important;
@@ -191,29 +146,23 @@ body {
   pointer-events: none;
 }
 
-
-
-.p1{ top: 0;    left: 6%;  width: 42%; }
-.p2{ top: 130px; right:10%; width: 38%; }
-.p3{ top: 480px; right:10%; width: 53%; }
-.p4{ top: 560px; left:12%; width: 46%; }
-.p5{ top: 790px; left:12%; width: 40%; }
+/* 배치 */
+.p1{ top: 0;      left: 6%;  width: 42%; }
+.p2{ top: 130px;  right:10%; width: 38%; }
+.p3{ top: 480px;  right:10%; width: 53%; }
+.p4{ top: 560px;  left:12%;  width: 46%; }
+.p5{ top: 790px;  left:12%;  width: 40%; }
 .p6{ top: 1000px; right:16%; width: 56%; }
-.p7{ top: 1500px; left:0%;  width: 48%; }
+.p7{ top: 1500px; left:0%;   width: 48%; }
 .p8{ top: 1800px; right:12%; width: 36%; }
 
-/* ✅ p9만 PC에서도 중앙 정렬 */
+/* ✅ p9: "기본 상태"에서 중앙 고정 */
 .p9{
   top: 2300px;
   left: 50%;
-  right: auto;                 /* 🔥 기존 right 무력화 */
-  transform: translateX(-50%); /* 🔥 중앙 */
+  right: auto;
   width: 36%;
-}
-
-/* ✅ hover가 transform 덮어쓰는 문제 방지 */
-.p9:hover{
-  transform: translateX(-50%) scale(1.05);
+  transform: translateX(-50%);
 }
 
 /* ✅ 스페이서(아래 잘림 방지) */
@@ -222,83 +171,51 @@ body {
   display:block;
   height: 2700px;
 }
-/* 스페이서: absolute 배치 때문에 사라진 높이를 확보 */
 
+/* ===========================
+   INVITE IMG
+=========================== */
 .invite-img{
   display: block;
-  width: 100%;          /* ✅ 컨텐츠 폭에 꽉 맞춤 */
-  max-width: 700px;     /* ✅ 너무 커지지 않게 상한 (원하면 조절) */
-  height: auto;         /* ✅ 비율 유지 */
-  margin: 28px auto 0;  /* ✅ 가운데 + 위쪽 간격 */
-  border-radius: 0;     /* 필요하면 12px로 */
+  width: 100%;
+  max-width: 700px;
+  height: auto;
+  margin: 28px auto 0;
+  border-radius: 0;
 }
 
-/* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
-/* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
-@media (prefers-reduced-motion: reduce){
-  .photo{ transition: none; }
-  .photo:hover{ transform:none; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
-}
-/* 📱 모바일 튜닝 */
-
-
+/* ===========================
+   MOBILE TUNING
+=========================== */
 @media (max-width:480px){
+  .photos { margin-bottom: 60px; }
+
   .photo{ width:65%; max-width:180px; }
 
-  .p1{ top:   0px; left:12%; }
-  .p2{ top: 190px; right:10%; }
-  .p3{ top: 520px; right:15%; }  /* ✅ 내려줌 */
-  .p4{ top: 720px; left:12%; }
-  .p5{ top: 880px; right:20%; width:65;}
-  .p6{ width: 75%;
-     max-width: 220px;
-  }
+  .p1{ top:   0px;  left:12%; }
+  .p2{ top: 190px;  right:10%; }
+  .p3{ top: 520px;  right:15%; }
+  .p4{ top: 720px;  left:12%; }
+  .p5{ top: 880px;  right:20%; width:65%; }
+  .p6{ width: 75%; max-width: 220px; }
   .p7{ top: 1350px; left:0%; }
   .p8{ top: 1650px; right:0%; }
 
-  /* p9 중앙/크게 */
   .p9{
     top: 2050px;
     left: 50%;
     right: auto;
-    transform: translateX(-50%);
     width: 78%;
     max-width: 260px;
+    transform: translateX(-50%);
   }
 
   .photos::after{ height: 2600px; }
 }
-}
-  
-.invite-img{
-  display: block;
-  width: 100%;          /* ✅ 컨텐츠 폭에 꽉 맞춤 */
-  max-width: 700px;     /* ✅ 너무 커지지 않게 상한 (원하면 조절) */
-  height: auto;         /* ✅ 비율 유지 */
-  margin: 28px auto 0;  /* ✅ 가운데 + 위쪽 간격 */
-  border-radius: 0;     /* 필요하면 12px로 */
-}
 
-/* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
-/* 사용자가 모션 줄이기 설정 시 과한 효과 제거(접근성) */
-@media (prefers-reduced-motion: reduce){
-  .photo{ transition: none; }
-  .photo:hover{ transform:none; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
-}
-
-/* ✅ 추가/수정된 간격 설정 */
-.photos {
-  position: relative;
-  margin-bottom: 120px;   /* PC 간격 */
-}
-
-@media (max-width:480px){
-  .photos { margin-bottom: 60px; }  /* 모바일 간격 */
-}
-
-/* 영역 */
-
-/* 가로 스크롤 트랙 */
+/* ===========================
+   CAROUSEL
+=========================== */
 .carousel-wrap {
   max-width: 480px;
   margin: 0 auto 24px;
@@ -306,7 +223,6 @@ body {
   overflow: hidden;
 }
 
-/* 슬라이드 */
 .carousel {
   display: flex;
   overflow-x: auto;
@@ -317,18 +233,9 @@ body {
 }
 .carousel::-webkit-scrollbar { display: none; }
 
-.slide {
-  flex: 0 0 100%;
-  scroll-snap-align: center;
-}
-.slide img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 0;
-}
+.slide { flex: 0 0 100%; scroll-snap-align: center; }
+.slide img { width: 100%; height: auto; display: block; border-radius: 0; }
 
-/* 양 옆 검정 점 */
 .nav {
   position: absolute;
   top: 50%;
@@ -337,10 +244,9 @@ body {
   display: flex;
   justify-content: space-between;
   transform: translateY(-50%);
-  pointer-events: none;          /* 전체 레이어는 클릭X */
+  pointer-events: none;
 }
 .nav button {
-  /* 🔥 버튼 기본 스타일 리셋 */
   padding: 0;
   margin: 0 18px;
   border: none;
@@ -349,23 +255,20 @@ body {
   -webkit-appearance: none;
   appearance: none;
 
-  /* 동그란 점 모양 */
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  display: block;        /* 인라인 대신 블록으로 */
+  display: block;
   opacity: 0.9;
   box-shadow: 0 0 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
-
 .nav button:hover,
 .nav button:active {
   transform: scale(1.15);
   opacity: 1;
 }
 
-/* 아래 얇은 막대바 */
 .progress-bar {
   position: absolute;
   left:0;
@@ -384,22 +287,21 @@ body {
   transition: width 0.3s ease;
 }
 
-
-/* 네모박스 */
+/* ===========================
+   CONTACT CTA
+=========================== */
 .contact-box {
-  background: none;       /* 배경 제거 */
-  border: none;           /* 테두리 제거 */
-  box-shadow: none;       /* 그림자 제거 */
-  padding: 0;             /* 여백 제거 */
-  margin: 0;              /* 외부 간격 제거 */
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
 }
 
-
-/* 버튼 - 박스 안 폭에 딱 맞게 */
 .contact-cta {
   display: block;
-  width: 100%;              /* 박스 안쪽 폭 기준으로 꽉 채움 */
-  box-sizing: border-box;   /* padding/border 포함 계산 */
+  width: 100%;
+  box-sizing: border-box;
   padding: 14px;
   border-radius: 10px;
   background: transparent;
@@ -410,158 +312,43 @@ body {
   cursor: pointer;
   transition: background 0.3s ease, transform 0.1s ease;
 }
-
-/* hover 시 */
 .contact-cta:hover {
   background: var(--cta-bg, #555);
   color: var(--cta-text, #fff);
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
-
-/* 눌렸을 때 */
 .contact-cta:active {
   transform: scale(0.98);
   background: var(--cta-bg-hover);
 }
 
-/* 연락하기 섹션 */
 .contact-section {
   text-align: center;
   padding: 40px 0;
 }
 
-/* 제목 */
-.contact-box h2 {
-  margin-top: 0;
-  color: #333;
-  font-size: 20px;
-  font-weight: 700;
-}
-
-/* 설명 문구 (있을 경우) */
-.contact-box p {
-  font-size: 15px;
-  color: #555;
-  margin: 10px 0 18px;
-  line-height: 1.6;
-}
-
-/* sheet base */
-.sheet{ position:fixed; inset:0; display:none; }
+/* ===========================
+   SHEETS
+=========================== */
+.sheet{ position:fixed; inset:0; display:none; z-index:9999; }
 .sheet[aria-hidden="false"]{ display:block; }
 
 .sheet-backdrop{
   position:absolute; inset:0;
-  background: rgba(0,0,0,.35);
-  backdrop-filter: blur(2px);
-  opacity:0; transition:.25s;
-}
-.sheet-panel{
-  position:absolute; left:0; right:0; bottom:0;
-  background: var(--sheet-bg);
-  border-top-left-radius: var(--sheet-radius);
-  border-top-right-radius: var(--sheet-radius);
-  box-shadow: var(--sheet-shadow);
-  transform: translateY(100%);
-  transition: transform .28s ease;
-  max-height: 70vh;  /* 시트 높이 */
-  display:flex; flex-direction:column;
-}
-.sheet[aria-hidden="false"] .sheet-backdrop{ opacity:1; }
-.sheet[aria-hidden="false"] .sheet-panel{ transform: translateY(0%); }
-
-.sheet-header{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 16px 6px;
-}
-.sheet-header h3{ margin:0; font-size:18px; }
-.sheet-close{
-  border:0; background:transparent; font-size:20px; padding:6px; line-height:1;
-}
-
-.sheet-body{
-  overflow:auto;
-  padding: 6px 14px 18px;
-}
-
-/* group & rows */
-.group{ background:#fff; border-radius:12px; padding:8px 0; margin-bottom:14px; }
-.group-title{
-  font-weight:700; padding:10px 14px; color:#333;
-  border-bottom:1px solid var(--divider);
-}
-
-.row{
-  display:flex; align-items:center; justify-content:space-between;
-  padding:12px 14px; gap:10px;
-  border-bottom:1px solid var(--divider);
-}
-.row:last-child{ border-bottom:0; }
-
-.who .role{ font-size:12px; color:var(--label); }
-.who .name{ font-size:16px; font-weight:600; }
-
-.acts a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;   /* 살짝 줄이기 */
-  height: 36px;
-  text-decoration: none;
-  background: transparent; /* 배경 투명! */
-  box-shadow: none;        /* 그림자 제거 */
-  border-radius: 0;        /* 둥근 모서리 제거 */
-  transition: 0.2s;
-}
-
-
-.acts a:active {
-  transform: translateY(1px);
-}
-
-/* svg 아이콘 전용 스타일 */
-.acts a img,
-.acts a svg {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  transition: 0.2s;
-  filter: brightness(0.5); /* 기본 회색톤 */
-}
-
-.acts a:hover img,
-.acts a:hover svg {
-  transform: scale(1.1);
-  filter: brightness(0.1); /* 진해짐 */
-}
-
-
-
-/* 페이지가 뒤에서 스크롤되지 않도록 */
-body.no-scroll{ height:100vh; overflow:hidden; }
-/* 1) sheet 자체를 최상단으로 올려서 다른 요소가 가리지 못하게 */
-.sheet { z-index: 9999; }
-
-/* 백드롭: blur는 모바일에서 느리므로 기본 off, opacity만 전환 */
-.sheet-backdrop {
-  position: absolute; inset: 0;
   background: rgba(0,0,0,0.35);
   backdrop-filter: none;
-  opacity: 0;
+  opacity:0;
   transition: opacity .18s ease-out;
   will-change: opacity;
-  z-index: 0;
+  z-index:0;
+}
+@media (min-width: 768px){
+  .sheet-backdrop{ backdrop-filter: blur(2px); }
 }
 
-/* 데스크탑 이상일 때만 blur 켜기 */
-@media (min-width: 768px) {
-  .sheet-backdrop { backdrop-filter: blur(2px); }
-}
-
-/* 패널: transform만 애니메이션 (reflow 최소화) */
-.sheet-panel {
-  position: absolute; left: 0; right: 0; bottom: 0;
+.sheet-panel{
+  position:absolute; left:0; right:0; bottom:0;
   background: #fff;
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
@@ -569,97 +356,157 @@ body.no-scroll{ height:100vh; overflow:hidden; }
   transform: translateY(100%);
   transition: transform .22s ease-out;
   will-change: transform;
-  z-index: 1;
+  max-height: 70vh;
+  display:flex;
+  flex-direction:column;
+  z-index:1;
 }
 
-/* 보여질 때 */
-.sheet[aria-hidden="false"] .sheet-backdrop { opacity: 1; }
-.sheet[aria-hidden="false"] .sheet-panel { transform: translateY(0%); }
+.sheet[aria-hidden="false"] .sheet-backdrop{ opacity:1; }
+.sheet[aria-hidden="false"] .sheet-panel{ transform: translateY(0%); }
 
-/* 터치, 스크롤 제어 부분 그대로 유지 */
-.sheet[aria-hidden="true"] { display: none; pointer-events: none; }
-.sheet[aria-hidden="false"] { display: block; pointer-events: auto; }
-.acts a img, .acts a svg { pointer-events: none; -webkit-user-select: none; user-select: none; }
-@media (hover: none) and (pointer: coarse) {
-  .acts a { width: 44px; height: 44px; }
+.sheet-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px 6px;
 }
-.acts a { -webkit-tap-highlight-color: transparent; }
-body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
+.sheet-header h3{ margin:0; font-size:18px; }
+.sheet-close{ border:0; background:transparent; font-size:20px; padding:6px; line-height:1; }
 
+.sheet-body{ overflow:auto; padding: 6px 14px 18px; }
 
-/* 지도 감싸는 박스 */
-.map-wrap {
+.group{ background:#fff; border-radius:12px; padding:8px 0; margin-bottom:14px; }
+.group-title{
+  font-weight:700;
+  padding:10px 14px;
+  color:#333;
+  border-bottom:1px solid var(--divider);
+}
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 14px;
+  gap:10px;
+  border-bottom:1px solid var(--divider);
+}
+.row:last-child{ border-bottom:0; }
+
+.who .role{ font-size:12px; color:var(--label); }
+.who .name{ font-size:16px; font-weight:600; }
+
+.acts a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:36px;
+  height:36px;
+  text-decoration:none;
+  background: transparent;
+  box-shadow:none;
+  border-radius:0;
+  transition:.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.acts a:active{ transform: translateY(1px); }
+
+.acts a img,
+.acts a svg{
+  width:24px;
+  height:24px;
+  object-fit:contain;
+  transition:.2s;
+  filter: brightness(0.5);
+  pointer-events:none;
+  -webkit-user-select:none;
+  user-select:none;
+}
+.acts a:hover img,
+.acts a:hover svg{
+  transform: scale(1.1);
+  filter: brightness(0.1);
+}
+
+@media (hover: none) and (pointer: coarse){
+  .acts a{ width:44px; height:44px; }
+}
+
+body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
+
+/* ===========================
+   MAP
+=========================== */
+.map-wrap{
   position: relative;
-  width: 92%;              /* 화면 폭의 92% */
-  max-width: 600px;        /* 너무 커지지 않게 상한 */
-  margin: 0 auto;          /* 가운데 정렬 */
+  width: 92%;
+  max-width: 600px;
+  margin: 0 auto;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-
-/* iframe을 비율 유지한 채로 늘리기 */
-.map-wrap::before {
-  content: "";
-  display: block;
-  padding-top: 60%; /* 높이 비율 (60% = 16:9 근사) */
+.map-wrap::before{
+  content:"";
+  display:block;
+  padding-top:60%;
+}
+.map-wrap iframe{
+  position:absolute;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  border:0;
+  border-radius:14px;
+}
+@media (max-width:480px){
+  .map-wrap{ width:94%; border-radius:10px; }
+  .map-wrap::before{ padding-top:70%; }
 }
 
-.map-wrap iframe {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-  border-radius: 14px;
+.map .addr{
+  text-align:center;
+  margin:10px 0;
+  font-size:15px;
+  line-height:1.5;
 }
 
-/* 📱 모바일에서 여백 조금 줄이기 */
-@media (max-width: 480px) {
-  .map-wrap { width: 94%; border-radius: 10px; }
-  .map-wrap::before { padding-top: 70%; } /* 좀 더 세로 넓게 */
+.map-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:10px;
 }
-
-
-/* 주소 */
-.map .addr {
-  text-align: center;
-  margin: 10px 0;
-  font-size: 15px;
-  line-height: 1.5;
+.map-buttons .btn{
+  padding:10px 18px;
+  font-size:14px;
+  font-weight:bold;
+  text-decoration:none;
+  border-radius:4.5px;
 }
+.map-buttons .kakao{ background:#fffc5dec; color:#000; }
+.map-buttons .naver{ background:#2ce126; color:#fff; }
+.map-buttons .btn:hover{ opacity:.9; }
 
-/* 버튼 */
-.map-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 10px;
-}
-.map-buttons .btn {
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 4.5px;     /* 네모 버튼 */
-}
-.map-buttons .kakao { background:#fffc5dec; color:#000; }
-.map-buttons .naver { background:#2ce126; color:#fff; }
-.map-buttons .btn:hover { opacity:.9; }
-
-
-.footer {
-  margin-top: 50px;
-  font-size: 14px;
-  text-align: left;
-  color: #555;
-}
-/* 기존 버튼 스타일 유지 */
+/* ===========================
+   MUSIC BUTTON
+=========================== */
 .music-btn{
-  position: fixed; right: 14px; bottom: 14px; z-index: 9999;
-  width: 48px; height: 48px; border: 0; border-radius: 999px;
-  background: rgba(0,0,0,.65); color:#fff; font-size:20px; font-weight:700;
-  display:inline-flex; align-items:center; justify-content:center;
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 9999;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0,0,0,.65);
+  color:#fff;
+  font-size:20px;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
   box-shadow: 0 6px 16px rgba(0,0,0,.25);
   backdrop-filter: blur(6px);
   transition: transform .15s ease, background .2s ease, opacity .2s ease;
@@ -668,40 +515,62 @@ body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
 .music-btn[aria-pressed="true"]{ background: rgba(0,0,0,.85); }
 @media (hover:none){ .music-btn:hover{ transform:none; } }
 
-/* 아이콘 전환 부분 (이 아래에 추가) */
-.music-btn img {
-  width: 24px; height: 24px;
-  position: absolute;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
+.music-btn img{
+  width:24px;
+  height:24px;
+  position:absolute;
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events:none;
 }
 .music-btn .icon-on { opacity: 0; transform: scale(0.7); }
-.music-btn .icon-off { opacity: 1; transform: scale(1); }
+.music-btn .icon-off{ opacity: 1; transform: scale(1); }
 .music-btn[aria-pressed="true"] .icon-on { opacity: 1; transform: scale(1); }
-.music-btn[aria-pressed="true"] .icon-off { opacity: 0; transform: scale(0.7); }
+.music-btn[aria-pressed="true"] .icon-off{ opacity: 0; transform: scale(0.7); }
 
+/* ===========================
+   ✅ SCROLL REVEAL (Pica 느낌)
+=========================== */
 
-/* ===== 스크롤 등장 (Pica 느낌) ===== */
-
-/* p0(sprinkle)는 제외하고 사진만 등장 */
+/* 기본: p0 제외하고 숨김 */
 .photos .photo:not(.p0){
   opacity: 0;
-  transform: translateY(22px);
   filter: blur(6px);
+  transform: translateY(22px);
   transition: opacity .8s ease, transform .8s ease, filter .8s ease;
   will-change: opacity, transform;
 }
 
-/* 화면에 들어오면 */
+/* 보이면 등장 */
 .photos .photo.is-visible{
   opacity: 1;
-  transform: translateY(0);
   filter: blur(0);
+  transform: translateY(0);
 }
 
-/* hover는 등장 이후에만 (등장 transform과 충돌 방지) */
+/* hover는 보일 때만 */
 .photos .photo.is-visible:hover{
   transform: translateY(0) scale(1.05);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+}
+
+/* ===========================
+   ✅ p9 중앙정렬 + 등장/hover 충돌 해결
+   (중요: 이 블록은 "스크롤 등장" 아래에 있어야 함)
+=========================== */
+.photos .p9{
+  /* X축 중앙 고정 + Y 등장 */
+  transform: translateX(-50%) translateY(22px);
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+}
+.photos .p9.is-visible{
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  filter: blur(0);
+}
+.photos .p9.is-visible:hover{
+  transform: translateX(-50%) translateY(0) scale(1.05);
 }
 
 /* 접근성: 모션 줄이기 */
@@ -712,31 +581,13 @@ body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
     filter: none;
     transition: none;
   }
-  /* ===========================
-   ✅ p9 중앙정렬 + 스크롤등장 충돌 해결
-   (스크롤 등장 블록 '아래'에 추가)
-=========================== */
 
-/* p9는 translateX(-50%)를 항상 유지한 채로 Y만 등장 */
-.photos .p9{
-  /* 기존 .p9의 translateX(-50%) + 등장 translateY 합치기 */
-  transform: translateX(-50%) translateY(22px);
-  opacity: 0;
-  filter: blur(6px);
-  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
-}
-
-/* p9가 보일 때 */
-.photos .p9.is-visible{
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-  filter: blur(0);
-}
-
-/* p9 hover도 중앙 유지 */
-.photos .p9.is-visible:hover{
-  transform: translateX(-50%) translateY(0) scale(1.05);
-}
-
+  /* p9는 중앙 유지 */
+  .photos .p9{
+    opacity: 1;
+    transform: translateX(-50%);
+    filter: none;
+    transition: none;
+  }
 }
 
