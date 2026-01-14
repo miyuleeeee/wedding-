@@ -169,7 +169,7 @@ body {
 .photos::after{
   content:"";
   display:block;
-  height: 2700px;
+  height: 2420px;
 }
 
 /* ===========================
@@ -210,7 +210,7 @@ body {
     transform: translateX(-50%);
   }
 
-  .photos::after{ height: 2600px; }
+  .photos::after{ height: 2200px; }
 }
 
 /* ===========================
