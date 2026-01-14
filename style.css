@@ -712,5 +712,31 @@ body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
     filter: none;
     transition: none;
   }
+  /* ===========================
+   ✅ p9 중앙정렬 + 스크롤등장 충돌 해결
+   (스크롤 등장 블록 '아래'에 추가)
+=========================== */
+
+/* p9는 translateX(-50%)를 항상 유지한 채로 Y만 등장 */
+.photos .p9{
+  /* 기존 .p9의 translateX(-50%) + 등장 translateY 합치기 */
+  transform: translateX(-50%) translateY(22px);
+  opacity: 0;
+  filter: blur(6px);
+  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+}
+
+/* p9가 보일 때 */
+.photos .p9.is-visible{
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* p9 hover도 중앙 유지 */
+.photos .p9.is-visible:hover{
+  transform: translateX(-50%) translateY(0) scale(1.05);
+}
+
 }
 
