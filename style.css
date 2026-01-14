@@ -528,7 +528,7 @@ body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
 .music-btn[aria-pressed="true"] .icon-off{ opacity: 0; transform: scale(0.7); }
 
 /* ===========================
-   ✅ SCROLL REVEAL (Pica 느낌)
+   ✅ SCROLL REVEAL 
 =========================== */
 
 /* 기본: p0 + p9 제외하고 숨김 */
