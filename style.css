@@ -165,10 +165,12 @@ body {
   transition: none;
   transition: transform 0.3s ease, box-shadow 0.3 ease;
 }
-.photo:hover {
-  transform: scale(1.05); /* hover 시 기울이고 확대 */
+/* hover는 보일 때만 */
+.photo.is-visible:hover{
+  transform: translateY(0) scale(1.05);
   box-shadow: 0 10px 26px rgba(0,0,0,0.18);
 }
+
 
 /* 불규칙 배치 (pica 스타일) — 값만 감각적으로 조정됨 */
 
@@ -677,3 +679,38 @@ body.no-scroll { position: fixed; width: 100%; overflow: hidden; }
 .music-btn .icon-off { opacity: 1; transform: scale(1); }
 .music-btn[aria-pressed="true"] .icon-on { opacity: 1; transform: scale(1); }
 .music-btn[aria-pressed="true"] .icon-off { opacity: 0; transform: scale(0.7); }
+
+
+/* ===== 스크롤 등장 (Pica 느낌) ===== */
+
+/* p0(sprinkle)는 제외하고 사진만 등장 */
+.photos .photo:not(.p0){
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(6px);
+  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+  will-change: opacity, transform;
+}
+
+/* 화면에 들어오면 */
+.photos .photo.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* hover는 등장 이후에만 (등장 transform과 충돌 방지) */
+.photos .photo.is-visible:hover{
+  transform: translateY(0) scale(1.05);
+}
+
+/* 접근성: 모션 줄이기 */
+@media (prefers-reduced-motion: reduce){
+  .photos .photo:not(.p0){
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
