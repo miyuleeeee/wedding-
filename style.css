@@ -531,12 +531,12 @@ body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
    ✅ SCROLL REVEAL 
 =========================== */
 
-/* 기본: p0 + p9 제외하고 숨김 */
+/* ✅ 기본: p0 + p9 제외하고 숨김 */
 .photos .photo:not(.p0):not(.p9){
   opacity: 0;
   filter: blur(6px);
-  transform: translateY(22px);
-  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+  transform: translateY(16px); /* 22px → 16px */
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease; /* .8s → .6s */
   will-change: opacity, transform;
 }
 
@@ -553,17 +553,12 @@ body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
   box-shadow: 0 10px 26px rgba(0,0,0,0.18);
 }
 
-
-/* ===========================
-   ✅ p9 중앙정렬 + 등장/hover 충돌 해결
-   (중요: 이 블록은 "스크롤 등장" 아래에 있어야 함)
-=========================== */
+/* ✅ p9도 동일한 속도/거리로 */
 .photos .p9{
-  /* X축 중앙 고정 + Y 등장 */
-  transform: translateX(-50%) translateY(22px);
+  transform: translateX(-50%) translateY(16px); /* 22px → 16px */
   opacity: 0;
   filter: blur(6px);
-  transition: opacity .8s ease, transform .8s ease, filter .8s ease;
+  transition: opacity .6s ease, transform .6s ease, filter .6s ease; /* .8s → .6s */
 }
 .photos .p9.is-visible{
   transform: translateX(-50%) translateY(0);
