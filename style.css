@@ -194,10 +194,10 @@ body {
 
   .p1{ top:   0px;  left:12%; }
   .p2{ top: 190px;  right:10%; }
-  .p3{ top: 520px;  right:15%; }
-  .p4{ top: 720px;  left:12%; }
-  .p5{ top: 880px;  right:20%; width:65%; }
-  .p6{ width: 75%; max-width: 220px; }
+  .p3{ top: 500px;  right:15%; }
+  .p4{ top: 700px;  left:12%; }
+  .p5{ top: 860px;  right:20%; width:70%; }
+  .p6{ width: 80%; max-width: 220px; }
   .p7{ top: 1350px; left:0%; }
   .p8{ top: 1650px; right:0%; }
 
