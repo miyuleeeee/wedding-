@@ -156,7 +156,30 @@ body {
 .p7{ top: 1500px; left:0%;   width: 48%; }
 .p8{ top: 1800px; right:12%; width: 36%; }
 /* ✅ 새 사진 2개 배치 (PC) */
-.p10{ top: 300px; left: 8%;  width: 44%; box-shadow: none !important;
+/* ===========================
+   ✅ p10 : 고정 표시 → fade-out 전용
+=========================== */
+.p10{
+  top: 300px;
+  left: 8%;
+  width: 44%;
+
+  /* p0처럼 항상 보이다가 */
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+
+  /* fade-out만 허용 */
+  transition: opacity .6s ease;
+
+  /* 장식/인터랙션 제거 */
+  pointer-events: none;
+  box-shadow: none !important;
+}
+
+/* fade-out 상태 */
+.p10.is-fadeout{
+  opacity: 0;
 }
 
 
