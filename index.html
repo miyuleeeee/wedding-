@@ -465,35 +465,37 @@ nextBtn.addEventListener("click", () => {
   </script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  // ✅ p10은 리빌에서 제외 (p0처럼 '그대로' 보이게 만들기)
-  const items = document.querySelectorAll(".photos .photo:not(.p0):not(.p10)");
 
-  items.forEach((el, i) => {
+  /* =========================
+     1) ✅ 스크롤 리빌 (p0, p10 제외)
+  ========================= */
+  const revealItems = document.querySelectorAll(".photos .photo:not(.p0):not(.p10)");
+
+  revealItems.forEach((el, i) => {
     el.style.transitionDelay = `${i * 120}ms`;
   });
 
-  const io = new IntersectionObserver((entries) => {
+  const ioReveal = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-        io.unobserve(entry.target);
+        ioReveal.unobserve(entry.target);
       }
     });
   }, { threshold: 0.12, rootMargin: "0px 0px -15% 0px" });
 
-  items.forEach(el => io.observe(el));
-});
-</script>
+  revealItems.forEach(el => ioReveal.observe(el));
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
+
+  /* =========================
+     2) ✅ p10 fade-out (p2 트리거 + 사용자 인터랙션 이후만)
+  ========================= */
   const p10 = document.querySelector(".photos .p10");
   const trigger = document.querySelector(".photos .p2");
   if (!p10 || !trigger) return;
 
   let hasInteracted = false;
 
-  // ✅ 모바일/PC 모두에서 "한 번이라도 실제 움직임" 감지
   const mark = () => { hasInteracted = true; };
   window.addEventListener("scroll", mark, { once: true, passive: true });
   window.addEventListener("touchstart", mark, { once: true, passive: true });
@@ -503,15 +505,15 @@ document.addEventListener("DOMContentLoaded", () => {
     entries.forEach((entry) => {
       if (entry.isIntersecting && hasInteracted) {
         p10.classList.add("is-fadeout");
-      }
-      // 👇 다시 나타나게 하고 싶지 않으면 이 else 줄 자체를 삭제
-      else if (!entry.isIntersecting) {
+      } else if (!entry.isIntersecting) {
+        // ✅ 다시 나타나게 (원치 않으면 이 블록 삭제)
         p10.classList.remove("is-fadeout");
       }
     });
   }, { threshold: 0.2 });
 
   ioFade.observe(trigger);
+
 });
 </script>
 
