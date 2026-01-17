@@ -488,17 +488,31 @@ document.addEventListener("DOMContentLoaded", () => {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const p10 = document.querySelector(".photos .p10");
-  const trigger = document.querySelector(".photos .p2"); // ⭐ p3가 보이면 p10이 사라짐
+  const trigger = document.querySelector(".photos .p2");
   if (!p10 || !trigger) return;
+
+  let hasInteracted = false;
+
+  // ✅ 모바일/PC 모두에서 "한 번이라도 실제 움직임" 감지
+  const mark = () => { hasInteracted = true; };
+  window.addEventListener("scroll", mark, { once: true, passive: true });
+  window.addEventListener("touchstart", mark, { once: true, passive: true });
+  window.addEventListener("wheel", mark, { once: true, passive: true });
 
   const ioFade = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) p10.classList.add("is-fadeout");
-      else p10.classList.remove("is-fadeout"); // 다시 나타나게 (원치 않으면 이 줄 삭제)
+      if (entry.isIntersecting && hasInteracted) {
+        p10.classList.add("is-fadeout");
+      }
+      // 👇 다시 나타나게 하고 싶지 않으면 이 else 줄 자체를 삭제
+      else if (!entry.isIntersecting) {
+        p10.classList.remove("is-fadeout");
+      }
     });
   }, { threshold: 0.2 });
 
   ioFade.observe(trigger);
 });
 </script>
+
 </body>
