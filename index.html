@@ -464,7 +464,6 @@ nextBtn.addEventListener("click", () => {
   })();
   </script>
 <script>
-<script>
 document.addEventListener("DOMContentLoaded", () => {
   // ✅ p10은 리빌에서 제외 (p0처럼 '그대로' 보이게 만들기)
   const items = document.querySelectorAll(".photos .photo:not(.p0):not(.p10)");
@@ -485,11 +484,11 @@ document.addEventListener("DOMContentLoaded", () => {
   items.forEach(el => io.observe(el));
 });
 </script>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const p10 = document.querySelector(".photos .p10");
   const trigger = document.querySelector(".photos .p3"); // ⭐ p3가 보이면 p10이 사라짐
-
   if (!p10 || !trigger) return;
 
   const ioFade = new IntersectionObserver((entries) => {
@@ -502,7 +501,3 @@ document.addEventListener("DOMContentLoaded", () => {
   ioFade.observe(trigger);
 });
 </script>
-
-
-</body>
-</html>
