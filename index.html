@@ -464,6 +464,7 @@ nextBtn.addEventListener("click", () => {
   })();
   </script>
 <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =========================
@@ -495,8 +496,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!p10 || !trigger) return;
 
   let hasInteracted = false;
-
   const mark = () => { hasInteracted = true; };
+
   window.addEventListener("scroll", mark, { once: true, passive: true });
   window.addEventListener("touchstart", mark, { once: true, passive: true });
   window.addEventListener("wheel", mark, { once: true, passive: true });
@@ -506,7 +507,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (entry.isIntersecting && hasInteracted) {
         p10.classList.add("is-fadeout");
       } else if (!entry.isIntersecting) {
-        // ✅ 다시 나타나게 (원치 않으면 이 블록 삭제)
+        // ✅ 다시 나타나게 (원치 않으면 이 줄 삭제)
         p10.classList.remove("is-fadeout");
       }
     });
@@ -518,3 +519,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 </body>
+</html>
