@@ -463,9 +463,11 @@ nextBtn.addEventListener("click", () => {
     render(false);
   })();
   </script>
-  <script>
+<script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
-  const items = document.querySelectorAll(".photos .photo:not(.p0)");
+  // ✅ p10은 리빌에서 제외 (p0처럼 '그대로' 보이게 만들기)
+  const items = document.querySelectorAll(".photos .photo:not(.p0):not(.p10)");
 
   items.forEach((el, i) => {
     el.style.transitionDelay = `${i * 120}ms`;
@@ -483,6 +485,24 @@ document.addEventListener("DOMContentLoaded", () => {
   items.forEach(el => io.observe(el));
 });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const p10 = document.querySelector(".photos .p10");
+  const trigger = document.querySelector(".photos .p3"); // ⭐ p3가 보이면 p10이 사라짐
+
+  if (!p10 || !trigger) return;
+
+  const ioFade = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) p10.classList.add("is-fadeout");
+      else p10.classList.remove("is-fadeout"); // 다시 나타나게 (원치 않으면 이 줄 삭제)
+    });
+  }, { threshold: 0.2 });
+
+  ioFade.observe(trigger);
+});
+</script>
+
 
 </body>
 </html>
