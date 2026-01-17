@@ -568,14 +568,14 @@ body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
 }
 
 /* 보이면 등장 (p9 제외) */
-.photos .photo:not(.p0):not(.p9).is-visible{
+.photos .photo:not(.p0):not(.p9):not(.p10).is-visible{
   opacity: 1;
   filter: blur(0);
   transform: translateY(0);
 }
 
 /* hover는 보일 때만 (p9 제외) */
-.photos .photo:not(.p0):not(.p9).is-visible:hover{
+.photos .photo:not(.p0):not(.p9):not(.p10).is-visible:hover{
   transform: translateY(0) scale(1.05);
   box-shadow: 0 10px 26px rgba(0,0,0,0.18);
 }
