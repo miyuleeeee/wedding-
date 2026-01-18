@@ -257,7 +257,7 @@ body {
   /* ✅ p10 : 항상 보이다가, 오른→왼 wipe 페이드아웃 */
   .p10{
   position: absolute;
-  top: 375px;
+  top: 400px;
 
   left: 50%;
   width: 100%;
