@@ -159,28 +159,46 @@ body {
 /* ===========================
    ✅ p10 : 고정 표시 → fade-out 전용
 =========================== */
+/* ✅ p10 : 항상 보이다가, 오른→왼 wipe 페이드아웃 */
 .p10{
+  position: absolute;          /* ✅ 필수: 확실히 absolute */
   top: 300px;
   left: 8%;
   width: 44%;
 
-  /* p0처럼 항상 보이다가 */
   opacity: 1 !important;
   filter: none !important;
-  transform: none !important;
 
-  /* fade-out만 허용 */
-  transition: opacity .6s ease;
+  /* wipe용 마스크 */
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
+  -webkit-mask-size: 220% 100%;
+  -webkit-mask-position: 100% 0;
 
-  /* 장식/인터랙션 제거 */
+  mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
+  mask-size: 220% 100%;
+  mask-position: 100% 0;
+
+  transition:
+    -webkit-mask-position .65s ease,
+    mask-position .65s ease,
+    transform .65s ease,
+    opacity .65s ease;
+
+  transform: translateX(0);
+
+  will-change: transform, -webkit-mask-position; /* ✅ 모바일 안정화 */
   pointer-events: none;
   box-shadow: none !important;
 }
 
 /* fade-out 상태 */
 .p10.is-fadeout{
-  opacity: 0;
+  -webkit-mask-position: 0 0;
+  mask-position: 0 0;
+  transform: translateX(-14px);
+  opacity: 0; /* wipe가 약하면 이 줄 잠깐 지우고 테스트 */
 }
+
 
 
 /* ✅ p9: "기본 상태"에서 중앙 고정 */
