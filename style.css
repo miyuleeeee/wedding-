@@ -164,7 +164,7 @@ body {
   position: absolute;          /* ✅ 필수: 확실히 absolute */
   top: 300px;
   left: 8%;
-  width: 44%;
+  width:100%;
 
   opacity: 1 !important;
   filter: none !important;
