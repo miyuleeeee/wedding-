@@ -255,14 +255,17 @@ body {
     transform: translateX(-50%);
   }
   /* ✅ p10 : 항상 보이다가, 오른→왼 wipe 페이드아웃 */
-.p10{
+  .p10{
+  position: absolute;
   top: 300px;
-  left: 8%;
-  width: 44%;
 
-  /* 항상 보이는 기본 상태 */
+  left: 50%;
+  width: 53%;                 /* ✅ p3(두 번째 캡처 사진)과 동일 */
+  transform: translateX(-50%);
+
   opacity: 1 !important;
   filter: none !important;
+
 
   /* ✅ wipe용 마스크(그라데이션) */
   -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
@@ -288,10 +291,10 @@ body {
 
 /* ✅ fade-out 상태: 오른쪽부터 투명해지며 왼쪽으로 wipe */
 .p10.is-fadeout{
-  opacity: 0;
   -webkit-mask-position: 0 0;
   mask-position: 0 0;
-  transform: translateX(-18px);
+  transform: translateX(calc(-50% - 14px));
+  opacity: 0;
 }
 
   .photos::after{ height: 2100px; }
