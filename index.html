@@ -488,32 +488,45 @@ document.addEventListener("DOMContentLoaded", () => {
   revealItems.forEach(el => ioReveal.observe(el));
 
 
-  /* =========================
-     2) ✅ p10 fade-out (p2 트리거 + 사용자 인터랙션 이후만)
-  ========================= */
-  const p10 = document.querySelector(".photos .p10");
-  const trigger = document.querySelector(".photos .p2");
-  if (!p10 || !trigger) return;
+/* =========================
+   2) ✅ p10 fade-out (p2 트리거 + 사용자 인터랙션 이후만)
+========================= */
+const p10 = document.querySelector(".photos .p10");
+const trigger = document.querySelector(".photos .p2");
+if (!p10 || !trigger) return;
 
-  let hasInteracted = false;
-  const mark = () => { hasInteracted = true; };
+let hasInteracted = false;
 
-  window.addEventListener("scroll", mark, { once: true, passive: true });
-  window.addEventListener("touchstart", mark, { once: true, passive: true });
-  window.addEventListener("wheel", mark, { once: true, passive: true });
+const applyIfTriggerVisible = () => {
+  const r = trigger.getBoundingClientRect();
+  const visible = r.top < window.innerHeight * 0.8 && r.bottom > window.innerHeight * 0.2;
+  if (visible) p10.classList.add("is-fadeout");
+};
 
-  const ioFade = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && hasInteracted) {
-        p10.classList.add("is-fadeout");
-      } else if (!entry.isIntersecting) {
-        // ✅ 다시 나타나게 (원치 않으면 이 줄 삭제)
-        p10.classList.remove("is-fadeout");
-      }
-    });
-  }, { threshold: 0.2 });
+const mark = () => {
+  hasInteracted = true;
+  applyIfTriggerVisible(); // ✅ 인터랙션 발생 순간 즉시 판정
+};
 
-  ioFade.observe(trigger);
+["scroll","touchstart","pointerdown","wheel","keydown"].forEach(ev => {
+  window.addEventListener(ev, mark, { once: true, passive: true });
+});
+
+const ioFade = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!hasInteracted) return;
+
+    if (entry.isIntersecting) {
+      p10.classList.add("is-fadeout");
+    } else {
+      // 다시 나타나게 하고 싶으면 유지, 싫으면 이 줄 삭제
+      p10.classList.remove("is-fadeout");
+    }
+  });
+}, { threshold: 0.2, rootMargin: "0px 0px -20% 0px" });
+
+ioFade.observe(trigger);
+
 
 });
 </script>
