@@ -260,14 +260,12 @@ body {
   top: 300px;
 
   left: 50%;
-  width: 78%;                 /* ✅ p3(두 번째 캡처 사진)과 동일 */
-  transform: translateX(-50%);
+  width: 78%;
+  transform: translateX(-50%); /* ✅ 중앙 고정 */
 
   opacity: 1 !important;
   filter: none !important;
 
-
-  /* ✅ wipe용 마스크(그라데이션) */
   -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
   -webkit-mask-size: 220% 100%;
   -webkit-mask-position: 100% 0;
@@ -275,25 +273,22 @@ body {
   mask-size: 220% 100%;
   mask-position: 100% 0;
 
-  /* fade-out만 허용 */
   transition:
     opacity .65s ease,
     -webkit-mask-position .65s ease,
     mask-position .65s ease,
     transform .65s ease;
 
-  /* 살짝 왼쪽으로 밀리면서 사라지게(선택) */
-  transform: translateX(0);
-
+  will-change: transform, -webkit-mask-position;
   pointer-events: none;
   box-shadow: none !important;
 }
 
-/* ✅ fade-out 상태: 오른쪽부터 투명해지며 왼쪽으로 wipe */
+/* ✅ fade-out 상태 */
 .p10.is-fadeout{
   -webkit-mask-position: 0 0;
   mask-position: 0 0;
-  transform: translateX(calc(-50% - 14px));
+  transform: translateX(calc(-50% - 14px)); /* ✅ 중앙(-50%) 기준 유지 */
   opacity: 0;
 }
 
