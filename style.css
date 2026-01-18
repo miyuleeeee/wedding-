@@ -257,10 +257,10 @@ body {
   /* ✅ p10 : 항상 보이다가, 오른→왼 wipe 페이드아웃 */
   .p10{
   position: absolute;
-  top: 350px;
+  top: 375px;
 
   left: 50%;
-  width: 78%;
+  width: 100%;
   transform: translateX(-50%); /* ✅ 중앙 고정 */
 
   opacity: 1 !important;
