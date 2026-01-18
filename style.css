@@ -255,43 +255,48 @@ body {
     transform: translateX(-50%);
   }
   /* ✅ p10 : 항상 보이다가, 오른→왼 wipe 페이드아웃 */
-  .p10{
-  position: absolute;
-  top: 400px;
+.p10{
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    width: 100%;
 
-  left: 50%;
-  width: 100%;
-  transform: translateX(-50%); /* ✅ 중앙 고정 */
+    /* ✅ 시작: 오른쪽 끝(화면 밖)에서 시작 */
+    transform: translateX(calc(-50% + 60vw));
 
-  opacity: 1 !important;
-  filter: none !important;
+    opacity: 1 !important;
+    filter: none !important;
 
-  -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
-  -webkit-mask-size: 220% 100%;
-  -webkit-mask-position: 100% 0;
-  mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
-  mask-size: 220% 100%;
-  mask-position: 100% 0;
+    -webkit-mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
+    -webkit-mask-size: 220% 100%;
+    -webkit-mask-position: 100% 0;
+    mask-image: linear-gradient(to left, transparent 0%, #000 22%, #000 100%);
+    mask-size: 220% 100%;
+    mask-position: 100% 0;
 
-  transition:
-    opacity .65s ease,
-    -webkit-mask-position .65s ease,
-    mask-position .65s ease,
-    transform .65s ease;
+    transition:
+      transform .65s ease,
+      opacity .65s ease,
+      -webkit-mask-position .65s ease,
+      mask-position .65s ease;
 
-  will-change: transform, -webkit-mask-position;
-  pointer-events: none;
-  box-shadow: none !important;
-}
+    will-change: transform, -webkit-mask-position;
+    pointer-events: none;
+    box-shadow: none !important;
+  }
 
-/* ✅ fade-out 상태 */
-.p10.is-fadeout{
-  -webkit-mask-position: 0 0;
-  mask-position: 0 0;
-  transform: translateX(calc(-50% - 60px)); /* ✅ 중앙(-50%) 기준 유지 */
-  opacity: 0;
-}
+  /* ✅ 착지: 지금 너가 원하는 “중앙 위치” */
+  .p10.is-landed{
+    transform: translateX(-50%);
+  }
 
+  /* ✅ 퇴장(기존 fade-out) */
+  .p10.is-fadeout{
+    -webkit-mask-position: 0 0;
+    mask-position: 0 0;
+    transform: translateX(calc(-50% - 60px));
+    opacity: 0;
+  }
   .photos::after{ height: 2100px; }
 }
 
