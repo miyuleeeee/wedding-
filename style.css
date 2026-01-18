@@ -288,7 +288,7 @@ body {
 .p10.is-fadeout{
   -webkit-mask-position: 0 0;
   mask-position: 0 0;
-  transform: translateX(calc(-50% - 14px)); /* ✅ 중앙(-50%) 기준 유지 */
+  transform: translateX(calc(-50% - 60px)); /* ✅ 중앙(-50%) 기준 유지 */
   opacity: 0;
 }
 
