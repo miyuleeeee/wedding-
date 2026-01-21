@@ -420,53 +420,67 @@ nextBtn.addEventListener("click", () => {
   }
   </script>
 
-  <script>
-  (() => {
-    const audio = document.getElementById('bgm');
-    const btn   = document.getElementById('musicToggle');
+ <script>
+(() => {
+  const audio = document.getElementById('bgm');
+  const btn   = document.getElementById('musicToggle');
 
-    function render(on){
-      btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-      try { localStorage.setItem('bgm_on', on ? '1' : '0'); } catch(e){}
+  function render(on){
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+
+  async function playBGM(){
+    try {
+      await audio.play();
+      render(true);
+    } catch(e){
+      render(true); // 아이콘은 ON 유지
     }
+  }
 
-    async function playBGM(){
-      try { await audio.play(); render(true); }
-      catch(e){ render(false); }
-    }
-    function pauseBGM(){ audio.pause(); render(false); }
-
-    btn.addEventListener('click', () => { if (audio.paused) playBGM(); else pauseBGM(); });
-
-    let primed = false;
-    const prime = () => {
-      if (primed) return;
-      primed = true;
-      const wantOn = (localStorage.getItem('bgm_on') ?? '1') === '1';
-      if (wantOn) playBGM(); else render(false);
-      window.removeEventListener('pointerdown', prime);
-      window.removeEventListener('touchstart', prime);
-      window.removeEventListener('keydown', prime);
-      window.removeEventListener('scroll', prime);
-    };
-    window.addEventListener('pointerdown', prime, {passive:true});
-    window.addEventListener('touchstart', prime, {passive:true});
-    window.addEventListener('keydown', prime);
-    window.addEventListener('scroll', prime, {passive:true});
-
-    let wasPlaying = false;
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        wasPlaying = !audio.paused;
-        if (wasPlaying) pauseBGM();
-      } else {
-        if (wasPlaying && (localStorage.getItem('bgm_on') === '1')) playBGM();
-      }
-    });
-
+  function pauseBGM(){
+    audio.pause();
     render(false);
-  })();
-  </script>
+  }
+
+  // 버튼 토글
+  btn.addEventListener('click', () => {
+    if (audio.paused) playBGM();
+    else pauseBGM();
+  });
+
+  // ✅ 첫 사용자 인터랙션 시 자동 재생
+  let primed = false;
+  const prime = () => {
+    if (primed) return;
+    primed = true;
+    playBGM();
+    window.removeEventListener('pointerdown', prime);
+    window.removeEventListener('touchstart', prime);
+    window.removeEventListener('keydown', prime);
+    window.removeEventListener('scroll', prime);
+  };
+
+  window.addEventListener('pointerdown', prime, { passive:true });
+  window.addEventListener('touchstart', prime, { passive:true });
+  window.addEventListener('keydown', prime);
+  window.addEventListener('scroll', prime, { passive:true });
+
+  // 탭 전환 대응
+  let wasPlaying = false;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      wasPlaying = !audio.paused;
+      if (wasPlaying) pauseBGM();
+    } else {
+      if (wasPlaying) playBGM();
+    }
+  });
+
+  // ✅ 처음부터 아이콘은 ON
+  render(true);
+})();
+</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
