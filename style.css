@@ -668,3 +668,29 @@ body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
   }
 }
 
+/* ===========================
+   MOBILE TAP CURSOR (불투명 회색)
+=========================== */
+.tap-ripple{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+
+  /* 🔘 불투명 회색 */
+  background: rgb(170, 170, 170);
+
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  animation: tapRipple 380ms ease-out forwards;
+}
+
+@keyframes tapRipple{
+  0% {
+    opacity:
+
+
