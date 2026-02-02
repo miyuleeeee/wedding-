@@ -328,6 +328,8 @@ body {
   pointer-events: none;
 }
 .nav button {
+  pointer-events: auto;        /* 부모(.nav)의 none을 무효화 */
+  touch-action: manipulation; 
   padding: 0;
   margin: 0 18px;
   border: none;
