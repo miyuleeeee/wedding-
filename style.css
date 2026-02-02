@@ -328,6 +328,7 @@ body {
   pointer-events: none;
 }
 .nav button {
+  position: relateive;
   pointer-events: auto;        /* 부모(.nav)의 none을 무효화 */
   touch-action: manipulation; 
   padding: 0;
@@ -345,6 +346,11 @@ body {
   opacity: 0.9;
   box-shadow: 0 0 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav button::before{
+  content:"";
+  position:absolute;
+  inset:-14px;   /* 터치 영역 확장 */
 }
 .nav button:hover,
 .nav button:active {
