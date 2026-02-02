@@ -539,8 +539,7 @@ ioFade.observe(trigger);
 </script>
 <script>
 (() => {
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  if (!isMobile) return;
+
 
   const cursor = document.createElement('div');
   cursor.className = 'touch-cursor';
