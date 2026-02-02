@@ -537,6 +537,43 @@ ioFade.observe(trigger);
 
 });
 </script>
+<script>
+(() => {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (!isMobile) return;
 
+  const cursor = document.createElement('div');
+  cursor.className = 'touch-cursor';
+  document.body.appendChild(cursor);
+
+  const move = (x, y) => {
+    cursor.style.left = x + 'px';
+    cursor.style.top  = y + 'px';
+  };
+
+  window.addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    move(t.clientX, t.clientY);
+    cursor.classList.add('is-active');
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    move(t.clientX, t.clientY);
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => {
+    cursor.classList.remove('is-active');
+  });
+
+  window.addEventListener('touchcancel', () => {
+    cursor.classList.remove('is-active');
+  });
+})();
+</script>
+<!-- ✅ 여기까지 -->
+
+</body>
+</html>
 </body>
 </html>
