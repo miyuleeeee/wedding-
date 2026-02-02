@@ -667,30 +667,29 @@ body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
     transition: none;
   }
 }
-
 /* ===========================
-   MOBILE TAP CURSOR (불투명 회색)
+   MOBILE TOUCH CURSOR (불투명 회색)
 =========================== */
-.tap-ripple{
+.touch-cursor{
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 18px;
-  height: 18px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
+  background: rgb(170,170,170); /* 불투명 회색 */
   pointer-events: none;
-  z-index: 99999;
+  z-index: 100000;
 
-  /* 🔘 불투명 회색 */
-  background: rgb(170, 170, 170);
-
-  transform: translate(-50%, -50%) scale(0.7);
+  transform: translate(-50%, -50%);
   opacity: 0;
-  animation: tapRipple 380ms ease-out forwards;
+  transition: opacity .15s ease;
 }
 
-@keyframes tapRipple{
-  0% {
-    opacity:
+.touch-cursor.is-active{
+  opacity: 1;
+}
 
+/* iOS 기본 탭 하이라이트 제거 */
+*{
+  -webkit-tap-highlight-color: transparent;
+}
 
