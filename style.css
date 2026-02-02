@@ -672,10 +672,10 @@ body.no-scroll{ position: fixed; width: 100%; overflow: hidden; height: 100vh; }
 =========================== */
 .touch-cursor{
   position: fixed;
-  width: 32px;
-  height: 32px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: rgb((245,245,220); /* 불투명 회색 */
+  background: rgb(245,245,220); /* 불투명 회색 */
   pointer-events: none;
   z-index: 100000;
 
