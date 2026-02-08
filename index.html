@@ -331,22 +331,13 @@
 <script>
 (() => {
   const carousel = document.getElementById("carousel");
-  const progress = document.getElementById("progress");
   const slides   = Array.from(carousel?.querySelectorAll(".slide") || []);
-  const prevBtn  = document.querySelector(".nav .prev");
-  const nextBtn  = document.querySelector(".nav .next");
+  const prevBtn  = document.querySelector(".controls .nav .prev");
+  const nextBtn  = document.querySelector(".controls .nav .next");
   const dotsWrap = document.getElementById("dots");
 
-  if (!carousel || !progress || !slides.length || !prevBtn || !nextBtn || !dotsWrap) return;
+  if (!carousel || !slides.length || !prevBtn || !nextBtn || !dotsWrap) return;
 
-  // ---- progress ----
-  function updateProgress() {
-    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-    const percent = maxScroll <= 0 ? 0 : (carousel.scrollLeft / maxScroll) * 100;
-    progress.style.width = percent + "%";
-  }
-
-  // ---- index ----
   function getCurrentIndex() {
     return Math.round(carousel.scrollLeft / carousel.clientWidth);
   }
@@ -355,8 +346,8 @@
     carousel.scrollTo({ left: carousel.clientWidth * idx, behavior });
   }
 
-  // ---- dots: 사진 수량만큼 생성 ----
-  dotsWrap.innerHTML = ""; // 혹시 남아있을 수 있는 내용 초기화
+  // dots 생성
+  dotsWrap.innerHTML = "";
   const dots = slides.map((_, i) => {
     const b = document.createElement("button");
     b.className = "dot";
@@ -373,19 +364,20 @@
       d.classList.toggle("is-active", on);
       d.setAttribute("aria-current", on ? "true" : "false");
     });
+
+    // 활성 dot이 왼쪽 리스트에서 화면 밖이면 살짝 따라오게
+    const active = dots[idx];
+    if (active) active.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
   }
 
-  // ---- 스크롤(스와이프)로 넘어갈 때도 동기화 ----
+  // 스와이프/스크롤 동기화
   let raf = 0;
   carousel.addEventListener("scroll", () => {
     if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      updateProgress();
-      setActiveDot(getCurrentIndex());
-    });
+    raf = requestAnimationFrame(() => setActiveDot(getCurrentIndex()));
   }, { passive: true });
 
-  // ---- 버튼 prev/next ----
+  // prev/next
   prevBtn.addEventListener("click", () => {
     let idx = getCurrentIndex();
     idx = Math.max(0, idx - 1);
@@ -398,7 +390,7 @@
     scrollToIndex(idx, "smooth");
   });
 
-  // ---- 손 놓으면 가까운 슬라이드로 스냅 보정(iOS 안정) ----
+  // iOS 스냅 보정
   let snapTimer;
   const snapToNearest = () => {
     clearTimeout(snapTimer);
@@ -411,16 +403,13 @@
   carousel.addEventListener("mouseup", snapToNearest);
   carousel.addEventListener("mouseleave", snapToNearest);
 
-  // ---- 초기 상태 ----
-  scrollToIndex(0, "auto");   // ✅ instant 대신 auto
-  updateProgress();
+  // 초기
+  scrollToIndex(0, "auto");
   setActiveDot(0);
 
-  // ---- 리사이즈 시 현재 인덱스 유지 ----
   window.addEventListener("resize", () => {
     const idx = getCurrentIndex();
     scrollToIndex(idx, "auto");
-    updateProgress();
     setActiveDot(idx);
   });
 })();
