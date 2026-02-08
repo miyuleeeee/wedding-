@@ -328,17 +328,31 @@
   const nextBtn  = document.querySelector(".controls .nav .next");
   const dotsWrap = document.getElementById("dots");
 
-  if (!carousel || !slides.length || !prevBtn || !nextBtn || !dotsWrap) return;
+  if (!carousel || slides.length === 0 || !prevBtn || !nextBtn || !dotsWrap) return;
 
-  // ✅ 현재 인덱스 (스냅/관성 오차를 줄이기 위해 clamp)
-  function getCurrentIndex() {
-    const raw = Math.round(carousel.scrollLeft / carousel.clientWidth);
-    return Math.max(0, Math.min(slides.length - 1, raw));
-  }
+  // ✅ 상태값으로 인덱스를 관리 (scrollLeft로 매번 계산하지 않음)
+  let current = 0;
+  let isProgrammatic = false;
+  let unlockTimer = 0;
+
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
 
   function scrollToIndex(idx, behavior = "smooth") {
-    const safe = Math.max(0, Math.min(slides.length - 1, idx));
-    carousel.scrollTo({ left: carousel.clientWidth * safe, behavior });
+    current = clamp(idx, 0, slides.length - 1);
+
+    // ✅ slide의 실제 위치로 이동 (clientWidth 계산 오차 제거)
+    const left = slides[current].offsetLeft;
+
+    isProgrammatic = true;
+    clearTimeout(unlockTimer);
+
+    carousel.scrollTo({ left, behavior });
+    setActiveDot(current);
+
+    // ✅ iOS에서 smooth가 끝나는 시간이 들쭉날쭉이라 조금 여유있게
+    unlockTimer = setTimeout(() => {
+      isProgrammatic = false;
+    }, 520);
   }
 
   // ✅ dots 생성
@@ -348,126 +362,101 @@
     b.className = "dot";
     b.type = "button";
     b.setAttribute("aria-label", `${i + 1}번 사진`);
-    b.addEventListener("click", () => {
-      // dots 클릭은 “의도된 이동”이니까 programmatic 처리
-      isProgrammaticScroll = true;
-      allowDotAutoScroll = true;
-
-      scrollToIndex(i, "smooth");
-      setActiveDot(i);
-
-      setTimeout(() => { isProgrammaticScroll = false; }, 380);
-    });
+    b.addEventListener("click", () => scrollToIndex(i, "smooth"));
     dotsWrap.appendChild(b);
     return b;
   });
 
-  // ✅ 초기 로딩에서 scrollIntoView로 페이지 점프 방지
-  let allowDotAutoScroll = false;
+  // ✅ scrollIntoView 금지(=페이지 점프 방지)
+  // 대신 dotsWrap 내부 가로 스크롤만 수동으로 맞춤
+  function centerDot(i) {
+    const d = dots[i];
+    if (!d) return;
 
-  function setActiveDot(idx) {
-    const safe = Math.max(0, Math.min(slides.length - 1, idx));
+    // dotsWrap이 overflow-x:auto일 때만 의미 있음
+    const wrapRect = dotsWrap.getBoundingClientRect();
+    const dotRect  = d.getBoundingClientRect();
+    const delta = (dotRect.left + dotRect.width/2) - (wrapRect.left + wrapRect.width/2);
 
-    dots.forEach((d, i) => {
-      const on = i === safe;
+    // 가로만 이동
+    dotsWrap.scrollLeft += delta;
+  }
+
+  function setActiveDot(i) {
+    const safe = clamp(i, 0, dots.length - 1);
+    dots.forEach((d, k) => {
+      const on = k === safe;
       d.classList.toggle("is-active", on);
       d.setAttribute("aria-current", on ? "true" : "false");
     });
 
-    // ✅ 초기 로딩에는 dots 스크롤 금지
-    if (!allowDotAutoScroll) return;
-
-    const active = dots[safe];
-    if (active) {
-      active.scrollIntoView({
-        inline: "center",
-        block: "nearest",
-        behavior: "smooth"
-      });
-    }
+    // ✅ dotsWrap이 화면에 있을 때만 가로 centering (점프 방지)
+    const rect = dotsWrap.getBoundingClientRect();
+    const inView = rect.bottom > 0 && rect.top < window.innerHeight;
+    if (inView) centerDot(safe);
   }
 
-  // ✅ 핵심: 버튼/클릭으로 이동 중엔 scroll 이벤트가 상태를 망치지 않게 막기
-  let isProgrammaticScroll = false;
+  // ✅ 사용자 스와이프 종료 후에만 current를 확정(디바운스)
+  let settleTimer = 0;
+  function settleIndex() {
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      if (isProgrammatic) return;
 
-  // 스와이프/스크롤 동기화 (사용자 스크롤일 때만)
-  let raf = 0;
+      // 가장 가까운 slide로 current 확정
+      let best = 0;
+      let bestDist = Infinity;
+      const x = carousel.scrollLeft;
+
+      for (let i = 0; i < slides.length; i++) {
+        const dist = Math.abs(slides[i].offsetLeft - x);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      }
+
+      current = best;
+      // 스냅 보정
+      scrollToIndex(current, "smooth");
+    }, 110);
+  }
+
   carousel.addEventListener("scroll", () => {
-    if (isProgrammaticScroll) return; // ✅ 버튼 이동 중엔 무시
-
-    if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => {
-      setActiveDot(getCurrentIndex());
-    });
+    if (isProgrammatic) return;
+    // 스크롤 중에는 dot만 업데이트(대충)
+    // (계산을 offsetLeft 기반으로)
+    let best = 0;
+    let bestDist = Infinity;
+    const x = carousel.scrollLeft;
+    for (let i = 0; i < slides.length; i++) {
+      const dist = Math.abs(slides[i].offsetLeft - x);
+      if (dist < bestDist) { bestDist = dist; best = i; }
+    }
+    setActiveDot(best);
+    settleIndex();
   }, { passive: true });
 
-  // ✅ prev/next (연타/끝부분 끊김 방지 포함)
+  // ✅ 버튼 연타 버벅 방지: programmatic 중엔 클릭 무시
   prevBtn.addEventListener("click", () => {
-    let idx = getCurrentIndex();
-    if (idx <= 0) return;
-
-    isProgrammaticScroll = true;
-    allowDotAutoScroll = true;
-
-    scrollToIndex(idx - 1, "smooth");
-    setActiveDot(idx - 1);
-
-    setTimeout(() => { isProgrammaticScroll = false; }, 380);
+    if (isProgrammatic) return;
+    scrollToIndex(current - 1, "smooth");
   });
 
   nextBtn.addEventListener("click", () => {
-    let idx = getCurrentIndex();
-    if (idx >= slides.length - 1) return;
-
-    isProgrammaticScroll = true;
-    allowDotAutoScroll = true;
-
-    scrollToIndex(idx + 1, "smooth");
-    setActiveDot(idx + 1);
-
-    setTimeout(() => { isProgrammaticScroll = false; }, 380);
+    if (isProgrammatic) return;
+    scrollToIndex(current + 1, "smooth");
   });
 
-  // ✅ iOS 스냅 보정: “사용자 제스처”에서만 동작하게
-  let snapTimer;
-  const snapToNearest = () => {
-    if (isProgrammaticScroll) return;
-    clearTimeout(snapTimer);
-    snapTimer = setTimeout(() => {
-      const idx = getCurrentIndex();
-      isProgrammaticScroll = true;
-      allowDotAutoScroll = true;
-
-      scrollToIndex(idx, "smooth");
-      setActiveDot(idx);
-
-      setTimeout(() => { isProgrammaticScroll = false; }, 380);
-    }, 90);
-  };
-
-  carousel.addEventListener("touchend", snapToNearest, { passive: true });
-  carousel.addEventListener("mouseup", snapToNearest);
-  carousel.addEventListener("mouseleave", snapToNearest);
-
-  // ✅ 초기: 캐러셀은 0으로만 맞추고(가로만), dots는 점프 금지 상태로 세팅
-  scrollToIndex(0, "auto");
-  setActiveDot(0);
-
-  // ✅ 초기 로딩 이후(다음 프레임)부터 dots 자동 스크롤 허용
-  requestAnimationFrame(() => {
-    allowDotAutoScroll = true;
-  });
-
-  // 리사이즈 시 현재 인덱스 유지
+  // ✅ iOS 주소창 숨김/표시로 resize 튀는 경우: “페이지 점프” 방지
+  // 여기서 scrollIntoView가 없으니 점프가 거의 사라짐
   window.addEventListener("resize", () => {
-    const idx = getCurrentIndex();
-    isProgrammaticScroll = true;
-
-    scrollToIndex(idx, "auto");
-    setActiveDot(idx);
-
-    setTimeout(() => { isProgrammaticScroll = false; }, 0);
+    // 현재 인덱스 유지
+    scrollToIndex(current, "auto");
   });
+
+  // 초기
+  scrollToIndex(0, "auto");
 })();
 </script>
 
