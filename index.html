@@ -330,39 +330,103 @@
   </script>
 
 <script>
-const carousel = document.getElementById("carousel");
-const progress = document.getElementById("progress");
-const slides = carousel.querySelectorAll(".slide");
-const prevBtn = document.querySelector(".prev");
-const nextBtn = document.querySelector(".next");
+(() => {
+  const carousel = document.getElementById("carousel");
+  const progress = document.getElementById("progress");
+  const slides   = Array.from(carousel?.querySelectorAll(".slide") || []);
+  const prevBtn  = document.querySelector(".nav .prev");
+  const nextBtn  = document.querySelector(".nav .next");
+  const dotsWrap = document.getElementById("dots");
 
-function updateProgress() {
-  const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-  const percent = (carousel.scrollLeft / maxScroll) * 100;
-  progress.style.width = percent + "%";
-}
+  if (!carousel || !progress || !slides.length || !prevBtn || !nextBtn || !dotsWrap) return;
 
-// 스크롤할 때 막대바 업데이트
-carousel.addEventListener("scroll", updateProgress);
+  // ---- progress ----
+  function updateProgress() {
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+    const percent = maxScroll <= 0 ? 0 : (carousel.scrollLeft / maxScroll) * 100;
+    progress.style.width = percent + "%";
+  }
 
-// 현재 인덱스 구하는 함수
-function getCurrentIndex() {
-  return Math.round(carousel.scrollLeft / carousel.clientWidth);
-}
+  // ---- index ----
+  function getCurrentIndex() {
+    return Math.round(carousel.scrollLeft / carousel.clientWidth);
+  }
 
-// 이전 / 다음 버튼
-prevBtn.addEventListener("click", () => {
-  let idx = getCurrentIndex();
-  idx = Math.max(0, idx - 1);
-  carousel.scrollTo({ left: carousel.clientWidth * idx, behavior: "smooth" });
-});
+  function scrollToIndex(idx, behavior = "smooth") {
+    carousel.scrollTo({ left: carousel.clientWidth * idx, behavior });
+  }
 
-nextBtn.addEventListener("click", () => {
-  let idx = getCurrentIndex();
-  idx = Math.min(slides.length - 1, idx + 1);
-  carousel.scrollTo({ left: carousel.clientWidth * idx, behavior: "smooth" });
-});
+  // ---- dots: 사진 수량만큼 생성 ----
+  dotsWrap.innerHTML = ""; // 혹시 남아있을 수 있는 내용 초기화
+  const dots = slides.map((_, i) => {
+    const b = document.createElement("button");
+    b.className = "dot";
+    b.type = "button";
+    b.setAttribute("aria-label", `${i + 1}번 사진`);
+    b.addEventListener("click", () => scrollToIndex(i, "smooth"));
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  function setActiveDot(idx) {
+    dots.forEach((d, i) => {
+      const on = i === idx;
+      d.classList.toggle("is-active", on);
+      d.setAttribute("aria-current", on ? "true" : "false");
+    });
+  }
+
+  // ---- 스크롤(스와이프)로 넘어갈 때도 동기화 ----
+  let raf = 0;
+  carousel.addEventListener("scroll", () => {
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      updateProgress();
+      setActiveDot(getCurrentIndex());
+    });
+  }, { passive: true });
+
+  // ---- 버튼 prev/next ----
+  prevBtn.addEventListener("click", () => {
+    let idx = getCurrentIndex();
+    idx = Math.max(0, idx - 1);
+    scrollToIndex(idx, "smooth");
+  });
+
+  nextBtn.addEventListener("click", () => {
+    let idx = getCurrentIndex();
+    idx = Math.min(slides.length - 1, idx + 1);
+    scrollToIndex(idx, "smooth");
+  });
+
+  // ---- 손 놓으면 가까운 슬라이드로 스냅 보정(iOS 안정) ----
+  let snapTimer;
+  const snapToNearest = () => {
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(() => {
+      const idx = getCurrentIndex();
+      scrollToIndex(idx, "smooth");
+    }, 90);
+  };
+  carousel.addEventListener("touchend", snapToNearest, { passive: true });
+  carousel.addEventListener("mouseup", snapToNearest);
+  carousel.addEventListener("mouseleave", snapToNearest);
+
+  // ---- 초기 상태 ----
+  scrollToIndex(0, "auto");   // ✅ instant 대신 auto
+  updateProgress();
+  setActiveDot(0);
+
+  // ---- 리사이즈 시 현재 인덱스 유지 ----
+  window.addEventListener("resize", () => {
+    const idx = getCurrentIndex();
+    scrollToIndex(idx, "auto");
+    updateProgress();
+    setActiveDot(idx);
+  });
+})();
 </script>
+
 
 <script>
 (() => {
