@@ -98,17 +98,24 @@
   </div>
 
   <!-- 양 옆 검정 점 -->
- </section>
-
-<div class="controls">
-  <div class="dots" id="dots" aria-label="사진 선택"></div>
-
-  <div class="nav" aria-label="사진 이동">
-    <button class="prev" type="button" aria-label="이전">←</button>
-    <button class="next" type="button" aria-label="다음">→</button>
+  <div class="nav">
+    <button class="prev" aria-label="이전"></button>
+    <button class="next" aria-label="다음"></button>
   </div>
-</div>
 
+  <!-- 아래 막대바 -->
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+</section>
+<script>
+  window.addEventListener("load", () => {
+    const carousel = document.getElementById("carousel");
+    if (carousel) {
+      carousel.scrollTo({ left: 0, behavior: "instant" });
+    }
+  });
+</script>
 
 
     <!-- 연락하기 -->
@@ -321,146 +328,39 @@
   </script>
 
 <script>
-(() => {
-  const carousel = document.getElementById("carousel");
-  const slides   = Array.from(carousel?.querySelectorAll(".slide") || []);
-  const prevBtn  = document.querySelector(".controls .nav .prev");
-  const nextBtn  = document.querySelector(".controls .nav .next");
-  const dotsWrap = document.getElementById("dots");
+const carousel = document.getElementById("carousel");
+const progress = document.getElementById("progress");
+const slides = carousel.querySelectorAll(".slide");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
 
-  if (!carousel || slides.length === 0 || !prevBtn || !nextBtn || !dotsWrap) return;
+function updateProgress() {
+  const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+  const percent = (carousel.scrollLeft / maxScroll) * 100;
+  progress.style.width = percent + "%";
+}
 
-  // ✅ 상태값으로 인덱스를 관리 (scrollLeft로 매번 계산하지 않음)
-  let current = 0;
-  let isProgrammatic = false;
-  let unlockTimer = 0;
+// 스크롤할 때 막대바 업데이트
+carousel.addEventListener("scroll", updateProgress);
 
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+// 현재 인덱스 구하는 함수
+function getCurrentIndex() {
+  return Math.round(carousel.scrollLeft / carousel.clientWidth);
+}
 
-  function scrollToIndex(idx, behavior = "smooth") {
-    current = clamp(idx, 0, slides.length - 1);
+// 이전 / 다음 버튼
+prevBtn.addEventListener("click", () => {
+  let idx = getCurrentIndex();
+  idx = Math.max(0, idx - 1);
+  carousel.scrollTo({ left: carousel.clientWidth * idx, behavior: "smooth" });
+});
 
-    // ✅ slide의 실제 위치로 이동 (clientWidth 계산 오차 제거)
-    const left = slides[current].offsetLeft;
-
-    isProgrammatic = true;
-    clearTimeout(unlockTimer);
-
-    carousel.scrollTo({ left, behavior });
-    setActiveDot(current);
-
-    // ✅ iOS에서 smooth가 끝나는 시간이 들쭉날쭉이라 조금 여유있게
-    unlockTimer = setTimeout(() => {
-      isProgrammatic = false;
-    }, 520);
-  }
-
-  // ✅ dots 생성
-  dotsWrap.innerHTML = "";
-  const dots = slides.map((_, i) => {
-    const b = document.createElement("button");
-    b.className = "dot";
-    b.type = "button";
-    b.setAttribute("aria-label", `${i + 1}번 사진`);
-    b.addEventListener("click", () => scrollToIndex(i, "smooth"));
-    dotsWrap.appendChild(b);
-    return b;
-  });
-
-  // ✅ scrollIntoView 금지(=페이지 점프 방지)
-  // 대신 dotsWrap 내부 가로 스크롤만 수동으로 맞춤
-  function centerDot(i) {
-    const d = dots[i];
-    if (!d) return;
-
-    // dotsWrap이 overflow-x:auto일 때만 의미 있음
-    const wrapRect = dotsWrap.getBoundingClientRect();
-    const dotRect  = d.getBoundingClientRect();
-    const delta = (dotRect.left + dotRect.width/2) - (wrapRect.left + wrapRect.width/2);
-
-    // 가로만 이동
-    dotsWrap.scrollLeft += delta;
-  }
-
-  function setActiveDot(i) {
-    const safe = clamp(i, 0, dots.length - 1);
-    dots.forEach((d, k) => {
-      const on = k === safe;
-      d.classList.toggle("is-active", on);
-      d.setAttribute("aria-current", on ? "true" : "false");
-    });
-
-    // ✅ dotsWrap이 화면에 있을 때만 가로 centering (점프 방지)
-    const rect = dotsWrap.getBoundingClientRect();
-    const inView = rect.bottom > 0 && rect.top < window.innerHeight;
-    if (inView) centerDot(safe);
-  }
-
-  // ✅ 사용자 스와이프 종료 후에만 current를 확정(디바운스)
-  let settleTimer = 0;
-  function settleIndex() {
-    clearTimeout(settleTimer);
-    settleTimer = setTimeout(() => {
-      if (isProgrammatic) return;
-
-      // 가장 가까운 slide로 current 확정
-      let best = 0;
-      let bestDist = Infinity;
-      const x = carousel.scrollLeft;
-
-      for (let i = 0; i < slides.length; i++) {
-        const dist = Math.abs(slides[i].offsetLeft - x);
-        if (dist < bestDist) {
-          bestDist = dist;
-          best = i;
-        }
-      }
-
-      current = best;
-      // 스냅 보정
-      scrollToIndex(current, "smooth");
-    }, 110);
-  }
-
-  carousel.addEventListener("scroll", () => {
-    if (isProgrammatic) return;
-    // 스크롤 중에는 dot만 업데이트(대충)
-    // (계산을 offsetLeft 기반으로)
-    let best = 0;
-    let bestDist = Infinity;
-    const x = carousel.scrollLeft;
-    for (let i = 0; i < slides.length; i++) {
-      const dist = Math.abs(slides[i].offsetLeft - x);
-      if (dist < bestDist) { bestDist = dist; best = i; }
-    }
-    setActiveDot(best);
-    settleIndex();
-  }, { passive: true });
-
-  // ✅ 버튼 연타 버벅 방지: programmatic 중엔 클릭 무시
-  prevBtn.addEventListener("click", () => {
-    if (isProgrammatic) return;
-    scrollToIndex(current - 1, "smooth");
-  });
-
-  nextBtn.addEventListener("click", () => {
-    if (isProgrammatic) return;
-    scrollToIndex(current + 1, "smooth");
-  });
-
-  // ✅ iOS 주소창 숨김/표시로 resize 튀는 경우: “페이지 점프” 방지
-  // 여기서 scrollIntoView가 없으니 점프가 거의 사라짐
-  window.addEventListener("resize", () => {
-    // 현재 인덱스 유지
-    scrollToIndex(current, "auto");
-  });
-
-  // 초기
-  scrollToIndex(0, "auto");
-})();
+nextBtn.addEventListener("click", () => {
+  let idx = getCurrentIndex();
+  idx = Math.min(slides.length - 1, idx + 1);
+  carousel.scrollTo({ left: carousel.clientWidth * idx, behavior: "smooth" });
+});
 </script>
-
-
 
 <script>
 (() => {
@@ -729,25 +629,6 @@ ioFade.observe(trigger);
 })();
 </script>
 <!-- ✅ 여기까지 -->
-<script>
-  // ✅ Safari/모바일에서 이전 스크롤 위치 복원 막기
-  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-
-  // ✅ 최초 로딩 + bfcache(뒤로가기 캐시)에서도 무조건 맨 위
-  function forceTop() {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }
-
-  window.addEventListener('DOMContentLoaded', forceTop);
-  window.addEventListener('load', forceTop);
-  window.addEventListener('pageshow', (e) => {
-    // 뒤로가기/앞으로가기 복원(bfcache)일 때도 맨 위
-    if (e.persisted) forceTop();
-    else forceTop();
-  });
-</script>
 
 </body>
 </html>
