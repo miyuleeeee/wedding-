@@ -350,17 +350,28 @@
     return b;
   });
 
-  function setActiveDot(idx) {
-    dots.forEach((d, i) => {
-      const on = i === idx;
-      d.classList.toggle("is-active", on);
-      d.setAttribute("aria-current", on ? "true" : "false");
-    });
+let allowDotAutoScroll = false;
 
-    // 활성 dot이 왼쪽 리스트에서 화면 밖이면 살짝 따라오게
-    const active = dots[idx];
-    if (active) active.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+function setActiveDot(idx) {
+  dots.forEach((d, i) => {
+    const on = i === idx;
+    d.classList.toggle("is-active", on);
+    d.setAttribute("aria-current", on ? "true" : "false");
+  });
+
+  // ✅ 초기 로딩에는 scrollIntoView 금지 (페이지 점프 방지)
+  if (!allowDotAutoScroll) return;
+
+  const active = dots[idx];
+  if (active) {
+    active.scrollIntoView({
+      inline: "center",
+      block: "nearest",
+      behavior: "smooth"
+    });
   }
+}
+
 
   // 스와이프/스크롤 동기화
   let raf = 0;
