@@ -345,78 +345,101 @@
     b.className = "dot";
     b.type = "button";
     b.setAttribute("aria-label", `${i + 1}번 사진`);
-    b.addEventListener("click", () => scrollToIndex(i, "smooth"));
+    b.addEventListener("click", () => {
+      allowDotAutoScroll = true;
+      scrollToIndex(i, "smooth");
+    });
     dotsWrap.appendChild(b);
     return b;
   });
 
-let allowDotAutoScroll = false;
+  // ✅ 핵심: dot 자동 스크롤은 "스크롤이 멈춘 뒤"에만
+  let allowDotAutoScroll = false;
+  let isUserScrolling = false;
+  let scrollEndTimer = 0;
 
-function setActiveDot(idx) {
-  dots.forEach((d, i) => {
-    const on = i === idx;
-    d.classList.toggle("is-active", on);
-    d.setAttribute("aria-current", on ? "true" : "false");
-  });
-
-  // ✅ 초기 로딩에는 scrollIntoView 금지 (페이지 점프 방지)
-  if (!allowDotAutoScroll) return;
-
-  const active = dots[idx];
-  if (active) {
-    active.scrollIntoView({
-      inline: "center",
-      block: "nearest",
-      behavior: "smooth"
+  function setActiveDot(idx, { syncDotScroll = false } = {}) {
+    dots.forEach((d, i) => {
+      const on = i === idx;
+      d.classList.toggle("is-active", on);
+      d.setAttribute("aria-current", on ? "true" : "false");
     });
+
+    // 초기 로딩에는 dot 따라오지 않게 (페이지 점프 방지)
+    if (!allowDotAutoScroll) return;
+
+    // 스크롤 도중에는 dot 스크롤 금지
+    if (isUserScrolling && !syncDotScroll) return;
+
+    const active = dots[idx];
+    if (active) {
+      // ✅ smooth 금지(끊김 방지). 필요하면 auto로 살짝만 맞춤
+      active.scrollIntoView({ inline: "center", block: "nearest", behavior: "auto" });
+    }
   }
-}
 
-
-  // 스와이프/스크롤 동기화
+  // 스크롤 동기화 (끊김 방지 버전)
   let raf = 0;
   carousel.addEventListener("scroll", () => {
+    isUserScrolling = true;
+
+    clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(() => {
+      isUserScrolling = false;
+      const idx = getCurrentIndex();
+      // 스크롤이 멈춘 뒤에만 dot 위치 정리
+      setActiveDot(idx, { syncDotScroll: true });
+    }, 140);
+
     if (raf) cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(() => setActiveDot(getCurrentIndex()));
+    raf = requestAnimationFrame(() => {
+      setActiveDot(getCurrentIndex());
+    });
   }, { passive: true });
 
   // prev/next
   prevBtn.addEventListener("click", () => {
+    allowDotAutoScroll = true;
     let idx = getCurrentIndex();
     idx = Math.max(0, idx - 1);
     scrollToIndex(idx, "smooth");
   });
 
   nextBtn.addEventListener("click", () => {
+    allowDotAutoScroll = true;
     let idx = getCurrentIndex();
     idx = Math.min(slides.length - 1, idx + 1);
     scrollToIndex(idx, "smooth");
   });
 
-  // iOS 스냅 보정
+  // iOS 스냅 보정 (smooth 금지)
   let snapTimer;
   const snapToNearest = () => {
     clearTimeout(snapTimer);
     snapTimer = setTimeout(() => {
       const idx = getCurrentIndex();
-      scrollToIndex(idx, "auto");
-    }, 90);
+      scrollToIndex(idx, "auto"); // ✅ smooth → auto (뚝뚝 끊김 방지)
+      setActiveDot(idx, { syncDotScroll: true });
+    }, 140);
   };
+
   carousel.addEventListener("touchend", snapToNearest, { passive: true });
   carousel.addEventListener("mouseup", snapToNearest);
   carousel.addEventListener("mouseleave", snapToNearest);
 
-  // 초기
+  // 초기: 0번으로만 세팅 + dot 자동스크롤은 "나중에"
   scrollToIndex(0, "auto");
   setActiveDot(0);
+  setTimeout(() => { allowDotAutoScroll = true; }, 0);
 
   window.addEventListener("resize", () => {
     const idx = getCurrentIndex();
     scrollToIndex(idx, "auto");
-    setActiveDot(idx);
+    setActiveDot(idx, { syncDotScroll: true });
   });
 })();
 </script>
+
 
 
 <script>
