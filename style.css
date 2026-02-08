@@ -316,6 +316,36 @@ body {
 
 .slide { flex: 0 0 100%; scroll-snap-align: center; }
 .slide img { width: 100%; height: auto; display: block; border-radius: 0; }
+/* ===========================
+   DOTS (JUKI 스타일)
+=========================== */
+.dots{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap: 10px;
+  padding-top: 14px;
+}
+
+.dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1.5px solid #111;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .18s ease, transform .18s ease;
+}
+
+.dot.is-active,
+.dot[aria-current="true"]{
+  background:#111;
+}
+
+.dot:active{ transform: scale(0.92); }
 
 .nav {
   position: absolute;
@@ -328,7 +358,7 @@ body {
   pointer-events: none;
 }
 .nav button {
-  position: relateive;
+  position: relative;
   pointer-events: auto;        /* 부모(.nav)의 none을 무효화 */
   touch-action: manipulation; 
   padding: 0;
