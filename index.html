@@ -686,6 +686,25 @@ ioFade.observe(trigger);
 })();
 </script>
 <!-- ✅ 여기까지 -->
+<script>
+  // ✅ Safari/모바일에서 이전 스크롤 위치 복원 막기
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  // ✅ 최초 로딩 + bfcache(뒤로가기 캐시)에서도 무조건 맨 위
+  function forceTop() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
+  window.addEventListener('DOMContentLoaded', forceTop);
+  window.addEventListener('load', forceTop);
+  window.addEventListener('pageshow', (e) => {
+    // 뒤로가기/앞으로가기 복원(bfcache)일 때도 맨 위
+    if (e.persisted) forceTop();
+    else forceTop();
+  });
+</script>
 
 </body>
 </html>
