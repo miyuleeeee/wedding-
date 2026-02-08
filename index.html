@@ -399,7 +399,7 @@ function setActiveDot(idx) {
     clearTimeout(snapTimer);
     snapTimer = setTimeout(() => {
       const idx = getCurrentIndex();
-      scrollToIndex(idx, "smooth");
+      scrollToIndex(idx, "auto");
     }, 90);
   };
   carousel.addEventListener("touchend", snapToNearest, { passive: true });
