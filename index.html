@@ -362,16 +362,50 @@ nextBtn.addEventListener("click", () => {
 });
 </script>
 
-  <script>
-  (function () {
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (!isMobile) return;
-    document.getElementById('btnKakao')
-      .setAttribute('href','kakaomap://look?p=35.8503198,129.2770225');
-    document.getElementById('btnNaver')
-      .setAttribute('href','nmap://place?lat=35.8503198&lng=129.2770225&name='+encodeURIComponent('라한셀렉트경주'));
-  })();
-  </script>
+<script>
+(() => {
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (!isMobile) return;
+
+  const kakao = document.getElementById('btnKakao');
+  const naver = document.getElementById('btnNaver');
+  if (!kakao || !naver) return;
+
+  // 모바일에서 스킴 + target=_blank 충돌 방지
+  kakao.removeAttribute('target');
+  naver.removeAttribute('target');
+
+  const kakaoApp = 'kakaomap://look?p=35.8503198,129.2770225';
+  const kakaoWeb = 'https://map.kakao.com/link/map/라한셀렉트경주,35.8503198,129.2770225';
+
+  const naverApp =
+    'nmap://place?lat=35.8503198&lng=129.2770225&name=' +
+    encodeURIComponent('라한셀렉트경주');
+
+  const naverWeb =
+    'https://map.naver.com/v5/search/' +
+    encodeURIComponent('라한셀렉트 경주') +
+    '?c=129.2770225,35.8503198,15,0,0,0,dh';
+
+  // 기본은 웹
+  kakao.href = kakaoWeb;
+  naver.href = naverWeb;
+
+  // 클릭 시 앱 → 실패하면 웹
+  kakao.addEventListener('click', (e) => {
+    e.preventDefault();
+    location.href = kakaoApp;
+    setTimeout(() => { location.href = kakaoWeb; }, 700);
+  });
+
+  naver.addEventListener('click', (e) => {
+    e.preventDefault();
+    location.href = naverApp;
+    setTimeout(() => { location.href = naverWeb; }, 700);
+  });
+})();
+</script>
+
 
   <script>
   (function(){
